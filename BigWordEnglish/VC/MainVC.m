@@ -1,0 +1,195 @@
+//
+//  MainVC.m
+//  BigWordEnglish
+//
+//  Created by Joseph_iMac on 2017. 5. 20..
+//  Copyright © 2017년 Joseph_iMac. All rights reserved.
+//
+
+#import "MainVC.h"
+#import "GlobalHeader.h"
+#import "AdamAdView.h"
+#import <QuartzCore/QuartzCore.h>
+#import "AdamError.h"
+
+@interface MainVC () <AdamAdViewDelegate>
+
+@end
+
+@implementation MainVC
+
+@synthesize popupView;
+@synthesize m_bannerView;
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    [self versionCheck];
+}
+
+- (void)versionCheck{
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", COMMON_URL, VERSION_URL];
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration: defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    [urlRequest setHTTPMethod:@"POST"];
+    
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        //NSLog(@"Response:%@ %@\n", response, error);
+        resultValue = [[NSString alloc] initWithData:data encoding: NSUTF8StringEncoding];
+        NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
+        
+        if (statusCode == 200) {
+            if([[defaults stringForKey:DB_VERSION] isEqualToString:resultValue]){
+                
+            }else{
+                [self fileDown];
+            }
+        }
+    }];
+    [dataTask resume];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self bannerInit];
+}
+
+#pragma mark -
+#pragma mark FileDown
+
+- (void)fileDown{
+    [self loadingInit];
+    
+    NSString *urlString = [NSString stringWithFormat:@"%@%@", COMMON_URL, DB_FILE_URL];
+    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
+   
+    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
+    if (theConnection) {
+        receivedData = [NSMutableData data];
+    } else {
+        
+    }
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
+{
+    [receivedData setLength:0];
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
+{
+    [receivedData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n잠시 후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                         {}];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    [self loadingClose];
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection
+{
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 완료하였습니다." preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                         {}];
+    [alert addAction:ok];
+    [self presentViewController:alert animated:YES completion:nil];
+    
+    NSLog(@"%@", DOCUMENT_DIRECTORY);
+    NSArray *fileArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *filepath = [fileArr objectAtIndex:0];
+    NSString *documentPath = [filepath stringByAppendingPathComponent:@"EgDb.db"];
+
+    [receivedData writeToFile:documentPath atomically:YES];
+    
+    [defaults setObject:resultValue forKey:DB_VERSION];
+    
+    [self loadingClose];
+}
+
+#pragma mark -
+#pragma mark Loading Method
+
+- (void)loadingInit{
+    popupView.hidden = NO;
+    
+    // 로딩관련
+    loadingView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, WIDTH_FRAME, HEIGHT_FRAME)];
+    loadingView.backgroundColor = [UIColor colorWithRed:0 green:0 blue:0 alpha:0.5];
+    
+    activityView = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    activityView.frame = CGRectMake(WIDTH_FRAME/2 - activityView.bounds.size.width/2, HEIGHT_FRAME/2 - activityView.bounds.size.height/2, activityView.bounds.size.width, activityView.bounds.size.height);
+    [loadingView addSubview:activityView];
+    
+    [self.view addSubview:loadingView];
+    [self.view bringSubviewToFront:loadingView];
+    [activityView startAnimating];
+}
+
+- (void)loadingClose{
+    popupView.hidden = YES;
+    
+    loadingView.hidden = YES;
+    [activityView stopAnimating];
+}
+
+#pragma mark -
+#pragma mark AdamAdView Delegate
+
+- (void)bannerInit{
+    AdamAdView *adView = [AdamAdView sharedAdView];
+    adView.frame = CGRectMake(0.0, 0.0, WIDTH_FRAME, 50.0);
+    
+    adView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+    adView.delegate = self;
+    adView.clientId = ClientID_Adam;
+    [m_bannerView addSubview:adView];
+    
+    if (!adView.usingAutoRequest) {
+        [adView startAutoRequestAd:60.0];
+    }
+}
+
+// 광고 수신 관련 delegate 메소드
+- (void)didReceiveAd:(AdamAdView *)adView
+{
+    NSLog(@"didReceiveAdam");
+}
+
+// 광고 실패 관련 delegate 메소드
+- (void)didFailToReceiveAd:(AdamAdView *)adView error:(NSError *)error
+{
+    NSLog(@"didFailAdam %ld", (long)error.code);
+}
+
+/*
+#pragma mark - Navigation
+
+// In a storyboard-based application, you will often want to do a little preparation before navigation
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
+}
+*/
+
+@end
