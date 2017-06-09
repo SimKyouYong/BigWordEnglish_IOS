@@ -135,7 +135,6 @@
 				FF370C811EC1E25E00E5684C /* AppDelegate.h */,
 				FF370C821EC1E25E00E5684C /* AppDelegate.m */,
 				FF370C871EC1E25E00E5684C /* Main.storyboard */,
-				FFBD4B181ED01254005380A5 /* Resources */,
 				FF370C8A1EC1E25E00E5684C /* Assets.xcassets */,
 				FF370C8C1EC1E25E00E5684C /* LaunchScreen.storyboard */,
 				FF370C8F1EC1E25E00E5684C /* Info.plist */,
@@ -160,13 +159,6 @@
 				FFBD4B171ED01254005380A5 /* GlobalObject.m */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		FFBD4B181ED01254005380A5 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		FFBD4B191ED01254005380A5 /* VC */ = {
