@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE21EEF70720060F1B3 /* ChooseVC.m */; };
+		29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE51EEF9B370060F1B3 /* ChooseCell.m */; };
 		FF370C801EC1E25E00E5684C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF370C7F1EC1E25E00E5684C /* main.m */; };
 		FF370C831EC1E25E00E5684C /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = FF370C821EC1E25E00E5684C /* AppDelegate.m */; };
 		FF370C891EC1E25E00E5684C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF370C871EC1E25E00E5684C /* Main.storyboard */; };
@@ -38,6 +40,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		29F57BE11EEF70720060F1B3 /* ChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseVC.h; sourceTree = "<group>"; };
+		29F57BE21EEF70720060F1B3 /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
+		29F57BE41EEF9B370060F1B3 /* ChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCell.h; sourceTree = "<group>"; };
+		29F57BE51EEF9B370060F1B3 /* ChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCell.m; sourceTree = "<group>"; };
 		FF370C7B1EC1E25E00E5684C /* BigWordEnglish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigWordEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF370C7F1EC1E25E00E5684C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF370C811EC1E25E00E5684C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -109,6 +115,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29F57BE01EEF6C7E0060F1B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
 		FF370C721EC1E25E00E5684C = {
 			isa = PBXGroup;
 			children = (
@@ -135,6 +148,7 @@
 				FF370C811EC1E25E00E5684C /* AppDelegate.h */,
 				FF370C821EC1E25E00E5684C /* AppDelegate.m */,
 				FF370C871EC1E25E00E5684C /* Main.storyboard */,
+				29F57BE01EEF6C7E0060F1B3 /* Resources */,
 				FF370C8A1EC1E25E00E5684C /* Assets.xcassets */,
 				FF370C8C1EC1E25E00E5684C /* LaunchScreen.storyboard */,
 				FF370C8F1EC1E25E00E5684C /* Info.plist */,
@@ -166,6 +180,10 @@
 			children = (
 				FFBD4B1B1ED01268005380A5 /* MainVC.h */,
 				FFBD4B1C1ED01268005380A5 /* MainVC.m */,
+				29F57BE11EEF70720060F1B3 /* ChooseVC.h */,
+				29F57BE21EEF70720060F1B3 /* ChooseVC.m */,
+				29F57BE41EEF9B370060F1B3 /* ChooseCell.h */,
+				29F57BE51EEF9B370060F1B3 /* ChooseCell.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -313,8 +331,10 @@
 				FFBD4B561ED01A91005380A5 /* SBJsonBase.m in Sources */,
 				FFBD4B5A1ED01A91005380A5 /* UIView+Toast.m in Sources */,
 				FFBD4B581ED01A91005380A5 /* SBJsonWriter.m in Sources */,
+				29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */,
 				FF370C831EC1E25E00E5684C /* AppDelegate.m in Sources */,
 				FFBD4B571ED01A91005380A5 /* SBJsonParser.m in Sources */,
+				29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */,
 				FFBD4B1D1ED01268005380A5 /* MainVC.m in Sources */,
 				FF370C801EC1E25E00E5684C /* main.m in Sources */,
 			);

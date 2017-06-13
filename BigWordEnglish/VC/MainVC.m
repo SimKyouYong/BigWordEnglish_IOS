@@ -11,6 +11,7 @@
 #import "AdamAdView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AdamError.h"
+#import "ChooseVC.h"
 
 @interface MainVC () <AdamAdViewDelegate>
 
@@ -52,6 +53,8 @@
         }
     }];
     [dataTask resume];
+    
+    NSLog(@"%@", DOCUMENT_DIRECTORY);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -63,6 +66,63 @@
     [super viewWillAppear:animated];
     
     [self bannerInit];
+}
+
+#pragma mark -
+#pragma mark Next VC
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    if ([[segue identifier] isEqualToString:@"choose"])
+    {
+        ChooseVC *vc = [segue destinationViewController];
+        vc.buttonIndexNum = buttonIndex;
+    }
+}
+
+#pragma mark -
+#pragma mark Button Action
+
+- (IBAction)searchButton:(id)sender {
+    
+}
+
+- (IBAction)settingButton:(id)sender {
+}
+
+- (IBAction)scholasticTestButton:(id)sender {
+    buttonIndex = 1;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)newspaperButton:(id)sender {
+    buttonIndex = 2;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)toeicButton:(id)sender {
+    buttonIndex = 3;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)movieButton:(id)sender {
+    buttonIndex = 4;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)dramaButton:(id)sender {
+    buttonIndex = 5;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)officialButton:(id)sender {
+    buttonIndex = 6;
+    [self performSegueWithIdentifier:@"choose" sender:sender];
+}
+
+- (IBAction)allWordViewButton:(id)sender {
+}
+
+- (IBAction)wordViewSettingButton:(id)sender {
 }
 
 #pragma mark -
@@ -115,7 +175,6 @@
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
     
-    NSLog(@"%@", DOCUMENT_DIRECTORY);
     NSArray *fileArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filepath = [fileArr objectAtIndex:0];
     NSString *documentPath = [filepath stringByAppendingPathComponent:@"EgDb.db"];
@@ -181,15 +240,5 @@
 {
     NSLog(@"didFailAdam %ld", (long)error.code);
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 @end

@@ -18,9 +18,29 @@
     // 로딩뷰
     UIActivityIndicatorView *activityView;
     UIView *loadingView;
+    
+    NSInteger buttonIndex;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *popupView;
 @property (weak, nonatomic) IBOutlet UIView *m_bannerView;
+
+- (IBAction)searchButton:(id)sender;
+- (IBAction)settingButton:(id)sender;
+- (IBAction)scholasticTestButton:(id)sender;
+- (IBAction)newspaperButton:(id)sender;
+- (IBAction)toeicButton:(id)sender;
+- (IBAction)movieButton:(id)sender;
+- (IBAction)dramaButton:(id)sender;
+- (IBAction)officialButton:(id)sender;
+- (IBAction)allWordViewButton:(id)sender;
+- (IBAction)wordViewSettingButton:(id)sender;
+
+
+
+
+
+
+
 
 @end
