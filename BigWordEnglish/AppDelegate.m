@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import <sqlite3.h>
 
 @interface AppDelegate ()
 
@@ -47,5 +48,228 @@
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
 }
 
+#pragma mark -
+#pragma mark DB
+
+// 카테고리 리스트
+- (NSMutableArray *)selectSubKey:(NSInteger)subKey{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return nil;
+    }
+    
+    NSMutableArray *Result = [NSMutableArray array];
+    sqlite3_stmt *statement;
+    char *sql = "SELECT * FROM Category WHERE Category_Sub_Key=?";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        sqlite3_bind_int64(statement, 1, subKey);
+        
+        while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"KeyIndex",
+                                 [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)],@"Category_Sub_key",
+                                 [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)],@"Category_Sub",
+                                 nil];
+            [Result addObject:dic];
+        }
+    }
+    return Result;
+}
+
+// 모든 단어 가져오기
+- (NSMutableArray *)selectAllWord{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return nil;
+    }
+    
+    NSMutableArray *Result = [NSMutableArray array];
+    sqlite3_stmt *statement;
+    char *sql = "SELECT * FROM Word";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 nil];
+            [Result addObject:dic];
+        }
+    }
+    return Result;
+}
+
+// 카테고리 단어 가져오기
+- (NSMutableArray *)selectCategoryWord:(NSString*)categoryValue{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return nil;
+    }
+    
+    NSMutableArray *Result = [NSMutableArray array];
+    sqlite3_stmt *statement;
+    char *sql = "SELECT * FROM Word WHERE col_10=?";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [categoryValue UTF8String],  -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 nil];
+            [Result addObject:dic];
+        }
+    }
+    return Result;
+}
+
+// 모든 단어 즐겨찾기 가져오기
+- (NSMutableArray *)selectBookmarkWord{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return nil;
+    }
+    
+    NSMutableArray *Result = [NSMutableArray array];
+    sqlite3_stmt *statement;
+    char *sql = "SELECT * FROM Word WHERE col_13=?";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [@"true" UTF8String],  -1, SQLITE_TRANSIENT);
+        
+        while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
+                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 nil];
+            [Result addObject:dic];
+        }
+    }
+    return Result;
+}
+
+// 단어장 즐겨찾기 추가
+- (void)wordBookmarkUpdate:(NSInteger)idNum bookmarkValue:(NSString*)bookmarkValue{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return;
+    }
+    
+    sqlite3_stmt *statement;
+    char *sql = "UPDATE Word SET col_13=? WHERE col_1=?";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [bookmarkValue UTF8String],  -1, SQLITE_TRANSIENT);
+        sqlite3_bind_int64(statement, 2, idNum);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error");
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+}
+
+// 칼럽 업데이트 (NULL)
+- (void)col12Update{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return;
+    }
+    
+    sqlite3_stmt *statement;
+    char *sql = "UPDATE Word SET col_12=''";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error");
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+}
+
+- (void)col13Update{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return;
+    }
+    
+    sqlite3_stmt *statement;
+    char *sql = "UPDATE Word SET col_13=''";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error");
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+}
 
 @end

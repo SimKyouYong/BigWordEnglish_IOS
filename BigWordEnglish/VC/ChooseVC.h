@@ -10,6 +10,10 @@
 
 @interface ChooseVC : UIViewController{
     NSMutableArray *chooseArrList;
+    
+    NSDictionary *chooseDic;
+    
+    NSInteger viewCheckNum;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;

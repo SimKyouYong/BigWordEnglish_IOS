@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		292F5BCC1EF209AD0076A1FD /* DetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BCB1EF209AD0076A1FD /* DetailVC.m */; };
+		292F5BCE1EF212000076A1FD /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F5BCD1EF212000076A1FD /* libsqlite3.0.tbd */; };
+		292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD01EF21CD00076A1FD /* DetailCell.m */; };
+		292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD31EF249180076A1FD /* NoticeCell.m */; };
+		292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD61EF2492B0076A1FD /* NoticeVC.m */; };
+		292F5BDA1EF24E420076A1FD /* NoticeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */; };
 		29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE21EEF70720060F1B3 /* ChooseVC.m */; };
 		29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE51EEF9B370060F1B3 /* ChooseCell.m */; };
 		FF370C801EC1E25E00E5684C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF370C7F1EC1E25E00E5684C /* main.m */; };
@@ -40,6 +46,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		292F5BCA1EF209AD0076A1FD /* DetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailVC.h; sourceTree = "<group>"; };
+		292F5BCB1EF209AD0076A1FD /* DetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailVC.m; sourceTree = "<group>"; };
+		292F5BCD1EF212000076A1FD /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		292F5BCF1EF21CCF0076A1FD /* DetailCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DetailCell.h; sourceTree = "<group>"; };
+		292F5BD01EF21CD00076A1FD /* DetailCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DetailCell.m; sourceTree = "<group>"; };
+		292F5BD21EF249180076A1FD /* NoticeCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeCell.h; sourceTree = "<group>"; };
+		292F5BD31EF249180076A1FD /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
+		292F5BD51EF2492B0076A1FD /* NoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeVC.h; sourceTree = "<group>"; };
+		292F5BD61EF2492B0076A1FD /* NoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeVC.m; sourceTree = "<group>"; };
+		292F5BD81EF24E420076A1FD /* NoticeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailVC.h; sourceTree = "<group>"; };
+		292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailVC.m; sourceTree = "<group>"; };
 		29F57BE11EEF70720060F1B3 /* ChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseVC.h; sourceTree = "<group>"; };
 		29F57BE21EEF70720060F1B3 /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
 		29F57BE41EEF9B370060F1B3 /* ChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCell.h; sourceTree = "<group>"; };
@@ -93,6 +110,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				292F5BCE1EF212000076A1FD /* libsqlite3.0.tbd in Frameworks */,
 				FFBD4B7B1ED01D1B005380A5 /* Foundation.framework in Frameworks */,
 				FFBD4B791ED01CF4005380A5 /* UIKit.framework in Frameworks */,
 				FFBD4B771ED01CE0005380A5 /* Security.framework in Frameworks */,
@@ -184,6 +202,16 @@
 				29F57BE21EEF70720060F1B3 /* ChooseVC.m */,
 				29F57BE41EEF9B370060F1B3 /* ChooseCell.h */,
 				29F57BE51EEF9B370060F1B3 /* ChooseCell.m */,
+				292F5BCA1EF209AD0076A1FD /* DetailVC.h */,
+				292F5BCB1EF209AD0076A1FD /* DetailVC.m */,
+				292F5BCF1EF21CCF0076A1FD /* DetailCell.h */,
+				292F5BD01EF21CD00076A1FD /* DetailCell.m */,
+				292F5BD51EF2492B0076A1FD /* NoticeVC.h */,
+				292F5BD61EF2492B0076A1FD /* NoticeVC.m */,
+				292F5BD21EF249180076A1FD /* NoticeCell.h */,
+				292F5BD31EF249180076A1FD /* NoticeCell.m */,
+				292F5BD81EF24E420076A1FD /* NoticeDetailVC.h */,
+				292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -223,6 +251,7 @@
 		FFBD4B5B1ED01BA2005380A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				292F5BCD1EF212000076A1FD /* libsqlite3.0.tbd */,
 				FFBD4B7A1ED01D1B005380A5 /* Foundation.framework */,
 				FFBD4B781ED01CF4005380A5 /* UIKit.framework */,
 				FFBD4B761ED01CE0005380A5 /* Security.framework */,
@@ -333,8 +362,13 @@
 				FFBD4B581ED01A91005380A5 /* SBJsonWriter.m in Sources */,
 				29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */,
 				FF370C831EC1E25E00E5684C /* AppDelegate.m in Sources */,
+				292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */,
 				FFBD4B571ED01A91005380A5 /* SBJsonParser.m in Sources */,
+				292F5BDA1EF24E420076A1FD /* NoticeDetailVC.m in Sources */,
+				292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */,
+				292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */,
 				29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */,
+				292F5BCC1EF209AD0076A1FD /* DetailVC.m in Sources */,
 				FFBD4B1D1ED01268005380A5 /* MainVC.m in Sources */,
 				FF370C801EC1E25E00E5684C /* main.m in Sources */,
 			);

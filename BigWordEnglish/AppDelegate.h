@@ -12,6 +12,15 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
+- (NSMutableArray *)selectSubKey:(NSInteger)subKey;
+- (NSMutableArray *)selectAllWord;
+- (NSMutableArray *)selectBookmarkWord;
+- (NSMutableArray *)selectCategoryWord:(NSString*)categoryValue;
+
+- (void)wordBookmarkUpdate:(NSInteger)idNum bookmarkValue:(NSString*)bookmarkValue;
+
+- (void)col12Update;
+- (void)col13Update;
 
 @end
 

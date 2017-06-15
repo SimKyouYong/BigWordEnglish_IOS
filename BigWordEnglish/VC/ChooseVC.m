@@ -8,6 +8,8 @@
 
 #import "ChooseVC.h"
 #import "ChooseCell.h"
+#import "DetailVC.h"
+#import "AppDelegate.h"
 
 @interface ChooseVC ()
 
@@ -32,42 +34,10 @@
 }
 
 - (void)listLoad{
-    chooseArrList = [[NSMutableArray alloc] init];
+    id AppID = [[UIApplication sharedApplication] delegate];
     
-    if(buttonIndexNum == 1){
-        [chooseArrList addObject:@"수능"];
-        [chooseArrList addObject:@"수능 전체단어"];
-    }else if(buttonIndexNum == 2){
-        [chooseArrList addObject:@"신문 1"];
-        [chooseArrList addObject:@"신문 2"];
-        [chooseArrList addObject:@"신문 3"];
-        [chooseArrList addObject:@"신문 전체단어"];
-    }else if(buttonIndexNum == 3){
-        [chooseArrList addObject:@"토익"];
-        [chooseArrList addObject:@"토익 전체단어"];
-    }else if(buttonIndexNum == 4){
-        [chooseArrList addObject:@"영화 1"];
-        [chooseArrList addObject:@"영화 2"];
-        [chooseArrList addObject:@"영화 3"];
-        [chooseArrList addObject:@"영화 4"];
-        [chooseArrList addObject:@"영화 5"];
-        [chooseArrList addObject:@"영화 전체단어"];
-    }else if(buttonIndexNum == 5){
-        [chooseArrList addObject:@"드라마 1"];
-        [chooseArrList addObject:@"드라마 2"];
-        [chooseArrList addObject:@"드라마 3"];
-        [chooseArrList addObject:@"드라마 4"];
-        [chooseArrList addObject:@"드라마 5"];
-        [chooseArrList addObject:@"드라마 전체단어"];
-    }else if(buttonIndexNum == 6){
-        [chooseArrList addObject:@"9급 국가직"];
-        [chooseArrList addObject:@"7급 국가직"];
-        [chooseArrList addObject:@"일반순경"];
-        [chooseArrList addObject:@"9급 지방직"];
-        [chooseArrList addObject:@"7급 지방직"];
-        [chooseArrList addObject:@"공무원"];
-        [chooseArrList addObject:@"공무원 전체단어"];
-    }
+    chooseArrList = [[NSMutableArray alloc] init];
+    chooseArrList = [AppID selectSubKey:buttonIndexNum];
     
     NSLog(@"%@", chooseArrList);
     
@@ -78,7 +48,12 @@
 #pragma mark Next VC
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    
+    if ([[segue identifier] isEqualToString:@"detail"])
+    {
+        DetailVC *vc = [segue destinationViewController];
+        vc.viewCheck = viewCheckNum;
+        vc.detailDic = chooseDic;
+    }
 }
 
 #pragma mark -
@@ -131,6 +106,7 @@
 }
 
 - (IBAction)allWordViewButton:(id)sender {
+    viewCheckNum = 3;
 }
 
 #pragma mark -
@@ -162,10 +138,12 @@
     [cell setBackgroundView:nil];
     [cell setBackgroundColor:[UIColor clearColor]];
     
+    NSDictionary *dic = [chooseArrList objectAtIndex:indexPath.row];
+    
     // 셀 터치 시 파란색 배경 변경 효과 방지
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
-    cell.titleLabel.text = [chooseArrList objectAtIndex:indexPath.row];
+    cell.titleLabel.text = [dic objectForKey:@"Category_Sub"];
     
     cell.selectButton.tag = indexPath.row;
     [cell.selectButton addTarget:self action:@selector(selectAction:) forControlEvents:UIControlEventTouchUpInside];
@@ -176,7 +154,19 @@
 }
 
 - (void)selectAction:(UIButton*)sender{
+    NSDictionary *dic = [chooseArrList objectAtIndex:sender.tag];
     
+    // 수능
+    if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"18"]){
+        
+    // 공무원
+    }else if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"20"]){
+        
+    }else{
+        viewCheckNum = 2;
+        chooseDic = dic;
+        [self performSegueWithIdentifier:@"detail" sender:sender];
+    }
 }
 
 @end

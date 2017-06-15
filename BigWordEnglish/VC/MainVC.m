@@ -12,6 +12,9 @@
 #import <QuartzCore/QuartzCore.h>
 #import "AdamError.h"
 #import "ChooseVC.h"
+#import "DetailVC.h"
+#import "AppDelegate.h"
+#import "NoticeVC.h"
 
 @interface MainVC () <AdamAdViewDelegate>
 
@@ -24,6 +27,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"%@", DOCUMENT_DIRECTORY);
     
     defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
@@ -77,6 +82,15 @@
         ChooseVC *vc = [segue destinationViewController];
         vc.buttonIndexNum = buttonIndex;
     }
+    if ([[segue identifier] isEqualToString:@"mainDetail"])
+    {
+        DetailVC *vc = [segue destinationViewController];
+        vc.viewCheck = 1;
+    }
+    if ([[segue identifier] isEqualToString:@"notice"])
+    {
+        NoticeVC *vc = [segue destinationViewController];
+    }
 }
 
 #pragma mark -
@@ -87,6 +101,7 @@
 }
 
 - (IBAction)settingButton:(id)sender {
+    [self performSegueWithIdentifier:@"notice" sender:sender];
 }
 
 - (IBAction)scholasticTestButton:(id)sender {
@@ -120,6 +135,7 @@
 }
 
 - (IBAction)allWordViewButton:(id)sender {
+    [self performSegueWithIdentifier:@"mainDetail" sender:sender];
 }
 
 - (IBAction)wordViewSettingButton:(id)sender {
@@ -184,6 +200,16 @@
     [defaults setObject:resultValue forKey:DB_VERSION];
     
     [self loadingClose];
+    
+    // 칼럼 업데이트(한번만)
+    if([defaults stringForKey:@"col_update"].length == 0){
+        id AppID = [[UIApplication sharedApplication] delegate];
+        [AppID col12Update];
+        [AppID col13Update];
+        
+        [defaults setObject:@"YES" forKey:@"col_update"];
+    }
+    
 }
 
 #pragma mark -
