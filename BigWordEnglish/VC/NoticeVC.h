@@ -18,4 +18,9 @@
 
 @property (weak, nonatomic) IBOutlet UITableView *noticeTableView;
 
+@property (weak, nonatomic) IBOutlet UIWebView *noticeWebview;
+
+@property (weak, nonatomic) IBOutlet UIButton *closeButton;
+- (IBAction)closeButton:(id)sender;
+
 @end

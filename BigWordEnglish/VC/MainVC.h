@@ -38,11 +38,4 @@
 - (IBAction)allWordViewButton:(id)sender;
 - (IBAction)wordViewSettingButton:(id)sender;
 
-
-
-
-
-
-
-
 @end

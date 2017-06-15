@@ -9,6 +9,8 @@
 #import "DetailVC.h"
 #import "AppDelegate.h"
 #import "DetailCell.h"
+#import "SearchVC.h"
+#import "SettingVC.h"
 
 @interface DetailVC ()
 
@@ -106,7 +108,6 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
-    NSLog(@"%@", dic);
     
     cell.numberLabel.text = [[dic objectForKey:@"col_1"] stringValue];
     cell.wordLabel.text = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
@@ -174,6 +175,16 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+- (IBAction)searchButton:(id)sender {
+    SearchVC *_searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"searchVC"];
+    [self.navigationController presentViewController:_searchVC animated:YES completion:nil];
+}
+
+- (IBAction)settingButton:(id)sender {
+    SettingVC *_settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingVC"];
+    [self.navigationController pushViewController:_settingVC animated:NO];
+}
+
 - (IBAction)wordHiddenButton:(id)sender {
     UIButton *button = (UIButton *) sender;
     button.selected = !button.selected;
@@ -235,4 +246,5 @@
 
 - (IBAction)setting5Button:(id)sender {
 }
+
 @end

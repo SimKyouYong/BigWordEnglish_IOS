@@ -10,6 +10,8 @@
 #import "ChooseCell.h"
 #import "DetailVC.h"
 #import "AppDelegate.h"
+#import "SearchVC.h"
+#import "SettingVC.h"
 
 @interface ChooseVC ()
 
@@ -64,9 +66,13 @@
 }
 
 - (IBAction)searchButton:(id)sender {
+    SearchVC *_searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"searchVC"];
+    [self.navigationController presentViewController:_searchVC animated:YES completion:nil];
 }
 
 - (IBAction)settingButton:(id)sender {
+    SettingVC *_settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingVC"];
+    [self.navigationController pushViewController:_settingVC animated:NO];
 }
 
 - (IBAction)scholasticTestButton:(id)sender {

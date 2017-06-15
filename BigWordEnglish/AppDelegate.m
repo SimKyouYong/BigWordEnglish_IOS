@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import <sqlite3.h>
+#import "GlobalHeader.h"
 
 @interface AppDelegate ()
 
@@ -15,9 +16,13 @@
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    if([defaults stringForKey:WORD_NUM].length == 0){
+        [defaults setObject:@"0" forKey:WORD_NUM];
+    }
+    
     return YES;
 }
 
@@ -94,7 +99,22 @@
     
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
-    char *sql = "SELECT * FROM Word";
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    char *sql;
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sql = "SELECT * FROM Word";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sql = "SELECT * FROM Word ORDER BY col_2 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sql = "SELECT * FROM Word ORDER BY col_6";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sql = "SELECT * FROM Word ORDER BY col_4 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sql = "SELECT * FROM Word ORDER BY col_4 DESC";
+    }
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         while (sqlite3_step(statement)==SQLITE_ROW) {
@@ -132,7 +152,22 @@
     
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
-    char *sql = "SELECT * FROM Word WHERE col_10=?";
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    char *sql;
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sql = "SELECT * FROM Word WHERE col_10=?";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_2 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_6";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 DESC";
+    }
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [categoryValue UTF8String],  -1, SQLITE_TRANSIENT);
@@ -172,8 +207,23 @@
     
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
-    char *sql = "SELECT * FROM Word WHERE col_13=?";
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    char *sql;
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sql = "SELECT * FROM Word WHERE col_13=?";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_2 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_6";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 ASC";
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 DESC";
+    }
+
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [@"true" UTF8String],  -1, SQLITE_TRANSIENT);
         
@@ -225,7 +275,7 @@
     sqlite3_close(database);
 }
 
-// 칼럽 업데이트 (NULL)
+// 칼럼 업데이트 (NULL)
 - (void)col12Update{
     sqlite3 *database;
     NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];

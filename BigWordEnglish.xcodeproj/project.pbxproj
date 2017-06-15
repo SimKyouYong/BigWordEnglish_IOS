@@ -12,7 +12,6 @@
 		292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD01EF21CD00076A1FD /* DetailCell.m */; };
 		292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD31EF249180076A1FD /* NoticeCell.m */; };
 		292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD61EF2492B0076A1FD /* NoticeVC.m */; };
-		292F5BDA1EF24E420076A1FD /* NoticeDetailVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */; };
 		29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE21EEF70720060F1B3 /* ChooseVC.m */; };
 		29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE51EEF9B370060F1B3 /* ChooseCell.m */; };
 		FF370C801EC1E25E00E5684C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF370C7F1EC1E25E00E5684C /* main.m */; };
@@ -20,6 +19,8 @@
 		FF370C891EC1E25E00E5684C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF370C871EC1E25E00E5684C /* Main.storyboard */; };
 		FF370C8B1EC1E25E00E5684C /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = FF370C8A1EC1E25E00E5684C /* Assets.xcassets */; };
 		FF370C8E1EC1E25E00E5684C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = FF370C8C1EC1E25E00E5684C /* LaunchScreen.storyboard */; };
+		FF986ADC1EF2C238003C7B68 /* SettingVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FF986ADB1EF2C238003C7B68 /* SettingVC.m */; };
+		FF986ADF1EF2C7C9003C7B68 /* SearchVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FF986ADE1EF2C7C9003C7B68 /* SearchVC.m */; };
 		FFBD4B1A1ED01254005380A5 /* GlobalObject.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBD4B171ED01254005380A5 /* GlobalObject.m */; };
 		FFBD4B1D1ED01268005380A5 /* MainVC.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBD4B1C1ED01268005380A5 /* MainVC.m */; };
 		FFBD4B561ED01A91005380A5 /* SBJsonBase.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBD4B4B1ED01A91005380A5 /* SBJsonBase.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -55,8 +56,6 @@
 		292F5BD31EF249180076A1FD /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		292F5BD51EF2492B0076A1FD /* NoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeVC.h; sourceTree = "<group>"; };
 		292F5BD61EF2492B0076A1FD /* NoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeVC.m; sourceTree = "<group>"; };
-		292F5BD81EF24E420076A1FD /* NoticeDetailVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeDetailVC.h; sourceTree = "<group>"; };
-		292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeDetailVC.m; sourceTree = "<group>"; };
 		29F57BE11EEF70720060F1B3 /* ChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseVC.h; sourceTree = "<group>"; };
 		29F57BE21EEF70720060F1B3 /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
 		29F57BE41EEF9B370060F1B3 /* ChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCell.h; sourceTree = "<group>"; };
@@ -69,6 +68,10 @@
 		FF370C8A1EC1E25E00E5684C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		FF370C8D1EC1E25E00E5684C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		FF370C8F1EC1E25E00E5684C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FF986ADA1EF2C238003C7B68 /* SettingVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingVC.h; sourceTree = "<group>"; };
+		FF986ADB1EF2C238003C7B68 /* SettingVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingVC.m; sourceTree = "<group>"; };
+		FF986ADD1EF2C7C9003C7B68 /* SearchVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchVC.h; sourceTree = "<group>"; };
+		FF986ADE1EF2C7C9003C7B68 /* SearchVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchVC.m; sourceTree = "<group>"; };
 		FFBD4B151ED01254005380A5 /* GlobalHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalHeader.h; sourceTree = "<group>"; };
 		FFBD4B161ED01254005380A5 /* GlobalObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GlobalObject.h; sourceTree = "<group>"; };
 		FFBD4B171ED01254005380A5 /* GlobalObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GlobalObject.m; sourceTree = "<group>"; };
@@ -206,12 +209,14 @@
 				292F5BCB1EF209AD0076A1FD /* DetailVC.m */,
 				292F5BCF1EF21CCF0076A1FD /* DetailCell.h */,
 				292F5BD01EF21CD00076A1FD /* DetailCell.m */,
+				FF986ADA1EF2C238003C7B68 /* SettingVC.h */,
+				FF986ADB1EF2C238003C7B68 /* SettingVC.m */,
 				292F5BD51EF2492B0076A1FD /* NoticeVC.h */,
 				292F5BD61EF2492B0076A1FD /* NoticeVC.m */,
 				292F5BD21EF249180076A1FD /* NoticeCell.h */,
 				292F5BD31EF249180076A1FD /* NoticeCell.m */,
-				292F5BD81EF24E420076A1FD /* NoticeDetailVC.h */,
-				292F5BD91EF24E420076A1FD /* NoticeDetailVC.m */,
+				FF986ADD1EF2C7C9003C7B68 /* SearchVC.h */,
+				FF986ADE1EF2C7C9003C7B68 /* SearchVC.m */,
 			);
 			path = VC;
 			sourceTree = "<group>";
@@ -364,11 +369,12 @@
 				FF370C831EC1E25E00E5684C /* AppDelegate.m in Sources */,
 				292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */,
 				FFBD4B571ED01A91005380A5 /* SBJsonParser.m in Sources */,
-				292F5BDA1EF24E420076A1FD /* NoticeDetailVC.m in Sources */,
 				292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */,
+				FF986ADF1EF2C7C9003C7B68 /* SearchVC.m in Sources */,
 				292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */,
 				29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */,
 				292F5BCC1EF209AD0076A1FD /* DetailVC.m in Sources */,
+				FF986ADC1EF2C238003C7B68 /* SettingVC.m in Sources */,
 				FFBD4B1D1ED01268005380A5 /* MainVC.m in Sources */,
 				FF370C801EC1E25E00E5684C /* main.m in Sources */,
 			);

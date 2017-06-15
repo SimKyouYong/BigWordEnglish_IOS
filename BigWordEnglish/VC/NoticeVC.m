@@ -8,7 +8,6 @@
 
 #import "NoticeVC.h"
 #import "NoticeCell.h"
-#import "NoticeDetailVC.h"
 
 @interface NoticeVC ()
 
@@ -17,6 +16,8 @@
 @implementation NoticeVC
 
 @synthesize noticeTableView;
+@synthesize noticeWebview;
+@synthesize closeButton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -39,17 +40,6 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-#pragma mark -
-#pragma mark Next VC
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    if ([[segue identifier] isEqualToString:@"noticeDetail"])
-    {
-        NoticeDetailVC *vc = [segue destinationViewController];
-        vc.pathValue = pathStr;
-    }
 }
 
 #pragma mark -
@@ -85,7 +75,6 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSDictionary *dic = [noticeArr objectAtIndex:indexPath.row];
-    NSLog(@"%@", dic);
     
     cell.titleLabel.text = [dic objectForKey:@"mTitle"];
     cell.contentLabel.text = [dic objectForKey:@"mDate"];
@@ -100,11 +89,21 @@
     NSDictionary *dic = [noticeArr objectAtIndex:sender.tag];
     pathStr = [NSString stringWithFormat:@"http://snap40.cafe24.com/BigWordEgs/admin/notice/%@", [dic objectForKey:@"mPath"]];
     
-    [self performSegueWithIdentifier:@"noticeDetail" sender:sender];
+    noticeWebview.hidden = NO;
+    closeButton.hidden = NO;
+    
+    NSURL *url = [NSURL URLWithString:pathStr];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [noticeWebview loadRequest:request];
 }
 
 - (IBAction)homeButton:(id)sender {
-    [self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (IBAction)closeButton:(id)sender {
+    noticeWebview.hidden = YES;
+    closeButton.hidden = YES;
 }
 
 @end

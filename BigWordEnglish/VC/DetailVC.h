@@ -24,6 +24,9 @@
 @property (nonatomic) NSDictionary *detailDic;
 
 - (IBAction)homeButton:(id)sender;
+- (IBAction)searchButton:(id)sender;
+- (IBAction)settingButton:(id)sender;
+
 @property (weak, nonatomic) IBOutlet UITableView *detailTableView;
 
 @property (weak, nonatomic) IBOutlet UIView *bannerView;

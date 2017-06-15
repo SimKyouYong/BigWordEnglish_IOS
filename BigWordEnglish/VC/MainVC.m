@@ -14,7 +14,8 @@
 #import "ChooseVC.h"
 #import "DetailVC.h"
 #import "AppDelegate.h"
-#import "NoticeVC.h"
+#import "SettingVC.h"
+#import "SearchVC.h"
 
 @interface MainVC () <AdamAdViewDelegate>
 
@@ -88,21 +89,19 @@
         vc.viewCheck = 1;
         vc.wordCheck = nextWordCheck;
     }
-    if ([[segue identifier] isEqualToString:@"notice"])
-    {
-        NoticeVC *vc = [segue destinationViewController];
-    }
 }
 
 #pragma mark -
 #pragma mark Button Action
 
 - (IBAction)searchButton:(id)sender {
-    
+    SearchVC *_searchVC = [self.storyboard instantiateViewControllerWithIdentifier:@"searchVC"];
+    [self.navigationController presentViewController:_searchVC animated:YES completion:nil];
 }
 
 - (IBAction)settingButton:(id)sender {
-    [self performSegueWithIdentifier:@"notice" sender:sender];
+    SettingVC *_settingVC = [self.storyboard instantiateViewControllerWithIdentifier:@"settingVC"];
+    [self.navigationController pushViewController:_settingVC animated:NO];
 }
 
 - (IBAction)scholasticTestButton:(id)sender {
