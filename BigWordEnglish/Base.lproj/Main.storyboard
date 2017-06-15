@@ -752,6 +752,7 @@
                         <outlet property="bottomFiveView" destination="N2y-Gk-vKq" id="kny-A7-SAa"/>
                         <outlet property="bottomFourView" destination="Oiy-5b-h1c" id="z97-c3-OZx"/>
                         <outlet property="detailTableView" destination="iSB-6E-iEf" id="cgX-99-gIJ"/>
+                        <outlet property="wordViewbutton" destination="ZES-bb-yM7" id="JaW-Sj-NZT"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pLE-hD-yG7" userLabel="First Responder" sceneMemberID="firstResponder"/>

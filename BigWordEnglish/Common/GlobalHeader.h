@@ -13,6 +13,11 @@
 
 // NSUserDefaults
 #define DB_VERSION              @"db_version"
+// 단어배열순서(알파벳, 난이도, 출제횟수 오름차순, 출제횟수 내림차순)
+#define WORD_NUM1               @"word_num1"
+#define WORD_NUM2               @"word_num2"
+#define WORD_NUM3               @"word_num3"
+#define WORD_NUM4               @"word_num4"
 
 // URL
 #define COMMON_URL              @"http://snap40.cafe24.com/BigWordEgs/"

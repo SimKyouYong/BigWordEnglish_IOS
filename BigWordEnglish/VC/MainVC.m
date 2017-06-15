@@ -86,6 +86,7 @@
     {
         DetailVC *vc = [segue destinationViewController];
         vc.viewCheck = 1;
+        vc.wordCheck = nextWordCheck;
     }
     if ([[segue identifier] isEqualToString:@"notice"])
     {
@@ -135,10 +136,13 @@
 }
 
 - (IBAction)allWordViewButton:(id)sender {
+    nextWordCheck = 1;
     [self performSegueWithIdentifier:@"mainDetail" sender:sender];
 }
 
 - (IBAction)wordViewSettingButton:(id)sender {
+    nextWordCheck = 2;
+    [self performSegueWithIdentifier:@"mainDetail" sender:sender];
 }
 
 #pragma mark -

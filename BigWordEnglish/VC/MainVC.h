@@ -20,6 +20,8 @@
     UIView *loadingView;
     
     NSInteger buttonIndex;
+    
+    NSInteger nextWordCheck;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *popupView;
