@@ -118,20 +118,90 @@
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSString *col2 = ((char *)sqlite3_column_text(statement, 1)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)] :
+            nil;
+            if(col2 == nil){
+                col2 = @"";
+            }
+            
+            NSString *col3 = ((char *)sqlite3_column_text(statement, 2)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)] :
+            nil;
+            if(col3 == nil){
+                col3 = @"";
+            }
+            
+            NSString *col5 = ((char *)sqlite3_column_text(statement, 4)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)] :
+            nil;
+            if(col5 == nil){
+                col5 = @"";
+            }
+            
+            NSString *col6 = ((char *)sqlite3_column_text(statement, 5)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)] :
+            nil;
+            if(col6 == nil){
+                col6 = @"";
+            }
+            
+            NSString *col7 = ((char *)sqlite3_column_text(statement, 6)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)] :
+            nil;
+            if(col7 == nil){
+                col7 = @"";
+            }
+            
+            NSString *col8 = ((char *)sqlite3_column_text(statement, 7)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)] :
+            nil;
+            if(col8 == nil){
+                col8 = @"";
+            }
+            
+            NSString *col10 = ((char *)sqlite3_column_text(statement, 9)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)] :
+            nil;
+            if(col10 == nil){
+                col10 = @"";
+            }
+            
+            NSString *col11 = ((char *)sqlite3_column_text(statement, 10)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)] :
+            nil;
+            if(col11 == nil){
+                col11 = @"";
+            }
+            
+            NSString *col12 = ((char *)sqlite3_column_text(statement, 11)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)] :
+            nil;
+            if(col12 == nil){
+                col12 = @"";
+            }
+            
+            NSString *col13 = ((char *)sqlite3_column_text(statement, 12)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)] :
+            nil;
+            if(col13 == nil){
+                col13 = @"";
+            }
+            
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 col2,@"col_2",
+                                 col3,@"col_3",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 col5,@"col_5",
+                                 col6,@"col_6",
+                                 col7,@"col_7",
+                                 col8,@"col_8",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 col10,@"col_10",
+                                 col11,@"col_11",
+                                 col12,@"col_12",
+                                 col13,@"col_13",
                                  nil];
             [Result addObject:dic];
         }
@@ -173,20 +243,90 @@
         sqlite3_bind_text(statement, 1, [categoryValue UTF8String],  -1, SQLITE_TRANSIENT);
         
         while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSString *col2 = ((char *)sqlite3_column_text(statement, 1)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)] :
+            nil;
+            if(col2 == nil){
+                col2 = @"";
+            }
+            
+            NSString *col3 = ((char *)sqlite3_column_text(statement, 2)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)] :
+            nil;
+            if(col3 == nil){
+                col3 = @"";
+            }
+            
+            NSString *col5 = ((char *)sqlite3_column_text(statement, 4)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)] :
+            nil;
+            if(col5 == nil){
+                col5 = @"";
+            }
+            
+            NSString *col6 = ((char *)sqlite3_column_text(statement, 5)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)] :
+            nil;
+            if(col6 == nil){
+                col6 = @"";
+            }
+            
+            NSString *col7 = ((char *)sqlite3_column_text(statement, 6)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)] :
+            nil;
+            if(col7 == nil){
+                col7 = @"";
+            }
+            
+            NSString *col8 = ((char *)sqlite3_column_text(statement, 7)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)] :
+            nil;
+            if(col8 == nil){
+                col8 = @"";
+            }
+            
+            NSString *col10 = ((char *)sqlite3_column_text(statement, 9)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)] :
+            nil;
+            if(col10 == nil){
+                col10 = @"";
+            }
+            
+            NSString *col11 = ((char *)sqlite3_column_text(statement, 10)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)] :
+            nil;
+            if(col11 == nil){
+                col11 = @"";
+            }
+            
+            NSString *col12 = ((char *)sqlite3_column_text(statement, 11)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)] :
+            nil;
+            if(col12 == nil){
+                col12 = @"";
+            }
+            
+            NSString *col13 = ((char *)sqlite3_column_text(statement, 12)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)] :
+            nil;
+            if(col13 == nil){
+                col13 = @"";
+            }
+            
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 col2,@"col_2",
+                                 col3,@"col_3",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 col5,@"col_5",
+                                 col6,@"col_6",
+                                 col7,@"col_7",
+                                 col8,@"col_8",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 col10,@"col_10",
+                                 col11,@"col_11",
+                                 col12,@"col_12",
+                                 col13,@"col_13",
                                  nil];
             [Result addObject:dic];
         }
@@ -228,20 +368,90 @@
         sqlite3_bind_text(statement, 1, [@"true" UTF8String],  -1, SQLITE_TRANSIENT);
         
         while (sqlite3_step(statement)==SQLITE_ROW) {
+            NSString *col2 = ((char *)sqlite3_column_text(statement, 1)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 1)] :
+            nil;
+            if(col2 == nil){
+                col2 = @"";
+            }
+            
+            NSString *col3 = ((char *)sqlite3_column_text(statement, 2)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 2)] :
+            nil;
+            if(col3 == nil){
+                col3 = @"";
+            }
+            
+            NSString *col5 = ((char *)sqlite3_column_text(statement, 4)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 4)] :
+            nil;
+            if(col5 == nil){
+                col5 = @"";
+            }
+            
+            NSString *col6 = ((char *)sqlite3_column_text(statement, 5)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 5)] :
+            nil;
+            if(col6 == nil){
+                col6 = @"";
+            }
+            
+            NSString *col7 = ((char *)sqlite3_column_text(statement, 6)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 6)] :
+            nil;
+            if(col7 == nil){
+                col7 = @"";
+            }
+            
+            NSString *col8 = ((char *)sqlite3_column_text(statement, 7)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 7)] :
+            nil;
+            if(col8 == nil){
+                col8 = @"";
+            }
+            
+            NSString *col10 = ((char *)sqlite3_column_text(statement, 9)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 9)] :
+            nil;
+            if(col10 == nil){
+                col10 = @"";
+            }
+            
+            NSString *col11 = ((char *)sqlite3_column_text(statement, 10)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 10)] :
+            nil;
+            if(col11 == nil){
+                col11 = @"";
+            }
+            
+            NSString *col12 = ((char *)sqlite3_column_text(statement, 11)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 11)] :
+            nil;
+            if(col12 == nil){
+                col12 = @"";
+            }
+            
+            NSString *col13 = ((char *)sqlite3_column_text(statement, 12)) ?
+            [NSString stringWithUTF8String:(char *)sqlite3_column_text(statement, 12)] :
+            nil;
+            if(col13 == nil){
+                col13 = @"";
+            }
+            
             NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 0)],@"col_1",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 1)],@"col_2",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 2)],@"col_3",
+                                 col2,@"col_2",
+                                 col3,@"col_3",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 3)],@"col_4",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 4)],@"col_5",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 5)],@"col_6",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 6)],@"col_7",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 7)],@"col_8",
+                                 col5,@"col_5",
+                                 col6,@"col_6",
+                                 col7,@"col_7",
+                                 col8,@"col_8",
                                  [NSNumber numberWithUnsignedInteger:sqlite3_column_int64(statement, 8)],@"col_9",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 9)],@"col_10",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 10)],@"col_11",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 11)],@"col_12",
-                                 [NSString stringWithUTF8String:(const char *)sqlite3_column_text(statement, 12)],@"col_13",
+                                 col10,@"col_10",
+                                 col11,@"col_11",
+                                 col12,@"col_12",
+                                 col13,@"col_13",
                                  nil];
             [Result addObject:dic];
         }
@@ -266,53 +476,6 @@
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         sqlite3_bind_text(statement, 1, [bookmarkValue UTF8String],  -1, SQLITE_TRANSIENT);
         sqlite3_bind_int64(statement, 2, idNum);
-        if (sqlite3_step(statement) != SQLITE_DONE) {
-            NSLog(@"Error");
-        }
-    }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(database);
-}
-
-// 칼럼 업데이트 (NULL)
-- (void)col12Update{
-    sqlite3 *database;
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
-    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
-        sqlite3_close(database);
-        NSLog(@"Error");
-        return;
-    }
-    
-    sqlite3_stmt *statement;
-    char *sql = "UPDATE Word SET col_12=''";
-    
-    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
-        if (sqlite3_step(statement) != SQLITE_DONE) {
-            NSLog(@"Error");
-        }
-    }
-    
-    sqlite3_finalize(statement);
-    sqlite3_close(database);
-}
-
-- (void)col13Update{
-    sqlite3 *database;
-    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
-    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
-    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
-        sqlite3_close(database);
-        NSLog(@"Error");
-        return;
-    }
-    
-    sqlite3_stmt *statement;
-    char *sql = "UPDATE Word SET col_13=''";
-    
-    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         if (sqlite3_step(statement) != SQLITE_DONE) {
             NSLog(@"Error");
         }

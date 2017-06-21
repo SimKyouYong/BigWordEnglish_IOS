@@ -19,8 +19,5 @@
 
 - (void)wordBookmarkUpdate:(NSInteger)idNum bookmarkValue:(NSString*)bookmarkValue;
 
-- (void)col12Update;
-- (void)col13Update;
-
 @end
 

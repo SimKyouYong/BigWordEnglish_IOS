@@ -202,17 +202,7 @@
     
     [defaults setObject:resultValue forKey:DB_VERSION];
     
-    [self loadingClose];
-    
-    // 칼럼 업데이트(한번만)
-    if([defaults stringForKey:@"col_update"].length == 0){
-        id AppID = [[UIApplication sharedApplication] delegate];
-        [AppID col12Update];
-        [AppID col13Update];
-        
-        [defaults setObject:@"YES" forKey:@"col_update"];
-    }
-    
+    [self loadingClose];    
 }
 
 #pragma mark -
