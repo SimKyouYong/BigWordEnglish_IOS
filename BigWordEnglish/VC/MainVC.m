@@ -59,8 +59,6 @@
         }
     }];
     [dataTask resume];
-    
-    NSLog(@"%@", DOCUMENT_DIRECTORY);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -173,7 +171,7 @@
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
-    NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
+    //NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
     UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n잠시 후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
     

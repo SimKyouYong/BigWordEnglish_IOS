@@ -19,6 +19,7 @@
 @synthesize levelLabel;
 @synthesize soundButton;
 @synthesize bookmarkButton;
+@synthesize lineView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier{
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -47,6 +48,14 @@
         contentLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:14.0];
         [self addSubview:contentLabel];
         
+        contentExamLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 70, WIDTH_FRAME - 50, 45)];
+        [contentExamLabel setBackgroundColor:[UIColor clearColor]];
+        contentExamLabel.numberOfLines = 0;
+        contentExamLabel.textColor = [UIColor colorWithRed:55.0/255.0 green:55.0/255.0 blue:55.0/255.0 alpha:1.0];
+        contentExamLabel.textAlignment = NSTextAlignmentLeft;
+        contentExamLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:14.0];
+        [self addSubview:contentExamLabel];
+        
         levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH_FRAME - 150, 0, 50, 70)];
         [levelLabel setBackgroundColor:[UIColor clearColor]];
         levelLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
@@ -62,7 +71,7 @@
         [bookmarkButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         [self addSubview:bookmarkButton];
         
-        UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 69.5, WIDTH_FRAME, 0.5)];
+        lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 69.5, WIDTH_FRAME, 0.5)];
         lineView.backgroundColor = [UIColor grayColor];
         [self addSubview:lineView];
     }

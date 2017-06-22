@@ -11,6 +11,7 @@
 #import "DetailCell.h"
 #import "SearchVC.h"
 #import "SettingVC.h"
+#import "GlobalHeader.h"
 
 @interface DetailVC ()
 
@@ -57,6 +58,7 @@
     
     wordHiddenNum = 0;
     meanHiddenNum = 0;
+    examHiddenNum = 0;
     bookmarkNum = 0;
 }
 
@@ -90,6 +92,18 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    if(examHiddenNum == 1){
+        NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        CGSize size = rect.size;
+        
+        return 70 + size.height;
+        
+    }else{
+        return 70;
+    }
+    
     return 70;
 }
 
@@ -134,6 +148,20 @@
         cell.contentLabel.hidden = NO;
     }
     
+    // 예문 가리기
+    if(examHiddenNum == 1){
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
+        CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+        CGSize size = rect.size;
+        cell.contentExamLabel.frame = CGRectMake(50, 70, WIDTH_FRAME - 50, size.height);
+        cell.contentExamLabel.hidden = NO;
+        cell.contentExamLabel.text = [dic objectForKey:@"col_7"];
+        cell.lineView.frame = CGRectMake(0, 69.5 + size.height, WIDTH_FRAME, 0.5);
+    }else{
+        cell.contentExamLabel.hidden = YES;
+        cell.lineView.frame = CGRectMake(0, 69.5, WIDTH_FRAME, 0.5);
+    }
+    
     // 즐겨찾기 상태값
     if([[dic objectForKey:@"col_13"] isEqualToString:@""]){
         [cell.bookmarkButton setTitle:@"OFF" forState:UIControlStateNormal];
@@ -148,7 +176,13 @@
 #pragma mark Button Action
 
 - (void)soundAction:(UIButton*)sender{
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@"test"];
+    synthesizer = [[AVSpeechSynthesizer alloc] init];
+    utterance.rate = 0.3;
+    utterance.pitchMultiplier = 1.0;
+    [synthesizer speakUtterance:utterance];
     
+    //[synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
 }
 
 - (void)bookmarkAction:(UIButton*)sender{
@@ -212,6 +246,16 @@
 }
 
 - (IBAction)examButton:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        examHiddenNum = 1;
+    }else{
+        examHiddenNum = 0;
+    }
+    
+    [detailTableView reloadData];
 }
 
 - (IBAction)wordViewButton:(id)sender {

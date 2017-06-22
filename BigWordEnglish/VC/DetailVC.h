@@ -7,13 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <AVFoundation/AVFoundation.h>
 
 @interface DetailVC : UIViewController{
     NSMutableArray *detailListArr;
     
     NSInteger wordHiddenNum;
     NSInteger meanHiddenNum;
-    NSUInteger bookmarkNum;
+    NSInteger examHiddenNum;
+    NSInteger bookmarkNum;
+    
+    AVSpeechSynthesizer *synthesizer;
 }
 
 // 모든단어보기 & 카테고리 선택으로 들어왔는지 체크(모든 단어보기 - 1, 카테고리 - 2, 카테고리 모든단어 - 3)
