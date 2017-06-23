@@ -111,10 +111,6 @@
     [self listLoad];
 }
 
-- (IBAction)allWordViewButton:(id)sender {
-    viewCheckNum = 3;
-}
-
 #pragma mark -
 #pragma mark UITableView Delegate
 

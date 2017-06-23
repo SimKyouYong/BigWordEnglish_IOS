@@ -31,6 +31,5 @@
 - (IBAction)movieButton:(id)sender;
 - (IBAction)dramaButton:(id)sender;
 - (IBAction)officialButton:(id)sender;
-- (IBAction)allWordViewButton:(id)sender;
 
 @end
