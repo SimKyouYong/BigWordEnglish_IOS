@@ -24,9 +24,7 @@
 @synthesize wordCheck;
 @synthesize bannerView;
 @synthesize detailTableView;
-@synthesize bottomFourView;
 @synthesize bottomFiveView;
-@synthesize wordViewbutton;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -38,22 +36,15 @@
     
     id AppID = [[UIApplication sharedApplication] delegate];
     if(viewCheck == 1){
-        bottomFourView.hidden = NO;
-        bottomFiveView.hidden = YES;
-        
         if(wordCheck == 1){
             detailListArr = [AppID selectAllWord];
-            wordViewbutton.selected = 0;
             bookmarkNum = 0;
         }else{
             detailListArr = [AppID selectBookmarkWord];
-            wordViewbutton.selected = 1;
             bookmarkNum = 1;
         }
     }else if(viewCheck == 2 || viewCheck == 3){
         detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
-        bottomFourView.hidden = YES;
-        bottomFiveView.hidden = NO;
     }
     
     wordHiddenNum = 0;
@@ -122,6 +113,7 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
+    NSLog(@"%@", dic);
     
     cell.numberLabel.text = [[dic objectForKey:@"col_1"] stringValue];
     cell.wordLabel.text = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
@@ -164,9 +156,9 @@
     
     // 즐겨찾기 상태값
     if([[dic objectForKey:@"col_13"] isEqualToString:@""]){
-        [cell.bookmarkButton setTitle:@"OFF" forState:UIControlStateNormal];
+        [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite"] forState:UIControlStateNormal];
     }else{
-        [cell.bookmarkButton setTitle:@"ON" forState:UIControlStateNormal];
+        [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite_press"] forState:UIControlStateNormal];
     }
     
     return cell;

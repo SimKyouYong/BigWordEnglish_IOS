@@ -64,11 +64,12 @@
         [self addSubview:levelLabel];
         
         soundButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH_FRAME - 100, 0, 50, 70)];
+        [soundButton setImage:[UIImage imageNamed:@"btn_speak"] forState:UIControlStateNormal];
+        [soundButton setImage:[UIImage imageNamed:@"btn_speak_press"] forState:UIControlStateHighlighted];
         [self addSubview:soundButton];
         
         bookmarkButton = [[UIButton alloc] initWithFrame:CGRectMake(WIDTH_FRAME - 50, 0, 50, 70)];
-        [bookmarkButton setTitle:@"OFF" forState:UIControlStateNormal];
-        [bookmarkButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+        [bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite"] forState:UIControlStateNormal];
         [self addSubview:bookmarkButton];
         
         lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 69.5, WIDTH_FRAME, 0.5)];

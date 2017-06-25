@@ -35,16 +35,7 @@
 
 @property (weak, nonatomic) IBOutlet UIView *bannerView;
 
-// 모든 단어 하단 버튼
-@property (weak, nonatomic) IBOutlet UIView *bottomFourView;
-
-- (IBAction)wordHiddenButton:(id)sender;
-- (IBAction)meanHiddenButton:(id)sender;
-- (IBAction)examButton:(id)sender;
-- (IBAction)wordViewButton:(id)sender;
-@property (weak, nonatomic) IBOutlet UIButton *wordViewbutton;
-
-// 카테고리 단어 하단 버튼
+// 하단 버튼
 @property (weak, nonatomic) IBOutlet UIView *bottomFiveView;
 - (IBAction)wordHidden5Button:(id)sender;
 - (IBAction)meanHidden5Button:(id)sender;
