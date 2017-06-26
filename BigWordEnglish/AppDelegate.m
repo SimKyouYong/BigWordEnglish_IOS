@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <sqlite3.h>
 #import "GlobalHeader.h"
+#import "GlobalObject.h"
 
 @interface AppDelegate ()
 
@@ -103,17 +104,69 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
     
-    char *sql;
-    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-        sql = "SELECT * FROM Word";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-        sql = "SELECT * FROM Word ORDER BY col_2 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-        sql = "SELECT * FROM Word ORDER BY col_6";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-        sql = "SELECT * FROM Word ORDER BY col_4 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-        sql = "SELECT * FROM Word ORDER BY col_4 DESC";
+    const char *sql;
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+        if([COL4_CHECK isEqualToString:@""]){
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sql = "SELECT * FROM Word";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sql = "SELECT * FROM Word ORDER BY col_2 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sql = "SELECT * FROM Word ORDER BY col_6";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sql = "SELECT * FROM Word ORDER BY col_4 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sql = "SELECT * FROM Word ORDER BY col_4 DESC";
+            }
+            
+        }else{
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_2 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_6", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_4 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_4 DESC", COL4_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }
+    }else{
+        if([COL4_CHECK isEqualToString:@""]){
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_2 ASC", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_6", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_4 ASC", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_4 DESC", WORD_LEVEL_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }else{
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_2 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_6", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_4 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_4 DESC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }
     }
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -226,17 +279,69 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
     
-    char *sql;
-    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-        sql = "SELECT * FROM Word WHERE col_10=?";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_2 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_6";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-        sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 DESC";
+    const char *sql;
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+        if([COL4_CHECK isEqualToString:@""]){
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sql = "SELECT * FROM Word WHERE col_10=?";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_2 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_6";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sql = "SELECT * FROM Word WHERE col_10=? ORDER BY col_4 DESC";
+            }
+            
+        }else{
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_2 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_6", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_4 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_4 DESC", COL4_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }
+    }else{
+       if([COL4_CHECK isEqualToString:@""]){
+           NSString *sqlValue;
+           if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@", WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_2 ASC", WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_6", WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_4 ASC", WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_4 DESC", WORD_LEVEL_CHECK];
+           }
+           
+           sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+       }else{
+           NSString *sqlValue;
+           if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@", COL4_CHECK, WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_2 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_6", COL4_CHECK, WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+           }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 DESC", COL4_CHECK, WORD_LEVEL_CHECK];
+           }
+           
+           sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+       }
     }
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
@@ -351,17 +456,69 @@
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
     
-    char *sql;
-    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-        sql = "SELECT * FROM Word WHERE col_13=?";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_2 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_6";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 ASC";
-    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-        sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 DESC";
+    const char *sql;
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+        if([COL4_CHECK isEqualToString:@""]){
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sql = "SELECT * FROM Word WHERE col_13=?";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_2 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_6";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 ASC";
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sql = "SELECT * FROM Word WHERE col_13=? ORDER BY col_4 DESC";
+            }
+            
+        }else{
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_2 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_6", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_4 ASC", COL4_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_4 DESC", COL4_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }
+    }else{
+        if([COL4_CHECK isEqualToString:@""]){
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_2 ASC", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_6", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_4 ASC", WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_4 DESC", WORD_LEVEL_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }else{
+            NSString *sqlValue;
+            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_2 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_6", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 ASC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 DESC", COL4_CHECK, WORD_LEVEL_CHECK];
+            }
+            
+            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+        }
     }
 
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {

@@ -12,6 +12,8 @@
 #import "AppDelegate.h"
 #import "SearchVC.h"
 #import "SettingVC.h"
+#import "GlobalHeader.h"
+#import "GlobalObject.h"
 
 @interface ChooseVC ()
 
@@ -21,6 +23,15 @@
 
 @synthesize listTableView;
 @synthesize buttonIndexNum;
+@synthesize scholasticTestButton;
+@synthesize newspaperButton;
+@synthesize toeicButton;
+@synthesize movieButton;
+@synthesize dramaButton;
+@synthesize officialButton;
+@synthesize choosePopupView;
+@synthesize chooseView;
+@synthesize chooseText;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -28,6 +39,7 @@
     NSLog(@"%ld", buttonIndexNum);
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,8 +52,6 @@
     
     chooseArrList = [[NSMutableArray alloc] init];
     chooseArrList = [AppID selectSubKey:buttonIndexNum];
-    
-    NSLog(@"%@", chooseArrList);
     
     [listTableView reloadData];
 }
@@ -61,6 +71,29 @@
 #pragma mark -
 #pragma mark Button Action
 
+- (void)buttonSelected{
+    [scholasticTestButton setImage:[UIImage imageNamed:@"menu_01"] forState:UIControlStateNormal];
+    [newspaperButton setImage:[UIImage imageNamed:@"menu_02"] forState:UIControlStateNormal];
+    [toeicButton setImage:[UIImage imageNamed:@"menu_03"] forState:UIControlStateNormal];
+    [movieButton setImage:[UIImage imageNamed:@"menu_04"] forState:UIControlStateNormal];
+    [dramaButton setImage:[UIImage imageNamed:@"menu_05"] forState:UIControlStateNormal];
+    [officialButton setImage:[UIImage imageNamed:@"menu_06"] forState:UIControlStateNormal];
+    
+    if(buttonIndexNum == 1){
+        [scholasticTestButton setImage:[UIImage imageNamed:@"menu_01_press"] forState:UIControlStateNormal];
+    }else if(buttonIndexNum == 2){
+        [newspaperButton setImage:[UIImage imageNamed:@"menu_02_press"] forState:UIControlStateNormal];
+    }else if(buttonIndexNum == 3){
+        [toeicButton setImage:[UIImage imageNamed:@"menu_03_press"] forState:UIControlStateNormal];
+    }else if(buttonIndexNum == 4){
+        [movieButton setImage:[UIImage imageNamed:@"menu_04_press"] forState:UIControlStateNormal];
+    }else if(buttonIndexNum == 5){
+        [dramaButton setImage:[UIImage imageNamed:@"menu_05_press"] forState:UIControlStateNormal];
+    }else if(buttonIndexNum == 6){
+        [officialButton setImage:[UIImage imageNamed:@"menu_06_press"] forState:UIControlStateNormal];
+    }
+}
+
 - (IBAction)homeButton:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
@@ -79,36 +112,42 @@
     buttonIndexNum = 1;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (IBAction)newspaperButton:(id)sender {
     buttonIndexNum = 2;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (IBAction)toeicButton:(id)sender {
     buttonIndexNum = 3;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (IBAction)movieButton:(id)sender {
     buttonIndexNum = 4;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (IBAction)dramaButton:(id)sender {
     buttonIndexNum = 5;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 - (IBAction)officialButton:(id)sender {
     buttonIndexNum = 6;
     
     [self listLoad];
+    [self buttonSelected];
 }
 
 #pragma mark -
@@ -158,17 +197,71 @@
 - (void)selectAction:(UIButton*)sender{
     NSDictionary *dic = [chooseArrList objectAtIndex:sender.tag];
     
+    WORD_LEVEL_CHECK = @"";
+    COL4_CHECK = @"";
+    chooseDic = dic;
+    
     // 수능
-    if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"18"]){
+    if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"20"]){
+        chooseText.text = @"수능";
+        choosePopupView.hidden = NO;
+        chooseView.hidden = NO;
         
     // 공무원
-    }else if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"20"]){
+    }else if([[[dic objectForKey:@"KeyIndex"] stringValue] isEqualToString:@"18"]){
+        chooseText.text = @"공무원";
+        choosePopupView.hidden = NO;
+        chooseView.hidden = NO;
         
     }else{
         viewCheckNum = 2;
-        chooseDic = dic;
         [self performSegueWithIdentifier:@"detail" sender:sender];
     }
+}
+
+- (IBAction)choose1YearButton:(id)sender {
+    [self performSegueWithIdentifier:@"detail" sender:sender];
+    
+    choosePopupView.hidden = YES;
+    chooseView.hidden = YES;
+}
+
+- (IBAction)choose3YearButton:(id)sender {
+    [self performSegueWithIdentifier:@"detail" sender:sender];
+    
+    choosePopupView.hidden = YES;
+    chooseView.hidden = YES;
+}
+
+- (IBAction)choose5YearButton:(id)sender {
+    [self performSegueWithIdentifier:@"detail" sender:sender];
+    
+    choosePopupView.hidden = YES;
+    chooseView.hidden = YES;
+}
+
+- (IBAction)choose7YearButton:(id)sender {
+    [self performSegueWithIdentifier:@"detail" sender:sender];
+    
+    choosePopupView.hidden = YES;
+    chooseView.hidden = YES;
+}
+
+- (IBAction)choose10YearButton:(id)sender {
+    [self performSegueWithIdentifier:@"detail" sender:sender];
+    
+    choosePopupView.hidden = YES;
+    chooseView.hidden = YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
+    UITouch *touch = [[event allTouches] anyObject];
+    if(choosePopupView == [touch view]){
+        choosePopupView.hidden = YES;
+        chooseView.hidden = YES;
+    }
+    
+    [super touchesBegan:touches withEvent:event];
 }
 
 @end

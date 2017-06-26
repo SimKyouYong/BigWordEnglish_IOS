@@ -31,6 +31,8 @@
     if (self) {
         _pointCheck = 0;
         _bottomAdCheck = @"";
+        _wordLevelCheck = @"";
+        _col4Check = @"";
     }
     
     return self;

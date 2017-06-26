@@ -14,5 +14,7 @@
 
 @property (nonatomic, assign) NSInteger pointCheck;
 @property (nonatomic, assign) NSString *bottomAdCheck;
+@property (nonatomic, assign) NSString *wordLevelCheck;
+@property (nonatomic, assign) NSString *col4Check;
 
 @end

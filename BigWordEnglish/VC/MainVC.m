@@ -8,6 +8,7 @@
 
 #import "MainVC.h"
 #import "GlobalHeader.h"
+#import "GlobalObject.h"
 #import "AdamAdView.h"
 #import <QuartzCore/QuartzCore.h>
 #import "AdamError.h"
@@ -133,11 +134,17 @@
 }
 
 - (IBAction)allWordViewButton:(id)sender {
+    WORD_LEVEL_CHECK = @"";
+    COL4_CHECK = @"";
+
     nextWordCheck = 1;
     [self performSegueWithIdentifier:@"mainDetail" sender:sender];
 }
 
 - (IBAction)wordViewSettingButton:(id)sender {
+    WORD_LEVEL_CHECK = @"";
+    COL4_CHECK = @"";
+    
     nextWordCheck = 2;
     [self performSegueWithIdentifier:@"mainDetail" sender:sender];
 }
@@ -148,7 +155,7 @@
 - (void)fileDown{
     [self loadingInit];
     
-    NSString *urlString = [NSString stringWithFormat:@"%@%@", COMMON_URL, DB_FILE_URL];
+    NSString *urlString = @"http://iglassstory.com/egDb.db";
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
    
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];

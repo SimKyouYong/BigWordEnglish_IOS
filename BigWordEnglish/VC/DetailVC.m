@@ -25,19 +25,31 @@
 @synthesize bannerView;
 @synthesize detailTableView;
 @synthesize bottomFiveView;
+@synthesize setting5Button;
+@synthesize allWordSettingView;
+@synthesize wordLevelHighButton;
+@synthesize wordLevelMidButton;
+@synthesize wordLevelLowButton;
+@synthesize word1Button;
+@synthesize word2Button;
+@synthesize word3Button;
+@synthesize word4Button;
+@synthesize word5Button;
+@synthesize word7Button;
+@synthesize word10Button;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    detailListArr = [[NSMutableArray alloc] init];
+    wordLevelSelectedNum = 0;
+    wordNumberSelectedNum = 0;
     
-    NSLog(@"%@", detailDic);
-    NSLog(@"%ld", viewCheck);
+    detailListArr = [[NSMutableArray alloc] init];
     
     id AppID = [[UIApplication sharedApplication] delegate];
     if(viewCheck == 1){
         if(wordCheck == 1){
-            detailListArr = [AppID selectAllWord];
+            [self performSelector:@selector(loadAllWord) withObject:nil afterDelay:0.5];
             bookmarkNum = 0;
         }else{
             detailListArr = [AppID selectBookmarkWord];
@@ -51,6 +63,12 @@
     meanHiddenNum = 0;
     examHiddenNum = 0;
     bookmarkNum = 0;
+}
+
+- (void)loadAllWord{
+    id AppID = [[UIApplication sharedApplication] delegate];
+    detailListArr = [AppID selectAllWord];
+    [detailTableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -113,9 +131,8 @@
     [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
     
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
-    NSLog(@"%@", dic);
     
-    cell.numberLabel.text = [[dic objectForKey:@"col_1"] stringValue];
+    cell.numberLabel.text = [[dic objectForKey:@"col_4"] stringValue];
     cell.wordLabel.text = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
     cell.contentLabel.text = [dic objectForKey:@"col_5"];
     cell.levelLabel.text = [dic objectForKey:@"col_6"];
@@ -155,7 +172,8 @@
     }
     
     // 즐겨찾기 상태값
-    if([[dic objectForKey:@"col_13"] isEqualToString:@""]){
+    
+    if(![[dic objectForKey:@"col_13"] isEqualToString:@"true"]){
         [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite"] forState:UIControlStateNormal];
     }else{
         [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite_press"] forState:UIControlStateNormal];
@@ -168,9 +186,11 @@
 #pragma mark Button Action
 
 - (void)soundAction:(UIButton*)sender{
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:@"test"];
+    NSDictionary *dic = [detailListArr objectAtIndex:sender.tag];
+    
+    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:[dic objectForKey:@"col_2"]];
     synthesizer = [[AVSpeechSynthesizer alloc] init];
-    utterance.rate = 0.3;
+    utterance.rate = 0.4;
     utterance.pitchMultiplier = 1.0;
     [synthesizer speakUtterance:utterance];
     
@@ -189,11 +209,7 @@
     }
     
     detailListArr = [[NSMutableArray alloc] init];
-    if(bookmarkNum == 1){
-        detailListArr = [AppID selectBookmarkWord];
-    }else{
-        detailListArr = [AppID selectAllWord];
-    }
+    detailListArr = [AppID selectBookmarkWord];
     [detailTableView reloadData];
 }
 
@@ -211,7 +227,7 @@
     [self.navigationController pushViewController:_settingVC animated:NO];
 }
 
-- (IBAction)wordHiddenButton:(id)sender {
+- (IBAction)wordHidden5Button:(id)sender {
     UIButton *button = (UIButton *) sender;
     button.selected = !button.selected;
     
@@ -224,7 +240,7 @@
     [detailTableView reloadData];
 }
 
-- (IBAction)meanHiddenButton:(id)sender {
+- (IBAction)meanHidden5Button:(id)sender {
     UIButton *button = (UIButton *) sender;
     button.selected = !button.selected;
     
@@ -237,7 +253,7 @@
     [detailTableView reloadData];
 }
 
-- (IBAction)examButton:(id)sender {
+- (IBAction)exam5Button:(id)sender {
     UIButton *button = (UIButton *) sender;
     button.selected = !button.selected;
     
@@ -250,7 +266,7 @@
     [detailTableView reloadData];
 }
 
-- (IBAction)wordViewButton:(id)sender {
+- (IBAction)wordView5Button:(id)sender {
     id AppID = [[UIApplication sharedApplication] delegate];
     detailListArr = [[NSMutableArray alloc] init];
     
@@ -264,23 +280,228 @@
         bookmarkNum = 0;
         detailListArr = [AppID selectAllWord];
     }
- 
+    
     [detailTableView reloadData];
 }
 
-- (IBAction)wordHidden5Button:(id)sender {
-}
-
-- (IBAction)meanHidden5Button:(id)sender {
-}
-
-- (IBAction)exam5Button:(id)sender {
-}
-
-- (IBAction)wordView5Button:(id)sender {
-}
-
 - (IBAction)setting5Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        allWordSettingView.hidden = NO;
+    }else{
+        allWordSettingView.hidden = YES;
+    }
+}
+
+- (IBAction)wordLevelHighButton:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordLevelSelectedNum = 1;
+        [self wordLevelSelected];
+        
+    }else{
+        [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordLevelSelectedNum = 0;
+    }
+}
+
+- (IBAction)wordLevelMidButton:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordLevelSelectedNum = 2;
+        [self wordLevelSelected];
+        
+    }else{
+        [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordLevelSelectedNum = 0;
+    }
+}
+
+- (IBAction)wordLevelLowButton:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordLevelSelectedNum = 3;
+        [self wordLevelSelected];
+        
+    }else{
+        [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordLevelSelectedNum = 0;
+    }
+}
+
+// 난이도 설정 버튼
+- (void)wordLevelSelected{
+    [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    
+    if(wordLevelSelectedNum == 1){
+        [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordLevelSelectedNum == 2){
+        [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordLevelSelectedNum == 3){
+        [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }
+}
+
+- (IBAction)word1Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 1;
+        [self wordSelected];
+        
+    }else{
+        [word1Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word2Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 2;
+        [self wordSelected];
+        
+    }else{
+        [word2Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word3Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 3;
+        [self wordSelected];
+        
+    }else{
+        [word3Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word4Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 4;
+        [self wordSelected];
+        
+    }else{
+        [word4Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word5Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 5;
+        [self wordSelected];
+        
+    }else{
+        [word5Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word7Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 6;
+        [self wordSelected];
+        
+    }else{
+        [word7Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+- (IBAction)word10Button:(id)sender {
+    UIButton *button = (UIButton *) sender;
+    button.selected = !button.selected;
+    
+    if(button.selected == 1){
+        wordNumberSelectedNum = 7;
+        [self wordSelected];
+        
+    }else{
+        [word10Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+        button.selected = 0;
+        wordNumberSelectedNum = 0;
+    }
+}
+
+// 출제횟수 설정 버튼
+- (void)wordSelected{
+    [word1Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word2Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word3Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word4Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word5Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word7Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    [word10Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
+    
+    if(wordNumberSelectedNum == 1){
+        [word1Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 2){
+        [word2Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 3){
+        [word3Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 4){
+        [word4Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 5){
+        [word5Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 6){
+        [word7Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }else if(wordNumberSelectedNum == 7){
+        [word10Button setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+    }
+}
+
+- (void)totalSelected{
+    NSLog(@"%ld", wordLevelSelectedNum);
+    NSLog(@"%ld", wordNumberSelectedNum);
+}
+
+- (IBAction)submitButton:(id)sender {
+    allWordSettingView.hidden = YES;
+    setting5Button.selected = 0;
+    
+    [self totalSelected];
+}
+
+- (IBAction)cancelButton:(id)sender {
+    allWordSettingView.hidden = YES;
+    setting5Button.selected = 0;
 }
 
 @end

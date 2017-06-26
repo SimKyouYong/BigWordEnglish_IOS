@@ -24,6 +24,10 @@
 // 메모리 보관
 #define POINT_CHECK             [GlobalObject sharedInstance].pointCheck
 #define BOTTOM_AD_CHECK         [GlobalObject sharedInstance].bottomAdCheck
+// 단어 난이도
+#define WORD_LEVEL_CHECK        [GlobalObject sharedInstance].wordLevelCheck
+// 단어 출제횟수
+#define COL4_CHECK              [GlobalObject sharedInstance].col4Check
 
 // AlertTag
 #define TEST                    9999
