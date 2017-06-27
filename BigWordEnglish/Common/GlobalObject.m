@@ -33,6 +33,7 @@
         _bottomAdCheck = @"";
         _wordLevelCheck = @"";
         _col4Check = @"";
+        _limitNum = 0;
     }
     
     return self;

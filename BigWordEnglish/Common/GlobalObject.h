@@ -16,5 +16,6 @@
 @property (nonatomic, assign) NSString *bottomAdCheck;
 @property (nonatomic, assign) NSString *wordLevelCheck;
 @property (nonatomic, assign) NSString *col4Check;
+@property (nonatomic, assign) NSInteger limitNum;
 
 @end

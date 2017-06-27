@@ -28,6 +28,8 @@
 #define WORD_LEVEL_CHECK        [GlobalObject sharedInstance].wordLevelCheck
 // 단어 출제횟수
 #define COL4_CHECK              [GlobalObject sharedInstance].col4Check
+// DB 갱신
+#define LIMIT_NUM               [GlobalObject sharedInstance].limitNum
 
 // AlertTag
 #define TEST                    9999

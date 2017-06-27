@@ -12,6 +12,7 @@
 #import "SearchVC.h"
 #import "SettingVC.h"
 #import "GlobalHeader.h"
+#import "GlobalObject.h"
 
 @interface DetailVC ()
 
@@ -43,13 +44,15 @@
     
     wordLevelSelectedNum = 0;
     wordNumberSelectedNum = 0;
+    listCountNum = 0;
+    LIMIT_NUM = 300;
     
     detailListArr = [[NSMutableArray alloc] init];
     
     id AppID = [[UIApplication sharedApplication] delegate];
     if(viewCheck == 1){
         if(wordCheck == 1){
-            [self performSelector:@selector(loadAllWord) withObject:nil afterDelay:0.5];
+            detailListArr = [AppID selectAllWord];
             bookmarkNum = 0;
         }else{
             detailListArr = [AppID selectBookmarkWord];
@@ -65,26 +68,9 @@
     bookmarkNum = 0;
 }
 
-- (void)loadAllWord{
-    id AppID = [[UIApplication sharedApplication] delegate];
-    detailListArr = [AppID selectAllWord];
-    [detailTableView reloadData];
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 #pragma mark -
 #pragma mark UITableView Delegate
@@ -180,6 +166,28 @@
     }
     
     return cell;
+}
+
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    id AppID = [[UIApplication sharedApplication] delegate];
+    detailListArr = [AppID selectAllWord];
+    LIMIT_NUM = LIMIT_NUM + 300;
+    
+    if(bookmarkNum == 0){
+        if(viewCheck == 1){
+            if(wordCheck == 1){
+                detailListArr = [AppID selectAllWord];
+            }else{
+                detailListArr = [AppID selectBookmarkWord];
+            }
+        }else if(viewCheck == 2 || viewCheck == 3){
+            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        }
+    }else{
+        detailListArr = [AppID selectBookmarkWord];
+    }
+    
+    [detailTableView reloadData];
 }
 
 #pragma mark -
