@@ -46,6 +46,7 @@
 - (IBAction)meanHidden5Button:(id)sender;
 - (IBAction)exam5Button:(id)sender;
 - (IBAction)wordView5Button:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *wordView5Button;
 - (IBAction)setting5Button:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *setting5Button;
 

@@ -36,8 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%ld", buttonIndexNum);
-    
     [self listLoad];
     [self buttonSelected];
 }
@@ -72,25 +70,25 @@
 #pragma mark Button Action
 
 - (void)buttonSelected{
-    [scholasticTestButton setImage:[UIImage imageNamed:@"menu_01"] forState:UIControlStateNormal];
-    [newspaperButton setImage:[UIImage imageNamed:@"menu_02"] forState:UIControlStateNormal];
-    [toeicButton setImage:[UIImage imageNamed:@"menu_03"] forState:UIControlStateNormal];
-    [movieButton setImage:[UIImage imageNamed:@"menu_04"] forState:UIControlStateNormal];
-    [dramaButton setImage:[UIImage imageNamed:@"menu_05"] forState:UIControlStateNormal];
-    [officialButton setImage:[UIImage imageNamed:@"menu_06"] forState:UIControlStateNormal];
+    [scholasticTestButton setImage:[UIImage imageNamed:@"btn_sub_menu_01_off"] forState:UIControlStateNormal];
+    [newspaperButton setImage:[UIImage imageNamed:@"btn_sub_menu_02_off"] forState:UIControlStateNormal];
+    [toeicButton setImage:[UIImage imageNamed:@"btn_sub_menu_03_off"] forState:UIControlStateNormal];
+    [movieButton setImage:[UIImage imageNamed:@"btn_sub_menu_04_off"] forState:UIControlStateNormal];
+    [dramaButton setImage:[UIImage imageNamed:@"btn_sub_menu_05_off"] forState:UIControlStateNormal];
+    [officialButton setImage:[UIImage imageNamed:@"btn_sub_menu_06_off"] forState:UIControlStateNormal];
     
     if(buttonIndexNum == 1){
-        [scholasticTestButton setImage:[UIImage imageNamed:@"menu_01_press"] forState:UIControlStateNormal];
+        [scholasticTestButton setImage:[UIImage imageNamed:@"btn_sub_menu_01_on"] forState:UIControlStateNormal];
     }else if(buttonIndexNum == 2){
-        [newspaperButton setImage:[UIImage imageNamed:@"menu_02_press"] forState:UIControlStateNormal];
+        [newspaperButton setImage:[UIImage imageNamed:@"btn_sub_menu_02_on"] forState:UIControlStateNormal];
     }else if(buttonIndexNum == 3){
-        [toeicButton setImage:[UIImage imageNamed:@"menu_03_press"] forState:UIControlStateNormal];
+        [toeicButton setImage:[UIImage imageNamed:@"btn_sub_menu_03_on"] forState:UIControlStateNormal];
     }else if(buttonIndexNum == 4){
-        [movieButton setImage:[UIImage imageNamed:@"menu_04_press"] forState:UIControlStateNormal];
+        [movieButton setImage:[UIImage imageNamed:@"btn_sub_menu_04_on"] forState:UIControlStateNormal];
     }else if(buttonIndexNum == 5){
-        [dramaButton setImage:[UIImage imageNamed:@"menu_05_press"] forState:UIControlStateNormal];
+        [dramaButton setImage:[UIImage imageNamed:@"btn_sub_menu_05_on"] forState:UIControlStateNormal];
     }else if(buttonIndexNum == 6){
-        [officialButton setImage:[UIImage imageNamed:@"menu_06_press"] forState:UIControlStateNormal];
+        [officialButton setImage:[UIImage imageNamed:@"btn_sub_menu_06_on"] forState:UIControlStateNormal];
     }
 }
 

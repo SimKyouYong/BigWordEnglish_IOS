@@ -38,6 +38,7 @@
 @synthesize word5Button;
 @synthesize word7Button;
 @synthesize word10Button;
+@synthesize wordView5Button;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -57,6 +58,7 @@
         }else{
             detailListArr = [AppID selectBookmarkWord];
             bookmarkNum = 1;
+            wordView5Button.selected = 1;
         }
     }else if(viewCheck == 2 || viewCheck == 3){
         detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
@@ -217,7 +219,15 @@
     }
     
     detailListArr = [[NSMutableArray alloc] init];
-    detailListArr = [AppID selectBookmarkWord];
+    if(viewCheck == 1){
+        if(bookmarkNum == 0){
+            detailListArr = [AppID selectAllWord];
+        }else{
+            detailListArr = [AppID selectBookmarkWord];
+        }
+    }else if(viewCheck == 2 || viewCheck == 3){
+        detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+    }
     [detailTableView reloadData];
 }
 
