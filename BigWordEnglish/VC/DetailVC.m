@@ -498,6 +498,51 @@
 - (void)totalSelected{
     NSLog(@"%ld", wordLevelSelectedNum);
     NSLog(@"%ld", wordNumberSelectedNum);
+    
+    // 단어 난이도 상중하
+    if(wordLevelSelectedNum == 1){
+        WORD_LEVEL_CHECK = @"상";
+    }else if(wordLevelSelectedNum == 2){
+        WORD_LEVEL_CHECK = @"중";
+    }else if(wordLevelSelectedNum == 3){
+        WORD_LEVEL_CHECK = @"하";
+    }else{
+        WORD_LEVEL_CHECK = @"";
+    }
+    
+    // 출제 횟수
+    if(wordNumberSelectedNum == 1){
+        COL4_CHECK = @"0";
+    }else if(wordNumberSelectedNum == 2){
+        COL4_CHECK = @"1";
+    }else if(wordNumberSelectedNum == 3){
+        COL4_CHECK = @"2";
+    }else if(wordNumberSelectedNum == 4){
+        COL4_CHECK = @"3";
+    }else if(wordNumberSelectedNum == 5){
+        COL4_CHECK = @"4";
+    }else if(wordNumberSelectedNum == 6){
+        COL4_CHECK = @"6";
+    }else if(wordNumberSelectedNum == 7){
+        COL4_CHECK = @"9";
+    }else{
+        COL4_CHECK = @"";
+    }
+    
+    detailListArr = [[NSMutableArray alloc] init];
+    
+    id AppID = [[UIApplication sharedApplication] delegate];
+    if(viewCheck == 1){
+        if(bookmarkNum == 0){
+            detailListArr = [AppID selectAllWord];
+        }else{
+            detailListArr = [AppID selectBookmarkWord];
+        }
+    }else if(viewCheck == 2 || viewCheck == 3){
+        detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+    }
+    
+    [detailTableView reloadData];
 }
 
 - (IBAction)submitButton:(id)sender {

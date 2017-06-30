@@ -124,16 +124,17 @@
             
         }else{
             NSString *sqlValue;
+            NSString *col4Value = COL4_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -141,34 +142,39 @@
     }else{
         if([COL4_CHECK isEqualToString:@""]){
             NSString *sqlValue;
+            NSString *wordLevelValue = WORD_LEVEL_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6='%s' LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_6 LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6='%s' ORDER BY col_6 LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+            
         }else{
             NSString *sqlValue;
+            NSString *col4Value = COL4_CHECK;
+            NSString *wordLevelValue = WORD_LEVEL_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' AND col_6='%s' LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' AND col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' AND col_6='%s' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' AND col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4=%@ AND col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_4>'%ld' AND col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+            NSLog(@"%@", sqlValue);
         }
     }
     
@@ -302,16 +308,17 @@
             
         }else{
             NSString *sqlValue;
+            NSString *col4Value = COL4_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -319,31 +326,34 @@
     }else{
        if([COL4_CHECK isEqualToString:@""]){
            NSString *sqlValue;
+           NSString *wordLevelValue = WORD_LEVEL_CHECK;
            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6='%s' LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_6 LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6='%s' ORDER BY col_6 LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
            }
            
            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
        }else{
            NSString *sqlValue;
+           NSString *col4Value = COL4_CHECK;
+           NSString *wordLevelValue = WORD_LEVEL_CHECK;
            if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' AND col_6='%s' LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
            }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+               sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
            }
            
            sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -482,16 +492,17 @@
             
         }else{
             NSString *sqlValue;
+            NSString *col4Value = COL4_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
@@ -499,31 +510,34 @@
     }else{
         if([COL4_CHECK isEqualToString:@""]){
             NSString *sqlValue;
+            NSString *wordLevelValue = WORD_LEVEL_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6='%s' LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_6 LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6='%s' ORDER BY col_6 LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [wordLevelValue UTF8String], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
         }else{
             NSString *sqlValue;
+            NSString *col4Value = COL4_CHECK;
+            NSString *wordLevelValue = WORD_LEVEL_CHECK;
             if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' AND col_6='%s' LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_2 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_2 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_6 LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_6 LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 ASC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_4 ASC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4=%@ AND col_6=%@ ORDER BY col_4 DESC LIMIT '%ld'", COL4_CHECK, WORD_LEVEL_CHECK, LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13=? AND col_4>'%ld' AND col_6='%s' ORDER BY col_4 DESC LIMIT '%ld'", [col4Value integerValue], [wordLevelValue UTF8String], LIMIT_NUM];
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
