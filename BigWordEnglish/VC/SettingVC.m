@@ -35,15 +35,19 @@
     
     if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
         wordNumCheck1.selected = 1;
+        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
         wordNumCheck2.selected = 1;
+        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
         wordNumCheck3.selected = 1;
+        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
         wordNumCheck4.selected = 1;
+        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
     }
 }
 
@@ -81,6 +85,7 @@
         [self wordNumSelectedInit:1];
     }else{
         wordNumCheck1.selected = 0;
+        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -93,6 +98,7 @@
         [self wordNumSelectedInit:2];
     }else{
         wordNumCheck2.selected = 0;
+        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -105,6 +111,7 @@
         [self wordNumSelectedInit:3];
     }else{
         wordNumCheck3.selected = 0;
+        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -117,6 +124,7 @@
         [self wordNumSelectedInit:4];
     }else{
        wordNumCheck4.selected = 0;
+        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -127,22 +135,31 @@
     wordNumCheck3.selected = 0;
     wordNumCheck4.selected = 0;
     
+    [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
+    [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
+    [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
+    [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
+    
     [defaults setObject:@"0" forKey:WORD_NUM];
     
     if(checkNum == 1){
         wordNumCheck1.selected = 1;
+        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         [defaults setObject:@"1" forKey:WORD_NUM];
         
     }else if(checkNum == 2){
         wordNumCheck2.selected = 1;
+        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         [defaults setObject:@"2" forKey:WORD_NUM];
         
     }else if(checkNum == 3){
         wordNumCheck3.selected = 1;
+        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         [defaults setObject:@"3" forKey:WORD_NUM];
         
     }else if(checkNum == 4){
         wordNumCheck4.selected = 1;
+        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         [defaults setObject:@"4" forKey:WORD_NUM];
     }
 }

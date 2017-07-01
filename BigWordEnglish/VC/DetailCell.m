@@ -28,7 +28,7 @@
         
         numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 50, 70)];
         [numberLabel setBackgroundColor:[UIColor clearColor]];
-        numberLabel.textColor = [UIColor grayColor];
+        numberLabel.textColor = [UIColor orangeColor];
         numberLabel.textAlignment = NSTextAlignmentCenter;
         numberLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:18.0];
         [self addSubview:numberLabel];

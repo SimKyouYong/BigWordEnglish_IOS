@@ -26,6 +26,10 @@
 @synthesize bannerView;
 @synthesize detailTableView;
 @synthesize bottomFiveView;
+@synthesize wordHidden5Button;
+@synthesize meanHidden5Button;
+@synthesize exam5Button;
+@synthesize wordView5Button;
 @synthesize setting5Button;
 @synthesize allWordSettingView;
 @synthesize wordLevelHighButton;
@@ -38,7 +42,6 @@
 @synthesize word5Button;
 @synthesize word7Button;
 @synthesize word10Button;
-@synthesize wordView5Button;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -68,6 +71,17 @@
     meanHiddenNum = 0;
     examHiddenNum = 0;
     bookmarkNum = 0;
+    
+    wordHidden5Button.layer.masksToBounds = YES;
+    wordHidden5Button.layer.cornerRadius = 20.0;
+    meanHidden5Button.layer.masksToBounds = YES;
+    meanHidden5Button.layer.cornerRadius = 20.0;
+    exam5Button.layer.masksToBounds = YES;
+    exam5Button.layer.cornerRadius = 20.0;
+    wordView5Button.layer.masksToBounds = YES;
+    wordView5Button.layer.cornerRadius = 20.0;
+    setting5Button.layer.masksToBounds = YES;
+    setting5Button.layer.cornerRadius = 20.0;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -251,8 +265,12 @@
     
     if(button.selected == 1){
         wordHiddenNum = 1;
+        [wordHidden5Button setTitle:@"단어보기" forState:UIControlStateNormal];
+        wordHidden5Button.backgroundColor = [UIColor darkGrayColor];
     }else{
         wordHiddenNum = 0;
+        [wordHidden5Button setTitle:@"단어가리기" forState:UIControlStateNormal];
+        wordHidden5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
     }
     
     [detailTableView reloadData];
@@ -264,8 +282,12 @@
     
     if(button.selected == 1){
         meanHiddenNum = 1;
+        [meanHidden5Button setTitle:@"뜻보기" forState:UIControlStateNormal];
+        meanHidden5Button.backgroundColor = [UIColor darkGrayColor];
     }else{
         meanHiddenNum = 0;
+        [meanHidden5Button setTitle:@"뜻가리기" forState:UIControlStateNormal];
+        meanHidden5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
     }
     
     [detailTableView reloadData];
@@ -277,8 +299,12 @@
     
     if(button.selected == 1){
         examHiddenNum = 1;
+        [exam5Button setTitle:@"예문가리기" forState:UIControlStateNormal];
+        exam5Button.backgroundColor = [UIColor darkGrayColor];
     }else{
         examHiddenNum = 0;
+        [exam5Button setTitle:@"예문보기" forState:UIControlStateNormal];
+        exam5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
     }
     
     [detailTableView reloadData];
@@ -293,9 +319,13 @@
     
     if(button.selected == 1){
         bookmarkNum = 1;
+        [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
+        wordView5Button.backgroundColor = [UIColor darkGrayColor];
         detailListArr = [AppID selectBookmarkWord];
     }else{
         bookmarkNum = 0;
+        [wordView5Button setTitle:@"단어장" forState:UIControlStateNormal];
+        wordView5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
         detailListArr = [AppID selectAllWord];
     }
     

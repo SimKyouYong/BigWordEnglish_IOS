@@ -43,8 +43,11 @@
 // 하단 버튼
 @property (weak, nonatomic) IBOutlet UIView *bottomFiveView;
 - (IBAction)wordHidden5Button:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *wordHidden5Button;
 - (IBAction)meanHidden5Button:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *meanHidden5Button;
 - (IBAction)exam5Button:(id)sender;
+@property (weak, nonatomic) IBOutlet UIButton *exam5Button;
 - (IBAction)wordView5Button:(id)sender;
 @property (weak, nonatomic) IBOutlet UIButton *wordView5Button;
 - (IBAction)setting5Button:(id)sender;
