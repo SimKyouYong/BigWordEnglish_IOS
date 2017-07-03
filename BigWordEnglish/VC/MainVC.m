@@ -158,9 +158,9 @@
 #pragma mark FileDown
 
 - (void)fileDown{
-    [self loadingInit];
+    //[self loadingInit];
     
-    NSString *urlString = @"http://iglassstory.com/egDb.db";
+    NSString *urlString = DB_FILE_URL
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
    
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
@@ -192,7 +192,7 @@
     [alert addAction:ok];
     [self presentViewController:alert animated:YES completion:nil];
     
-    [self loadingClose];
+    //[self loadingClose];
 }
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
@@ -205,7 +205,7 @@
     
     [defaults setObject:resultValue forKey:DB_VERSION];
     
-    [self loadingClose];
+    //[self loadingClose];
     
     introImage.hidden = YES;
 }

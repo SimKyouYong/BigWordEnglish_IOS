@@ -18,7 +18,7 @@
 
 // URL
 #define COMMON_URL              @"http://snap40.cafe24.com/BigWordEgs/"
-#define DB_FILE_URL             @"admin/db/egDb.db"
+#define DB_FILE_URL             @"http://iglassstory.com/egDb.db"
 #define VERSION_URL             @"Version.php"
 
 // 메모리 보관
