@@ -7,11 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaulyAdView.h"
 
 @interface NoticeVC : UIViewController{
     NSArray *noticeArr;
     
     NSString *pathStr;
+    
+    CaulyAdView *m_bannerCauly;
 }
 
 - (IBAction)homeButton:(id)sender;
@@ -22,5 +25,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *closeButton;
 - (IBAction)closeButton:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIView *bannerView;
 
 @end

@@ -665,4 +665,29 @@
     sqlite3_close(database);
 }
 
+// 즐겨찾기 초기화
+- (void)wordBookmarkReset{
+    sqlite3 *database;
+    NSString *documentsDirectory = [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) objectAtIndex:0];
+    NSString *filePath = [documentsDirectory stringByAppendingPathComponent:@"EgDb.db"];
+    if (sqlite3_open([filePath UTF8String], &database) != SQLITE_OK) {
+        sqlite3_close(database);
+        NSLog(@"Error");
+        return;
+    }
+    
+    sqlite3_stmt *statement;
+    char *sql = "UPDATE Word SET col_13=?";
+    
+    if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
+        sqlite3_bind_text(statement, 1, [@"" UTF8String],  -1, SQLITE_TRANSIENT);
+        if (sqlite3_step(statement) != SQLITE_DONE) {
+            NSLog(@"Error");
+        }
+    }
+    
+    sqlite3_finalize(statement);
+    sqlite3_close(database);
+}
+
 @end

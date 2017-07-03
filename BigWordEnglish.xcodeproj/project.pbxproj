@@ -38,6 +38,16 @@
 		29C159AB1F063DC200A982A0 /* btn_search_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 29C159A71F063DC200A982A0 /* btn_search_on.png */; };
 		29C159AC1F063DC200A982A0 /* edit_text_search.png in Resources */ = {isa = PBXBuildFile; fileRef = 29C159A81F063DC200A982A0 /* edit_text_search.png */; };
 		29C159AE1F06427400A982A0 /* img_list.png in Resources */ = {isa = PBXBuildFile; fileRef = 29C159AD1F06427400A982A0 /* img_list.png */; };
+		29E0E4DB1F09DA6F0096A950 /* AVKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29E0E4DA1F09DA6F0096A950 /* AVKit.framework */; };
+		29E0E4DD1F09DA790096A950 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29E0E4DC1F09DA790096A950 /* QuartzCore.framework */; };
+		29E0E4DF1F09DA8E0096A950 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 29E0E4DE1F09DA8E0096A950 /* MessageUI.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		29E0E4EA1F09DB370096A950 /* cauly_default_banner_ipad_large.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4E61F09DB370096A950 /* cauly_default_banner_ipad_large.png */; };
+		29E0E4EB1F09DB370096A950 /* cauly_default_banner_ipad_small.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4E71F09DB370096A950 /* cauly_default_banner_ipad_small.png */; };
+		29E0E4EC1F09DB370096A950 /* cauly_default_banner_iphone.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4E81F09DB370096A950 /* cauly_default_banner_iphone.png */; };
+		29E0E4EF1F09DBFA0096A950 /* libCauly.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 29E0E4EE1F09DBFA0096A950 /* libCauly.a */; };
+		29E0E4F61F09FB120096A950 /* intro_320.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4F31F09FB120096A950 /* intro_320.png */; };
+		29E0E4F71F09FB120096A950 /* intro_375.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4F41F09FB120096A950 /* intro_375.png */; };
+		29E0E4F81F09FB120096A950 /* intro_414.png in Resources */ = {isa = PBXBuildFile; fileRef = 29E0E4F51F09FB120096A950 /* intro_414.png */; };
 		29F57BE31EEF70720060F1B3 /* ChooseVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE21EEF70720060F1B3 /* ChooseVC.m */; };
 		29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 29F57BE51EEF9B370060F1B3 /* ChooseCell.m */; };
 		FF370C801EC1E25E00E5684C /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = FF370C7F1EC1E25E00E5684C /* main.m */; };
@@ -87,14 +97,11 @@
 		FFBD4B6B1ED01CA9005380A5 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B6A1ED01CA9005380A5 /* CoreLocation.framework */; };
 		FFBD4B6D1ED01CB2005380A5 /* CoreTelephony.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B6C1ED01CB2005380A5 /* CoreTelephony.framework */; };
 		FFBD4B6F1ED01CB9005380A5 /* EventKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B6E1ED01CB9005380A5 /* EventKit.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
-		FFBD4B711ED01CBE005380A5 /* EventKitUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B701ED01CBE005380A5 /* EventKitUI.framework */; };
 		FFBD4B731ED01CC8005380A5 /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B721ED01CC8005380A5 /* MobileCoreServices.framework */; };
 		FFBD4B751ED01CD0005380A5 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B741ED01CD0005380A5 /* MediaPlayer.framework */; };
 		FFBD4B771ED01CE0005380A5 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B761ED01CE0005380A5 /* Security.framework */; };
 		FFBD4B791ED01CF4005380A5 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B781ED01CF4005380A5 /* UIKit.framework */; };
 		FFBD4B7B1ED01D1B005380A5 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B7A1ED01D1B005380A5 /* Foundation.framework */; };
-		FFBD4B8C1ED023A0005380A5 /* AdamAdWrapperView.m in Sources */ = {isa = PBXBuildFile; fileRef = FFBD4B881ED023A0005380A5 /* AdamAdWrapperView.m */; };
-		FFBD4B8D1ED023A0005380A5 /* libAdamPublisher.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FFBD4B8B1ED023A0005380A5 /* libAdamPublisher.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -133,6 +140,20 @@
 		29C159A71F063DC200A982A0 /* btn_search_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_search_on.png; sourceTree = "<group>"; };
 		29C159A81F063DC200A982A0 /* edit_text_search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = edit_text_search.png; sourceTree = "<group>"; };
 		29C159AD1F06427400A982A0 /* img_list.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_list.png; sourceTree = "<group>"; };
+		29E0E4DA1F09DA6F0096A950 /* AVKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVKit.framework; path = System/Library/Frameworks/AVKit.framework; sourceTree = SDKROOT; };
+		29E0E4DC1F09DA790096A950 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		29E0E4DE1F09DA8E0096A950 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		29E0E4E11F09DB370096A950 /* Cauly.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Cauly.h; sourceTree = "<group>"; };
+		29E0E4E21F09DB370096A950 /* CaulyAdSetting.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaulyAdSetting.h; sourceTree = "<group>"; };
+		29E0E4E31F09DB370096A950 /* CaulyAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaulyAdView.h; sourceTree = "<group>"; };
+		29E0E4E41F09DB370096A950 /* CaulyInterstitialAd.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CaulyInterstitialAd.h; sourceTree = "<group>"; };
+		29E0E4E61F09DB370096A950 /* cauly_default_banner_ipad_large.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cauly_default_banner_ipad_large.png; sourceTree = "<group>"; };
+		29E0E4E71F09DB370096A950 /* cauly_default_banner_ipad_small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cauly_default_banner_ipad_small.png; sourceTree = "<group>"; };
+		29E0E4E81F09DB370096A950 /* cauly_default_banner_iphone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cauly_default_banner_iphone.png; sourceTree = "<group>"; };
+		29E0E4EE1F09DBFA0096A950 /* libCauly.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCauly.a; sourceTree = "<group>"; };
+		29E0E4F31F09FB120096A950 /* intro_320.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_320.png; sourceTree = "<group>"; };
+		29E0E4F41F09FB120096A950 /* intro_375.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_375.png; sourceTree = "<group>"; };
+		29E0E4F51F09FB120096A950 /* intro_414.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = intro_414.png; sourceTree = "<group>"; };
 		29F57BE11EEF70720060F1B3 /* ChooseVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseVC.h; sourceTree = "<group>"; };
 		29F57BE21EEF70720060F1B3 /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
 		29F57BE41EEF9B370060F1B3 /* ChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCell.h; sourceTree = "<group>"; };
@@ -202,12 +223,6 @@
 		FFBD4B761ED01CE0005380A5 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		FFBD4B781ED01CF4005380A5 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		FFBD4B7A1ED01D1B005380A5 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		FFBD4B861ED023A0005380A5 /* AdamAdView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdamAdView.h; sourceTree = "<group>"; };
-		FFBD4B871ED023A0005380A5 /* AdamAdWrapperView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdamAdWrapperView.h; sourceTree = "<group>"; };
-		FFBD4B881ED023A0005380A5 /* AdamAdWrapperView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AdamAdWrapperView.m; sourceTree = "<group>"; };
-		FFBD4B891ED023A0005380A5 /* AdamError.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdamError.h; sourceTree = "<group>"; };
-		FFBD4B8A1ED023A0005380A5 /* AdamInterstitial.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AdamInterstitial.h; sourceTree = "<group>"; };
-		FFBD4B8B1ED023A0005380A5 /* libAdamPublisher.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libAdamPublisher.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -215,21 +230,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FFBD4B651ED01C97005380A5 /* AdSupport.framework in Frameworks */,
+				29E0E4DF1F09DA8E0096A950 /* MessageUI.framework in Frameworks */,
+				FFBD4B631ED01C8E005380A5 /* CFNetwork.framework in Frameworks */,
+				29E0E4DD1F09DA790096A950 /* QuartzCore.framework in Frameworks */,
+				29E0E4DB1F09DA6F0096A950 /* AVKit.framework in Frameworks */,
 				292F5BCE1EF212000076A1FD /* libsqlite3.0.tbd in Frameworks */,
 				FFBD4B7B1ED01D1B005380A5 /* Foundation.framework in Frameworks */,
+				29E0E4EF1F09DBFA0096A950 /* libCauly.a in Frameworks */,
 				FFBD4B791ED01CF4005380A5 /* UIKit.framework in Frameworks */,
 				FFBD4B771ED01CE0005380A5 /* Security.framework in Frameworks */,
 				FFBD4B751ED01CD0005380A5 /* MediaPlayer.framework in Frameworks */,
 				FFBD4B731ED01CC8005380A5 /* MobileCoreServices.framework in Frameworks */,
-				FFBD4B711ED01CBE005380A5 /* EventKitUI.framework in Frameworks */,
 				FFBD4B6F1ED01CB9005380A5 /* EventKit.framework in Frameworks */,
 				FFBD4B6D1ED01CB2005380A5 /* CoreTelephony.framework in Frameworks */,
 				FFBD4B6B1ED01CA9005380A5 /* CoreLocation.framework in Frameworks */,
-				FFBD4B8D1ED023A0005380A5 /* libAdamPublisher.a in Frameworks */,
 				FFBD4B691ED01CA5005380A5 /* CoreGraphics.framework in Frameworks */,
 				FFBD4B671ED01C9E005380A5 /* AssetsLibrary.framework in Frameworks */,
-				FFBD4B651ED01C97005380A5 /* AdSupport.framework in Frameworks */,
-				FFBD4B631ED01C8E005380A5 /* CFNetwork.framework in Frameworks */,
 				FFBD4B621ED01C87005380A5 /* SystemConfiguration.framework in Frameworks */,
 				FFBD4B611ED01C80005380A5 /* libz.1.2.5.tbd in Frameworks */,
 			);
@@ -238,9 +255,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		29E0E4E01F09DB370096A950 /* Cauly */ = {
+			isa = PBXGroup;
+			children = (
+				29E0E4EE1F09DBFA0096A950 /* libCauly.a */,
+				29E0E4E11F09DB370096A950 /* Cauly.h */,
+				29E0E4E21F09DB370096A950 /* CaulyAdSetting.h */,
+				29E0E4E31F09DB370096A950 /* CaulyAdView.h */,
+				29E0E4E41F09DB370096A950 /* CaulyInterstitialAd.h */,
+				29E0E4E51F09DB370096A950 /* DefaultImages */,
+			);
+			path = Cauly;
+			sourceTree = "<group>";
+		};
+		29E0E4E51F09DB370096A950 /* DefaultImages */ = {
+			isa = PBXGroup;
+			children = (
+				29E0E4E61F09DB370096A950 /* cauly_default_banner_ipad_large.png */,
+				29E0E4E71F09DB370096A950 /* cauly_default_banner_ipad_small.png */,
+				29E0E4E81F09DB370096A950 /* cauly_default_banner_iphone.png */,
+			);
+			path = DefaultImages;
+			sourceTree = "<group>";
+		};
 		29F57BE01EEF6C7E0060F1B3 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				29E0E4F31F09FB120096A950 /* intro_320.png */,
+				29E0E4F41F09FB120096A950 /* intro_375.png */,
+				29E0E4F51F09FB120096A950 /* intro_414.png */,
 				FFB09C261F07E53500F55EAE /* check_box_false.png */,
 				FFB09C271F07E53500F55EAE /* check_box_true.png */,
 				FFB09C221F07E0FD00F55EAE /* bottom_btn_off.png */,
@@ -377,7 +420,7 @@
 		FFBD4B481ED01A91005380A5 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
-				FFBD4B851ED023A0005380A5 /* Adam */,
+				29E0E4E01F09DB370096A950 /* Cauly */,
 				FFBD4B491ED01A91005380A5 /* JSON */,
 				FFBD4B531ED01A91005380A5 /* Toast */,
 			);
@@ -409,6 +452,9 @@
 		FFBD4B5B1ED01BA2005380A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				29E0E4DE1F09DA8E0096A950 /* MessageUI.framework */,
+				29E0E4DC1F09DA790096A950 /* QuartzCore.framework */,
+				29E0E4DA1F09DA6F0096A950 /* AVKit.framework */,
 				292F5BCD1EF212000076A1FD /* libsqlite3.0.tbd */,
 				FFBD4B7A1ED01D1B005380A5 /* Foundation.framework */,
 				FFBD4B781ED01CF4005380A5 /* UIKit.framework */,
@@ -427,19 +473,6 @@
 				FFBD4B5C1ED01BA3005380A5 /* SystemConfiguration.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FFBD4B851ED023A0005380A5 /* Adam */ = {
-			isa = PBXGroup;
-			children = (
-				FFBD4B861ED023A0005380A5 /* AdamAdView.h */,
-				FFBD4B871ED023A0005380A5 /* AdamAdWrapperView.h */,
-				FFBD4B881ED023A0005380A5 /* AdamAdWrapperView.m */,
-				FFBD4B891ED023A0005380A5 /* AdamError.h */,
-				FFBD4B8A1ED023A0005380A5 /* AdamInterstitial.h */,
-				FFBD4B8B1ED023A0005380A5 /* libAdamPublisher.a */,
-			);
-			path = Adam;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -505,10 +538,12 @@
 				29C159A01F063C0C00A982A0 /* btn_sub_menu_04_on.png in Resources */,
 				29C1599F1F063C0C00A982A0 /* btn_sub_menu_04_off.png in Resources */,
 				294C3ED61F00B93E0080D556 /* bg_search_set_on.png in Resources */,
+				29E0E4F61F09FB120096A950 /* intro_320.png in Resources */,
 				FFB6C5551EFFEADD004AFB25 /* btn_favorite_press.png in Resources */,
 				29C159A41F063C0C00A982A0 /* btn_sub_menu_06_on.png in Resources */,
 				29C1599A1F063C0C00A982A0 /* btn_sub_menu_01_on.png in Resources */,
 				29C159AA1F063DC200A982A0 /* btn_search_off.png in Resources */,
+				29E0E4F71F09FB120096A950 /* intro_375.png in Resources */,
 				298819DA1EFC964E00E7E54A /* btn_fav_word.png in Resources */,
 				FFB6C5741EFFEBFB004AFB25 /* menu_05.png in Resources */,
 				29C159A21F063C0C00A982A0 /* btn_sub_menu_05_on.png in Resources */,
@@ -516,6 +551,7 @@
 				FFB6C5771EFFEBFB004AFB25 /* set_switch_track_off.png in Resources */,
 				FFB6C5691EFFEBFB004AFB25 /* btn_cancel.png in Resources */,
 				298819DB1EFC964E00E7E54A /* btn_home.png in Resources */,
+				29E0E4EA1F09DB370096A950 /* cauly_default_banner_ipad_large.png in Resources */,
 				FFB6C5811EFFEE52004AFB25 /* all_view_set.png in Resources */,
 				FFB6C5561EFFEADD004AFB25 /* btn_favorite.png in Resources */,
 				FFB6C5701EFFEBFB004AFB25 /* menu_03.png in Resources */,
@@ -526,6 +562,7 @@
 				FFB6C5821EFFEE52004AFB25 /* bg_count.png in Resources */,
 				FFB6C5861EFFEE52004AFB25 /* bg_search_set_off.png in Resources */,
 				FFB6C56E1EFFEBFB004AFB25 /* menu_02.png in Resources */,
+				29E0E4EB1F09DB370096A950 /* cauly_default_banner_ipad_small.png in Resources */,
 				29C159A31F063C0C00A982A0 /* btn_sub_menu_06_off.png in Resources */,
 				29C159AB1F063DC200A982A0 /* btn_search_on.png in Resources */,
 				FFB6C5581EFFEADD004AFB25 /* btn_speak.png in Resources */,
@@ -536,10 +573,12 @@
 				FFB6C5781EFFEBFB004AFB25 /* set_switch_track_on.png in Resources */,
 				298819DD1EFC964E00E7E54A /* btn_setting.png in Resources */,
 				FFB6C5851EFFEE52004AFB25 /* bg_level.png in Resources */,
+				29E0E4EC1F09DB370096A950 /* cauly_default_banner_iphone.png in Resources */,
 				FFB6C5571EFFEADD004AFB25 /* btn_speak_press.png in Resources */,
 				29C1599C1F063C0C00A982A0 /* btn_sub_menu_02_on.png in Resources */,
 				29C1599B1F063C0C00A982A0 /* btn_sub_menu_02_off.png in Resources */,
 				FFB09C241F07E0FD00F55EAE /* bottom_btn_off.png in Resources */,
+				29E0E4F81F09FB120096A950 /* intro_414.png in Resources */,
 				FFB6C5841EFFEE52004AFB25 /* bg_favorite.png in Resources */,
 				FFB6C5761EFFEBFB004AFB25 /* menu_06.png in Resources */,
 				29C1599E1F063C0C00A982A0 /* btn_sub_menu_03_on.png in Resources */,
@@ -566,7 +605,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				FFBD4B1A1ED01254005380A5 /* GlobalObject.m in Sources */,
-				FFBD4B8C1ED023A0005380A5 /* AdamAdWrapperView.m in Sources */,
 				FFBD4B561ED01A91005380A5 /* SBJsonBase.m in Sources */,
 				FFBD4B5A1ED01A91005380A5 /* UIView+Toast.m in Sources */,
 				FFBD4B581ED01A91005380A5 /* SBJsonWriter.m in Sources */,
@@ -705,6 +743,7 @@
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Cauly",
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Google",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Adam",
+					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
@@ -730,6 +769,7 @@
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Cauly",
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Google",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Adam",
+					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;

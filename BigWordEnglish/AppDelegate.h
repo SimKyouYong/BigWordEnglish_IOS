@@ -18,6 +18,7 @@
 - (NSMutableArray *)selectCategoryWord:(NSString*)categoryValue;
 
 - (void)wordBookmarkUpdate:(NSInteger)idNum bookmarkValue:(NSString*)bookmarkValue;
+- (void)wordBookmarkReset;
 
 @end
 

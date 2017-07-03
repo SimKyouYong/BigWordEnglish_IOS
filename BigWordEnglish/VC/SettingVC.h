@@ -7,10 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaulyAdView.h"
 
 @interface SettingVC : UIViewController{
     NSUserDefaults *defaults;
+    
+    CaulyAdView *m_bannerCauly;
 }
+
+@property (weak, nonatomic) IBOutlet UIView *bannerView;
 
 - (IBAction)homeButton:(id)sender;
 - (IBAction)searchButton:(id)sender;
@@ -28,5 +33,7 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *wordNumCheck4;
 - (IBAction)wordNumCheck4:(id)sender;
+
+- (IBAction)bookmarkResetButton:(id)sender;
 
 @end

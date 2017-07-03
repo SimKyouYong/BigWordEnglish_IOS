@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaulyAdView.h"
 
 @interface ChooseVC : UIViewController{
     NSMutableArray *chooseArrList;
@@ -14,6 +15,8 @@
     NSDictionary *chooseDic;
     
     NSInteger viewCheckNum;
+    
+    CaulyAdView *m_bannerCauly;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;

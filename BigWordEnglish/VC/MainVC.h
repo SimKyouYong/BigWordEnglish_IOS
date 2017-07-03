@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "CaulyAdView.h"
 
 @interface MainVC : UIViewController<NSURLConnectionDelegate>{
     NSUserDefaults *defaults;
@@ -22,10 +23,13 @@
     NSInteger buttonIndex;
     
     NSInteger nextWordCheck;
+    
+    CaulyAdView *m_bannerCauly;
 }
 
 @property (weak, nonatomic) IBOutlet UIView *popupView;
 @property (weak, nonatomic) IBOutlet UIView *m_bannerView;
+@property (weak, nonatomic) IBOutlet UIImageView *introImage;
 
 - (IBAction)searchButton:(id)sender;
 - (IBAction)settingButton:(id)sender;

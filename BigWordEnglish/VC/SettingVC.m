@@ -10,8 +10,9 @@
 #import "NoticeVC.h"
 #import "SearchVC.h"
 #import "GlobalHeader.h"
+#import "AppDelegate.h"
 
-@interface SettingVC ()
+@interface SettingVC () <CaulyAdViewDelegate>
 
 @end
 
@@ -21,6 +22,7 @@
 @synthesize wordNumCheck2;
 @synthesize wordNumCheck3;
 @synthesize wordNumCheck4;
+@synthesize bannerView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -54,6 +56,12 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self caulyLoad];
 }
 
 #pragma mark -
@@ -163,5 +171,58 @@
         [defaults setObject:@"4" forKey:WORD_NUM];
     }
 }
+
+- (IBAction)bookmarkResetButton:(id)sender {
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"알림" message:@"어플리케이션을 초기화 하시겠습니까?" delegate:self cancelButtonTitle:@"취소" otherButtonTitles:@"확인", nil];
+    alert.tag = 9999;
+    [alert show];
+}
+
+#pragma mark -
+#pragma mark CaulyAdView Delegate
+
+- (void)caulyLoad{
+    CaulyAdSetting * adSetting = [CaulyAdSetting globalSetting];
+    [CaulyAdSetting setLogLevel:CaulyLogLevelRelease];
+    adSetting.adSize = CaulyAdSize_IPhone;
+    adSetting.appCode = ClientID_Cauly;
+    adSetting.animType = CaulyAnimNone;
+    adSetting.useGPSInfo = NO;
+    
+    m_bannerCauly= [[CaulyAdView alloc] initWithParentViewController:self];
+    m_bannerCauly.frame = CGRectMake(0, 0, WIDTH_FRAME, 50);
+    m_bannerCauly.delegate = self;
+    m_bannerCauly.showPreExpandableAd = TRUE;
+    [bannerView addSubview:m_bannerCauly];
+    [m_bannerCauly startBannerAdRequest];
+}
+
+// 광고 정보 수신 성공
+- (void)didReceiveAd:(CaulyAdView *)adView isChargeableAd:(BOOL)isChargeableAd{
+    NSLog(@"didReceiveCauly");
+}
+
+// 광고 정보 수신 실패
+- (void)didFailToReceiveAd:(CaulyAdView *)adView errorCode:(int)errorCode errorMsg:(NSString *)errorMsg {
+    //NSLog(@"didFailToReceiveAd : %d(%@)", errorCode, errorMsg);
+    
+    NSLog(@"didFailCauly");
+    [m_bannerCauly stopAdRequest];
+}
+
+#pragma mark -
+#pragma mark AlertView
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 9999){
+        if(buttonIndex == 1){
+            id AppID = [[UIApplication sharedApplication] delegate];
+            [AppID wordBookmarkReset];
+            
+            [self.navigationController popToRootViewControllerAnimated:NO];
+        }
+    }
+}
+
 
 @end

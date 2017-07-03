@@ -15,7 +15,7 @@
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
 
-@interface ChooseVC ()
+@interface ChooseVC () <CaulyAdViewDelegate>
 
 @end
 
@@ -32,6 +32,7 @@
 @synthesize choosePopupView;
 @synthesize chooseView;
 @synthesize chooseText;
+@synthesize bannerView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -52,6 +53,12 @@
     chooseArrList = [AppID selectSubKey:buttonIndexNum];
     
     [listTableView reloadData];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self caulyLoad];
 }
 
 #pragma mark -
@@ -260,6 +267,38 @@
     }
     
     [super touchesBegan:touches withEvent:event];
+}
+
+#pragma mark -
+#pragma mark CaulyAdView Delegate
+
+- (void)caulyLoad{
+    CaulyAdSetting * adSetting = [CaulyAdSetting globalSetting];
+    [CaulyAdSetting setLogLevel:CaulyLogLevelRelease];
+    adSetting.adSize = CaulyAdSize_IPhone;
+    adSetting.appCode = ClientID_Cauly;
+    adSetting.animType = CaulyAnimNone;
+    adSetting.useGPSInfo = NO;
+    
+    m_bannerCauly= [[CaulyAdView alloc] initWithParentViewController:self];
+    m_bannerCauly.frame = CGRectMake(0, 0, WIDTH_FRAME, 50);
+    m_bannerCauly.delegate = self;
+    m_bannerCauly.showPreExpandableAd = TRUE;
+    [bannerView addSubview:m_bannerCauly];
+    [m_bannerCauly startBannerAdRequest];
+}
+
+// 광고 정보 수신 성공
+- (void)didReceiveAd:(CaulyAdView *)adView isChargeableAd:(BOOL)isChargeableAd{
+    NSLog(@"didReceiveCauly");
+}
+
+// 광고 정보 수신 실패
+- (void)didFailToReceiveAd:(CaulyAdView *)adView errorCode:(int)errorCode errorMsg:(NSString *)errorMsg {
+    //NSLog(@"didFailToReceiveAd : %d(%@)", errorCode, errorMsg);
+    
+    NSLog(@"didFailCauly");
+    [m_bannerCauly stopAdRequest];
 }
 
 @end

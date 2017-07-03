@@ -14,7 +14,7 @@
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
 
-@interface DetailVC ()
+@interface DetailVC () <CaulyAdViewDelegate>
 
 @end
 
@@ -86,6 +86,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    
+    [self caulyLoad];
 }
 
 #pragma mark -
@@ -595,6 +601,38 @@
 - (IBAction)cancelButton:(id)sender {
     allWordSettingView.hidden = YES;
     setting5Button.selected = 0;
+}
+
+#pragma mark -
+#pragma mark CaulyAdView Delegate
+
+- (void)caulyLoad{
+    CaulyAdSetting * adSetting = [CaulyAdSetting globalSetting];
+    [CaulyAdSetting setLogLevel:CaulyLogLevelRelease];
+    adSetting.adSize = CaulyAdSize_IPhone;
+    adSetting.appCode = ClientID_Cauly;
+    adSetting.animType = CaulyAnimNone;
+    adSetting.useGPSInfo = NO;
+    
+    m_bannerCauly= [[CaulyAdView alloc] initWithParentViewController:self];
+    m_bannerCauly.frame = CGRectMake(0, 0, WIDTH_FRAME, 50);
+    m_bannerCauly.delegate = self;
+    m_bannerCauly.showPreExpandableAd = TRUE;
+    [bannerView addSubview:m_bannerCauly];
+    [m_bannerCauly startBannerAdRequest];
+}
+
+// 광고 정보 수신 성공
+- (void)didReceiveAd:(CaulyAdView *)adView isChargeableAd:(BOOL)isChargeableAd{
+    NSLog(@"didReceiveCauly");
+}
+
+// 광고 정보 수신 실패
+- (void)didFailToReceiveAd:(CaulyAdView *)adView errorCode:(int)errorCode errorMsg:(NSString *)errorMsg {
+    //NSLog(@"didFailToReceiveAd : %d(%@)", errorCode, errorMsg);
+    
+    NSLog(@"didFailCauly");
+    [m_bannerCauly stopAdRequest];
 }
 
 @end

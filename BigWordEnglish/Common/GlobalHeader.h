@@ -34,8 +34,8 @@
 // AlertTag
 #define TEST                    9999
 
-// Ad@m(다음아담) Client ID
-#define ClientID_Adam           @"DAN-ursep2xzotib"
+// Cauly Client ID
+#define ClientID_Cauly          @"CAULY"//@"ZwPyF5pN"
 
 
 

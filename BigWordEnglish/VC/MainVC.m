@@ -9,28 +9,33 @@
 #import "MainVC.h"
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
-#import "AdamAdView.h"
 #import <QuartzCore/QuartzCore.h>
-#import "AdamError.h"
 #import "ChooseVC.h"
 #import "DetailVC.h"
 #import "AppDelegate.h"
 #import "SettingVC.h"
 #import "SearchVC.h"
 
-@interface MainVC () <AdamAdViewDelegate>
-
+@interface MainVC () <CaulyAdViewDelegate>
+            
 @end
 
 @implementation MainVC
 
 @synthesize popupView;
 @synthesize m_bannerView;
+@synthesize introImage;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"%@", DOCUMENT_DIRECTORY);
+    if(WIDTH_FRAME == 414){
+        introImage.image = [UIImage imageNamed:@"intro_414"];
+    }else if(WIDTH_FRAME == 375){
+        introImage.image = [UIImage imageNamed:@"intro_375"];
+    }else{
+        introImage.image = [UIImage imageNamed:@"intro_320"];
+    }
     
     defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
@@ -53,7 +58,7 @@
         
         if (statusCode == 200) {
             if([[defaults stringForKey:DB_VERSION] isEqualToString:resultValue]){
-                
+                introImage.hidden = YES;
             }else{
                 [self fileDown];
             }
@@ -70,7 +75,7 @@
 - (void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     
-    [self bannerInit];
+    [self caulyLoad];
 }
 
 #pragma mark -
@@ -180,7 +185,7 @@
 {
     //NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
     
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n잠시 후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
+    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n앱 종료후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
                          {}];
@@ -192,13 +197,6 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection
 {
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 완료하였습니다." preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                         {}];
-    [alert addAction:ok];
-    [self presentViewController:alert animated:YES completion:nil];
-    
     NSArray *fileArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
     NSString *filepath = [fileArr objectAtIndex:0];
     NSString *documentPath = [filepath stringByAppendingPathComponent:@"EgDb.db"];
@@ -207,7 +205,9 @@
     
     [defaults setObject:resultValue forKey:DB_VERSION];
     
-    [self loadingClose];    
+    [self loadingClose];
+    
+    introImage.hidden = YES;
 }
 
 #pragma mark -
@@ -237,32 +237,35 @@
 }
 
 #pragma mark -
-#pragma mark AdamAdView Delegate
+#pragma mark CaulyAdView Delegate
 
-- (void)bannerInit{
-    AdamAdView *adView = [AdamAdView sharedAdView];
-    adView.frame = CGRectMake(0.0, 0.0, WIDTH_FRAME, 50.0);
+- (void)caulyLoad{
+    CaulyAdSetting * adSetting = [CaulyAdSetting globalSetting];
+    [CaulyAdSetting setLogLevel:CaulyLogLevelRelease];
+    adSetting.adSize = CaulyAdSize_IPhone;
+    adSetting.appCode = ClientID_Cauly;
+    adSetting.animType = CaulyAnimNone;
+    adSetting.useGPSInfo = NO;
     
-    adView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-    adView.delegate = self;
-    adView.clientId = ClientID_Adam;
-    [m_bannerView addSubview:adView];
-    
-    if (!adView.usingAutoRequest) {
-        [adView startAutoRequestAd:60.0];
-    }
+    m_bannerCauly= [[CaulyAdView alloc] initWithParentViewController:self];
+    m_bannerCauly.frame = CGRectMake(0, 0, WIDTH_FRAME, 50);
+    m_bannerCauly.delegate = self;
+    m_bannerCauly.showPreExpandableAd = TRUE;
+    [m_bannerView addSubview:m_bannerCauly];
+    [m_bannerCauly startBannerAdRequest];
 }
 
-// 광고 수신 관련 delegate 메소드
-- (void)didReceiveAd:(AdamAdView *)adView
-{
-    NSLog(@"didReceiveAdam");
+// 광고 정보 수신 성공
+- (void)didReceiveAd:(CaulyAdView *)adView isChargeableAd:(BOOL)isChargeableAd{
+    NSLog(@"didReceiveCauly");
 }
 
-// 광고 실패 관련 delegate 메소드
-- (void)didFailToReceiveAd:(AdamAdView *)adView error:(NSError *)error
-{
-    NSLog(@"didFailAdam %ld", (long)error.code);
+// 광고 정보 수신 실패
+- (void)didFailToReceiveAd:(CaulyAdView *)adView errorCode:(int)errorCode errorMsg:(NSString *)errorMsg {
+    //NSLog(@"didFailToReceiveAd : %d(%@)", errorCode, errorMsg);
+    
+    NSLog(@"didFailCauly");
+    [m_bannerCauly stopAdRequest];
 }
 
 @end
