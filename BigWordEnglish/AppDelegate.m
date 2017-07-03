@@ -24,6 +24,8 @@
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
     
+    [NSThread sleepForTimeInterval:2];
+    
     return YES;
 }
 
