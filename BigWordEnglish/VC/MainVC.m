@@ -160,7 +160,7 @@
 - (void)fileDown{
     //[self loadingInit];
     
-    NSString *urlString = DB_FILE_URL
+    NSString *urlString = DB_FILE_URL;
     NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
    
     NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
