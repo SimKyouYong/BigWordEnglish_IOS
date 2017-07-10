@@ -12,6 +12,11 @@
 		292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD01EF21CD00076A1FD /* DetailCell.m */; };
 		292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD31EF249180076A1FD /* NoticeCell.m */; };
 		292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F5BD61EF2492B0076A1FD /* NoticeVC.m */; };
+		292F69841F1327020090FFF4 /* MNMBottomPullToRefresh.strings in Resources */ = {isa = PBXBuildFile; fileRef = 292F697D1F1327020090FFF4 /* MNMBottomPullToRefresh.strings */; };
+		292F69851F1327020090FFF4 /* MNMBottomPullToRefreshArrow.png in Resources */ = {isa = PBXBuildFile; fileRef = 292F697E1F1327020090FFF4 /* MNMBottomPullToRefreshArrow.png */; };
+		292F69861F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 292F697F1F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png */; };
+		292F69871F1327020090FFF4 /* MNMBottomPullToRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F69811F1327020090FFF4 /* MNMBottomPullToRefreshManager.m */; };
+		292F69881F1327020090FFF4 /* MNMBottomPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F69831F1327020090FFF4 /* MNMBottomPullToRefreshView.m */; };
 		294C3ED41F0093140080D556 /* btn_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 294C3ED31F0093140080D556 /* btn_reset.png */; };
 		294C3ED61F00B93E0080D556 /* bg_search_set_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 294C3ED51F00B93E0080D556 /* bg_search_set_on.png */; };
 		298819D81EFC964E00E7E54A /* bg_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 298819CC1EFC964E00E7E54A /* bg_top.png */; };
@@ -114,6 +119,13 @@
 		292F5BD31EF249180076A1FD /* NoticeCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeCell.m; sourceTree = "<group>"; };
 		292F5BD51EF2492B0076A1FD /* NoticeVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NoticeVC.h; sourceTree = "<group>"; };
 		292F5BD61EF2492B0076A1FD /* NoticeVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NoticeVC.m; sourceTree = "<group>"; };
+		292F697D1F1327020090FFF4 /* MNMBottomPullToRefresh.strings */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; path = MNMBottomPullToRefresh.strings; sourceTree = "<group>"; };
+		292F697E1F1327020090FFF4 /* MNMBottomPullToRefreshArrow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = MNMBottomPullToRefreshArrow.png; sourceTree = "<group>"; };
+		292F697F1F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "MNMBottomPullToRefreshArrow@2x.png"; sourceTree = "<group>"; };
+		292F69801F1327020090FFF4 /* MNMBottomPullToRefreshManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshManager.h; sourceTree = "<group>"; };
+		292F69811F1327020090FFF4 /* MNMBottomPullToRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshManager.m; sourceTree = "<group>"; };
+		292F69821F1327020090FFF4 /* MNMBottomPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshView.h; sourceTree = "<group>"; };
+		292F69831F1327020090FFF4 /* MNMBottomPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshView.m; sourceTree = "<group>"; };
 		294C3ED31F0093140080D556 /* btn_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_reset.png; sourceTree = "<group>"; };
 		294C3ED51F00B93E0080D556 /* bg_search_set_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_search_set_on.png; sourceTree = "<group>"; };
 		298819CC1EFC964E00E7E54A /* bg_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_top.png; sourceTree = "<group>"; };
@@ -255,6 +267,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		292F697C1F1327020090FFF4 /* PullToRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				292F697D1F1327020090FFF4 /* MNMBottomPullToRefresh.strings */,
+				292F697E1F1327020090FFF4 /* MNMBottomPullToRefreshArrow.png */,
+				292F697F1F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png */,
+				292F69801F1327020090FFF4 /* MNMBottomPullToRefreshManager.h */,
+				292F69811F1327020090FFF4 /* MNMBottomPullToRefreshManager.m */,
+				292F69821F1327020090FFF4 /* MNMBottomPullToRefreshView.h */,
+				292F69831F1327020090FFF4 /* MNMBottomPullToRefreshView.m */,
+			);
+			path = PullToRefresh;
+			sourceTree = "<group>";
+		};
 		29E0E4E01F09DB370096A950 /* Cauly */ = {
 			isa = PBXGroup;
 			children = (
@@ -420,6 +446,7 @@
 		FFBD4B481ED01A91005380A5 /* Lib */ = {
 			isa = PBXGroup;
 			children = (
+				292F697C1F1327020090FFF4 /* PullToRefresh */,
 				29E0E4E01F09DB370096A950 /* Cauly */,
 				FFBD4B491ED01A91005380A5 /* JSON */,
 				FFBD4B531ED01A91005380A5 /* Toast */,
@@ -540,11 +567,13 @@
 				294C3ED61F00B93E0080D556 /* bg_search_set_on.png in Resources */,
 				29E0E4F61F09FB120096A950 /* intro_320.png in Resources */,
 				FFB6C5551EFFEADD004AFB25 /* btn_favorite_press.png in Resources */,
+				292F69841F1327020090FFF4 /* MNMBottomPullToRefresh.strings in Resources */,
 				29C159A41F063C0C00A982A0 /* btn_sub_menu_06_on.png in Resources */,
 				29C1599A1F063C0C00A982A0 /* btn_sub_menu_01_on.png in Resources */,
 				29C159AA1F063DC200A982A0 /* btn_search_off.png in Resources */,
 				29E0E4F71F09FB120096A950 /* intro_375.png in Resources */,
 				298819DA1EFC964E00E7E54A /* btn_fav_word.png in Resources */,
+				292F69861F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png in Resources */,
 				FFB6C5741EFFEBFB004AFB25 /* menu_05.png in Resources */,
 				29C159A21F063C0C00A982A0 /* btn_sub_menu_05_on.png in Resources */,
 				FFB6C5881EFFEE52004AFB25 /* bg_speak.png in Resources */,
@@ -592,6 +621,7 @@
 				FFB6C56A1EFFEBFB004AFB25 /* btn_ok.png in Resources */,
 				FFB09C281F07E53500F55EAE /* check_box_false.png in Resources */,
 				FF370C891EC1E25E00E5684C /* Main.storyboard in Resources */,
+				292F69851F1327020090FFF4 /* MNMBottomPullToRefreshArrow.png in Resources */,
 				29C159A91F063DC200A982A0 /* bg_search_top.png in Resources */,
 				29C1599D1F063C0C00A982A0 /* btn_sub_menu_03_off.png in Resources */,
 			);
@@ -610,8 +640,10 @@
 				FFBD4B581ED01A91005380A5 /* SBJsonWriter.m in Sources */,
 				29F57BE61EEF9B370060F1B3 /* ChooseCell.m in Sources */,
 				FF370C831EC1E25E00E5684C /* AppDelegate.m in Sources */,
+				292F69881F1327020090FFF4 /* MNMBottomPullToRefreshView.m in Sources */,
 				292F5BD41EF249180076A1FD /* NoticeCell.m in Sources */,
 				FFBD4B571ED01A91005380A5 /* SBJsonParser.m in Sources */,
+				292F69871F1327020090FFF4 /* MNMBottomPullToRefreshManager.m in Sources */,
 				292F5BD11EF21CD00076A1FD /* DetailCell.m in Sources */,
 				FF986ADF1EF2C7C9003C7B68 /* SearchVC.m in Sources */,
 				292F5BD71EF2492B0076A1FD /* NoticeVC.m in Sources */,
@@ -732,7 +764,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -746,10 +778,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
-				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
+				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
+				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglishDev;
 			};
 			name = Debug;
 		};
@@ -758,7 +790,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -772,10 +804,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
-				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
+				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
+				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglishDev;
 			};
 			name = Release;
 		};

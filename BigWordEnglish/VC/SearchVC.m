@@ -51,4 +51,12 @@
     [searchWebView loadRequest:request];
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    [textField resignFirstResponder];
+    [self searchButton:nil];
+    
+    return YES;
+}
+
 @end

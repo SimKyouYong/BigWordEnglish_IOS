@@ -62,6 +62,8 @@
             detailListArr = [AppID selectBookmarkWord];
             bookmarkNum = 1;
             wordView5Button.selected = 1;
+            [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
+            wordView5Button.backgroundColor = [UIColor darkGrayColor];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
         detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
@@ -82,6 +84,10 @@
     wordView5Button.layer.cornerRadius = 20.0;
     setting5Button.layer.masksToBounds = YES;
     setting5Button.layer.cornerRadius = 20.0;
+    
+    reloads_ = -1;
+    
+    pullToRefreshManager_ = [[MNMBottomPullToRefreshManager alloc] initWithPullToRefreshViewHeight:60.0f tableView:detailTableView withClient:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -92,6 +98,15 @@
     [super viewWillAppear:animated];
     
     [self caulyLoad];
+    
+    [self loadTable];
+}
+
+- (void)viewDidLayoutSubviews {
+    
+    [super viewDidLayoutSubviews];
+    
+    [pullToRefreshManager_ relocatePullToRefreshView];
 }
 
 #pragma mark -
@@ -192,7 +207,7 @@
 
 - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
     id AppID = [[UIApplication sharedApplication] delegate];
-    detailListArr = [AppID selectAllWord];
+    /*
     LIMIT_NUM = LIMIT_NUM + 300;
     
     if(bookmarkNum == 0){
@@ -210,6 +225,45 @@
     }
     
     [detailTableView reloadData];
+     */
+    
+    NSLog(@"a");
+    
+    [pullToRefreshManager_ tableViewReleased];
+}
+
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    [pullToRefreshManager_ tableViewScrolled];
+}
+
+- (void)bottomPullToRefreshTriggered:(MNMBottomPullToRefreshManager *)manager {
+    
+    [self performSelector:@selector(loadTable) withObject:nil afterDelay:1.0f];
+}
+
+- (void)loadTable {
+    LIMIT_NUM = LIMIT_NUM + 300;
+    
+    id AppID = [[UIApplication sharedApplication] delegate];
+    if(bookmarkNum == 0){
+        if(viewCheck == 1){
+            if(wordCheck == 1){
+                detailListArr = [AppID selectAllWord];
+            }else{
+                detailListArr = [AppID selectBookmarkWord];
+            }
+        }else if(viewCheck == 2 || viewCheck == 3){
+            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        }
+    }else{
+        detailListArr = [AppID selectBookmarkWord];
+    }
+    
+    [detailTableView reloadData];
+    
+    reloads_++;
+    
+    [pullToRefreshManager_ tableViewReloadFinished];
 }
 
 #pragma mark -
@@ -332,7 +386,11 @@
         bookmarkNum = 0;
         [wordView5Button setTitle:@"단어장" forState:UIControlStateNormal];
         wordView5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
-        detailListArr = [AppID selectAllWord];
+        if(viewCheck == 2 || viewCheck == 3){
+            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        }else{
+            detailListArr = [AppID selectAllWord];
+        }
     }
     
     [detailTableView reloadData];

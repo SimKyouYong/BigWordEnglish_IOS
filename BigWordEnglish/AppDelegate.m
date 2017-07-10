@@ -115,7 +115,7 @@
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
                 sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word ORDER BY col_2 ASC LIMIT '%ld'", LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
-                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word ORDER BY col_6 LIMIT '%ld", LIMIT_NUM];
+                sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word ORDER BY col_6 DESC LIMIT '%ld'", LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
                 sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word ORDER BY col_4 ASC LIMIT '%ld'", LIMIT_NUM];
             }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
@@ -176,7 +176,6 @@
             }
             
             sql = [sqlValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
-            NSLog(@"%@", sqlValue);
         }
     }
     
