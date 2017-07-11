@@ -29,6 +29,9 @@
         selectButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, WIDTH_FRAME - 20, 40)];
         [selectButton.layer setCornerRadius:0.0f];
         [selectButton.layer setBorderWidth:1.0f];
+        [selectButton.layer setBorderColor:[UIColor colorWithRed:140.0/255.0 green:140.0/255.0 blue:140.0/255.0 alpha:1.0].CGColor];
+        selectButton.layer.masksToBounds = YES;
+        selectButton.layer.cornerRadius = 5.0;
         [self addSubview:selectButton];
     }
     return self;

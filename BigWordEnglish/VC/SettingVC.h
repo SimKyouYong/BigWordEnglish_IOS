@@ -9,11 +9,17 @@
 #import <UIKit/UIKit.h>
 #import "CaulyAdView.h"
 
+@protocol settingDelegate <NSObject>
+- (void)settingClose;
+@end
+
 @interface SettingVC : UIViewController{
     NSUserDefaults *defaults;
     
     CaulyAdView *m_bannerCauly;
 }
+
+@property (nonatomic, retain) id <settingDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *bannerView;
 

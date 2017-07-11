@@ -37,6 +37,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    yearCheckValue = @"0";
+    
     [self listLoad];
     [self buttonSelected];
 }
@@ -70,6 +72,7 @@
         DetailVC *vc = [segue destinationViewController];
         vc.viewCheck = viewCheckNum;
         vc.detailDic = chooseDic;
+        vc.yearValue = yearCheckValue;
     }
 }
 
@@ -225,6 +228,8 @@
 }
 
 - (IBAction)choose1YearButton:(id)sender {
+    yearCheckValue = @"-1";
+    
     [self performSegueWithIdentifier:@"detail" sender:sender];
     
     choosePopupView.hidden = YES;
@@ -232,6 +237,8 @@
 }
 
 - (IBAction)choose3YearButton:(id)sender {
+    yearCheckValue = @"-3";
+    
     [self performSegueWithIdentifier:@"detail" sender:sender];
     
     choosePopupView.hidden = YES;
@@ -239,6 +246,8 @@
 }
 
 - (IBAction)choose5YearButton:(id)sender {
+    yearCheckValue = @"-5";
+    
     [self performSegueWithIdentifier:@"detail" sender:sender];
     
     choosePopupView.hidden = YES;
@@ -246,6 +255,8 @@
 }
 
 - (IBAction)choose7YearButton:(id)sender {
+    yearCheckValue = @"-7";
+    
     [self performSegueWithIdentifier:@"detail" sender:sender];
     
     choosePopupView.hidden = YES;
@@ -253,6 +264,8 @@
 }
 
 - (IBAction)choose10YearButton:(id)sender {
+    yearCheckValue = @"-10";
+    
     [self performSegueWithIdentifier:@"detail" sender:sender];
     
     choosePopupView.hidden = YES;

@@ -36,6 +36,8 @@
 @property (nonatomic) NSInteger viewCheck;
 // 모든 단어보기인지 & 내 단어장 보기인지 체크(모든 단어보기 - 1, 내 단어장 보기 - 2)
 @property (nonatomic) NSInteger wordCheck;
+// 기출문제 년도 체크(없으면 0)
+@property (nonatomic) NSString *yearValue;
 
 @property (nonatomic) NSDictionary *detailDic;
 

@@ -17,6 +17,8 @@
     NSInteger viewCheckNum;
     
     CaulyAdView *m_bannerCauly;
+    
+    NSString *yearCheckValue;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *listTableView;

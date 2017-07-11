@@ -14,7 +14,7 @@
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
 
-@interface DetailVC () <CaulyAdViewDelegate>
+@interface DetailVC () <CaulyAdViewDelegate, settingDelegate>
 
 @end
 
@@ -42,6 +42,7 @@
 @synthesize word5Button;
 @synthesize word7Button;
 @synthesize word10Button;
+@synthesize yearValue;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -53,20 +54,19 @@
     
     detailListArr = [[NSMutableArray alloc] init];
     
-    id AppID = [[UIApplication sharedApplication] delegate];
     if(viewCheck == 1){
         if(wordCheck == 1){
-            detailListArr = [AppID selectAllWord];
+            [self allWordQuerySetting];
             bookmarkNum = 0;
         }else{
-            detailListArr = [AppID selectBookmarkWord];
+            [self bookmarkQuerySetting];
             bookmarkNum = 1;
             wordView5Button.selected = 1;
             [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
             wordView5Button.backgroundColor = [UIColor darkGrayColor];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
-        detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
     }
     
     wordHiddenNum = 0;
@@ -205,30 +205,7 @@
     return cell;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    id AppID = [[UIApplication sharedApplication] delegate];
-    /*
-    LIMIT_NUM = LIMIT_NUM + 300;
-    
-    if(bookmarkNum == 0){
-        if(viewCheck == 1){
-            if(wordCheck == 1){
-                detailListArr = [AppID selectAllWord];
-            }else{
-                detailListArr = [AppID selectBookmarkWord];
-            }
-        }else if(viewCheck == 2 || viewCheck == 3){
-            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
-        }
-    }else{
-        detailListArr = [AppID selectBookmarkWord];
-    }
-    
-    [detailTableView reloadData];
-     */
-    
-    NSLog(@"a");
-    
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {    
     [pullToRefreshManager_ tableViewReleased];
 }
 
@@ -244,19 +221,19 @@
 - (void)loadTable {
     LIMIT_NUM = LIMIT_NUM + 300;
     
-    id AppID = [[UIApplication sharedApplication] delegate];
     if(bookmarkNum == 0){
         if(viewCheck == 1){
             if(wordCheck == 1){
-                detailListArr = [AppID selectAllWord];
+                [self allWordQuerySetting];
             }else{
-                detailListArr = [AppID selectBookmarkWord];
+                [self bookmarkQuerySetting];
             }
+            
         }else if(viewCheck == 2 || viewCheck == 3){
-            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+            [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
         }
     }else{
-        detailListArr = [AppID selectBookmarkWord];
+        [self bookmarkQuerySetting];
     }
     
     [detailTableView reloadData];
@@ -295,12 +272,12 @@
     detailListArr = [[NSMutableArray alloc] init];
     if(viewCheck == 1){
         if(bookmarkNum == 0){
-            detailListArr = [AppID selectAllWord];
+            [self allWordQuerySetting];
         }else{
-            detailListArr = [AppID selectBookmarkWord];
+            [self bookmarkQuerySetting];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
-        detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
     }
     [detailTableView reloadData];
 }
@@ -371,7 +348,6 @@
 }
 
 - (IBAction)wordView5Button:(id)sender {
-    id AppID = [[UIApplication sharedApplication] delegate];
     detailListArr = [[NSMutableArray alloc] init];
     
     UIButton *button = (UIButton *) sender;
@@ -381,15 +357,15 @@
         bookmarkNum = 1;
         [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
         wordView5Button.backgroundColor = [UIColor darkGrayColor];
-        detailListArr = [AppID selectBookmarkWord];
+        [self bookmarkQuerySetting];
     }else{
         bookmarkNum = 0;
         [wordView5Button setTitle:@"단어장" forState:UIControlStateNormal];
         wordView5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
         if(viewCheck == 2 || viewCheck == 3){
-            detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+            [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
         }else{
-            detailListArr = [AppID selectAllWord];
+            [self allWordQuerySetting];
         }
     }
     
@@ -600,9 +576,6 @@
 }
 
 - (void)totalSelected{
-    NSLog(@"%ld", wordLevelSelectedNum);
-    NSLog(@"%ld", wordNumberSelectedNum);
-    
     // 단어 난이도 상중하
     if(wordLevelSelectedNum == 1){
         WORD_LEVEL_CHECK = @"상";
@@ -635,15 +608,14 @@
     
     detailListArr = [[NSMutableArray alloc] init];
     
-    id AppID = [[UIApplication sharedApplication] delegate];
     if(viewCheck == 1){
         if(bookmarkNum == 0){
-            detailListArr = [AppID selectAllWord];
+            [self allWordQuerySetting];
         }else{
-            detailListArr = [AppID selectBookmarkWord];
+            [self bookmarkQuerySetting];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
-        detailListArr = [AppID selectCategoryWord:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
     }
     
     [detailTableView reloadData];
@@ -691,6 +663,141 @@
     
     NSLog(@"didFailCauly");
     [m_bannerCauly stopAdRequest];
+}
+
+#pragma mark -
+#pragma mark Setting Delegate
+
+- (void)settingClose{
+    LIMIT_NUM = 300;
+    
+    if(bookmarkNum == 0){
+        if(viewCheck == 1){
+            if(wordCheck == 1){
+                [self allWordQuerySetting];
+            }else{
+                [self bookmarkQuerySetting];
+            }
+            
+        }else if(viewCheck == 2 || viewCheck == 3){
+            [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        }
+    }else{
+        [self bookmarkQuerySetting];
+    }
+    
+    [detailTableView reloadData];
+}
+
+#pragma mark -
+#pragma mark Query Setting
+
+// 모든 단어
+- (void)allWordQuerySetting{
+    NSString *sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10='9000'"];
+    
+    // 난이도 체크
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+    }
+    
+    // 출제횟수
+    if([COL4_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_4>'%@'", sqlValue, COL4_CHECK];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sqlValue = [NSString stringWithFormat:@"%@ LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_2 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_6 LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 DESC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }
+    
+    id AppID = [[UIApplication sharedApplication] delegate];
+    detailListArr = [AppID selectAllWord:sqlValue];
+}
+
+// Category Query
+- (void)categoryQuerySetting:(NSString *)keyIndexValue{
+    NSString *sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_10='%@'", keyIndexValue];
+    
+    // 난이도 체크
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+    }
+    
+    // 출제횟수
+    if([COL4_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_4>'%@'", sqlValue, COL4_CHECK];
+    }
+    
+    // 수능, 공무원 1개년도 체크
+    if([yearValue isEqualToString:@"0"]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_9='%@'", sqlValue, yearValue];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sqlValue = [NSString stringWithFormat:@"%@ LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_2 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_6 LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 DESC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }
+    
+    id AppID = [[UIApplication sharedApplication] delegate];
+    detailListArr = [AppID selectCategoryWord:sqlValue];
+}
+
+// 즐겨찾기
+- (void)bookmarkQuerySetting{
+    NSString *sqlValue = [NSString stringWithFormat:@"SELECT * FROM Word WHERE col_13='true'"];
+    
+    // 난이도 체크
+    if([WORD_LEVEL_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+    }
+    
+    // 출제횟수
+    if([COL4_CHECK isEqualToString:@""]){
+    }else{
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_4>'%@'", sqlValue, COL4_CHECK];
+    }
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    if([[defaults stringForKey:WORD_NUM] isEqualToString:@"0"]){
+        sqlValue = [NSString stringWithFormat:@"%@ LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_2 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_6 LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 ASC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        sqlValue = [NSString stringWithFormat:@"%@ ORDER BY col_4 DESC LIMIT '%ld'", sqlValue, LIMIT_NUM];
+    }
+    
+    id AppID = [[UIApplication sharedApplication] delegate];
+    detailListArr = [AppID selectBookmarkWord:sqlValue];
 }
 
 @end
