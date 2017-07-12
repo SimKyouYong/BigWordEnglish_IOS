@@ -50,40 +50,39 @@
     wordLevelSelectedNum = 0;
     wordNumberSelectedNum = 0;
     listCountNum = 0;
-    LIMIT_NUM = 300;
+    LIMIT_NUM = 0;
     
     detailListArr = [[NSMutableArray alloc] init];
     
     if(viewCheck == 1){
         if(wordCheck == 1){
-            [self allWordQuerySetting];
+            //[self allWordQuerySetting];
             bookmarkNum = 0;
         }else{
-            [self bookmarkQuerySetting];
+            //[self bookmarkQuerySetting];
             bookmarkNum = 1;
             wordView5Button.selected = 1;
             [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
             wordView5Button.backgroundColor = [UIColor darkGrayColor];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
-        [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        //[self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
     }
     
     wordHiddenNum = 0;
     meanHiddenNum = 0;
     examHiddenNum = 0;
-    bookmarkNum = 0;
     
     wordHidden5Button.layer.masksToBounds = YES;
-    wordHidden5Button.layer.cornerRadius = 20.0;
+    wordHidden5Button.layer.cornerRadius = 15.0;
     meanHidden5Button.layer.masksToBounds = YES;
-    meanHidden5Button.layer.cornerRadius = 20.0;
+    meanHidden5Button.layer.cornerRadius = 15.0;
     exam5Button.layer.masksToBounds = YES;
-    exam5Button.layer.cornerRadius = 20.0;
+    exam5Button.layer.cornerRadius = 15.0;
     wordView5Button.layer.masksToBounds = YES;
-    wordView5Button.layer.cornerRadius = 20.0;
+    wordView5Button.layer.cornerRadius = 15.0;
     setting5Button.layer.masksToBounds = YES;
-    setting5Button.layer.cornerRadius = 20.0;
+    setting5Button.layer.cornerRadius = 15.0;
     
     reloads_ = -1;
     
@@ -124,16 +123,29 @@
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
+    
+    // 타이틀 텍스트
+    NSString *titleLength = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
+    NSAttributedString *titleAttributedText = [[NSAttributedString alloc] initWithString:titleLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:18.0]}];
+    CGRect titleRect = [titleAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize titleSize = titleRect.size;
+    
+    // 상세 텍스트
+    NSString *contentLength = [dic objectForKey:@"col_5"];
+    NSAttributedString *contentAttributedText = [[NSAttributedString alloc] initWithString:contentLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:12.0]}];
+    CGRect contentRect = [contentAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize contentSize = contentRect.size;
+    
     if(examHiddenNum == 1){
-        NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         CGSize size = rect.size;
         
-        return 70 + size.height;
+        return titleSize.height + 5 + contentSize.height + 5 + size.height + 5;
         
     }else{
-        return 70;
+        return titleSize.height + 5 + contentSize.height + 5;
     }
     
     return 70;
@@ -155,9 +167,29 @@
     
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
     
+    // 타이틀 텍스트
+    NSString *titleLength = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
+    NSAttributedString *titleAttributedText = [[NSAttributedString alloc] initWithString:titleLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:18.0]}];
+    CGRect titleRect = [titleAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize titleSize = titleRect.size;
+    
+    NSMutableAttributedString *searchStr = [[NSMutableAttributedString alloc] initWithString:titleLength];
+    NSRange sRange = [titleLength rangeOfString:[dic objectForKey:@"col_2"]];
+    [searchStr addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica Bold" size:18.0f],
+                               NSForegroundColorAttributeName: [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f]} range:sRange];
+    
+    // 상세 텍스트
+    NSString *contentLength = [dic objectForKey:@"col_5"];
+    NSAttributedString *contentAttributedText = [[NSAttributedString alloc] initWithString:contentLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:12.0]}];
+    CGRect contentRect = [contentAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
+    CGSize contentSize = contentRect.size;
+    
+    cell.wordLabel.frame = CGRectMake(50, 5, WIDTH_FRAME - 172, titleSize.height);
+    cell.contentLabel.frame = CGRectMake(50, titleSize.height + 5, WIDTH_FRAME - 172, contentSize.height);
+    
     cell.numberLabel.text = [[dic objectForKey:@"col_4"] stringValue];
-    cell.wordLabel.text = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
-    cell.contentLabel.text = [dic objectForKey:@"col_5"];
+    [cell.wordLabel setAttributedText:searchStr];
+    cell.contentLabel.text = contentLength;
     cell.levelLabel.text = [dic objectForKey:@"col_6"];
     
     cell.soundButton.tag = indexPath.row;
@@ -181,26 +213,33 @@
     }
     
     // 예문 가리기
+    NSInteger examHeight = 0;
     if(examHiddenNum == 1){
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         CGSize size = rect.size;
-        cell.contentExamLabel.frame = CGRectMake(50, 70, WIDTH_FRAME - 50, size.height);
+        cell.contentExamLabel.frame = CGRectMake(50, titleSize.height + 5 + contentSize.height + 5, WIDTH_FRAME - 50, size.height);
         cell.contentExamLabel.hidden = NO;
         cell.contentExamLabel.text = [dic objectForKey:@"col_7"];
-        cell.lineView.frame = CGRectMake(0, 69.5 + size.height, WIDTH_FRAME, 0.5);
+        examHeight = size.height + 5;
     }else{
         cell.contentExamLabel.hidden = YES;
-        cell.lineView.frame = CGRectMake(0, 69.5, WIDTH_FRAME, 0.5);
     }
     
     // 즐겨찾기 상태값
-    
     if(![[dic objectForKey:@"col_13"] isEqualToString:@"true"]){
-        [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite"] forState:UIControlStateNormal];
+        cell.bookmarkImg.image = [UIImage imageNamed:@"btn_favorite"];
     }else{
-        [cell.bookmarkButton setImage:[UIImage imageNamed:@"btn_favorite_press"] forState:UIControlStateNormal];
+        cell.bookmarkImg.image = [UIImage imageNamed:@"btn_favorite_press"];
     }
+    
+    cell.numberLabel.frame = CGRectMake(0, 0, 40, titleSize.height + 5 + contentSize.height + examHeight + 5);
+    cell.levelLabel.frame = CGRectMake(WIDTH_FRAME - 121, 0, 40, titleSize.height + 5 + contentSize.height + examHeight + 5);
+    cell.soundImg.frame = CGRectMake(WIDTH_FRAME - 75, (titleSize.height + 10 + contentSize.height)/2 - 9, 18, 17);
+    cell.soundButton.frame = CGRectMake(WIDTH_FRAME - 81, 0, 29, titleSize.height + 5 + contentSize.height);
+    cell.bookmarkImg.frame = CGRectMake(WIDTH_FRAME - 40, (titleSize.height + 10 + contentSize.height)/2 - 9, 18, 17);
+    cell.bookmarkButton.frame = CGRectMake(WIDTH_FRAME - 52, 0, 42, titleSize.height + 5 + contentSize.height);
+    cell.lineView.frame = CGRectMake(10, titleSize.height + 5 + contentSize.height + examHeight + 5 - 0.5, WIDTH_FRAME - 20, 0.5);
     
     return cell;
 }
@@ -249,13 +288,12 @@
 - (void)soundAction:(UIButton*)sender{
     NSDictionary *dic = [detailListArr objectAtIndex:sender.tag];
     
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:[dic objectForKey:@"col_2"]];
-    synthesizer = [[AVSpeechSynthesizer alloc] init];
-    utterance.rate = 0.4;
-    utterance.pitchMultiplier = 1.0;
-    [synthesizer speakUtterance:utterance];
+    AVSpeechSynthesizer * synthesizer = [[AVSpeechSynthesizer alloc]init];
+    AVSpeechUtterance * utterance = [[AVSpeechUtterance alloc]initWithString:[dic objectForKey:@"col_2"]];
+    utterance.voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"en-US"];
+    utterance.rate = 0.4f;
     
-    //[synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
+    [synthesizer speakUtterance:utterance];
 }
 
 - (void)bookmarkAction:(UIButton*)sender{
@@ -355,11 +393,13 @@
     
     if(button.selected == 1){
         bookmarkNum = 1;
+        wordCheck = 2;
         [wordView5Button setTitle:@"전체보기" forState:UIControlStateNormal];
         wordView5Button.backgroundColor = [UIColor darkGrayColor];
         [self bookmarkQuerySetting];
     }else{
         bookmarkNum = 0;
+        wordCheck = 1;
         [wordView5Button setTitle:@"단어장" forState:UIControlStateNormal];
         wordView5Button.backgroundColor = [UIColor colorWithRed:35.0/255.0 green:171.0/255.0 blue:238.0/255.0 alpha:1.0];
         if(viewCheck == 2 || viewCheck == 3){

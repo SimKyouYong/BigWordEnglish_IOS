@@ -19,8 +19,6 @@
     NSInteger examHiddenNum;
     NSInteger bookmarkNum;
     
-    AVSpeechSynthesizer *synthesizer;
-    
     NSInteger wordLevelSelectedNum;
     NSInteger wordNumberSelectedNum;
     

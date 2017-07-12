@@ -17,6 +17,7 @@
 		292F69861F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 292F697F1F1327020090FFF4 /* MNMBottomPullToRefreshArrow@2x.png */; };
 		292F69871F1327020090FFF4 /* MNMBottomPullToRefreshManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F69811F1327020090FFF4 /* MNMBottomPullToRefreshManager.m */; };
 		292F69881F1327020090FFF4 /* MNMBottomPullToRefreshView.m in Sources */ = {isa = PBXBuildFile; fileRef = 292F69831F1327020090FFF4 /* MNMBottomPullToRefreshView.m */; };
+		292F6A0E1F15D9590090FFF4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 292F6A0D1F15D9590090FFF4 /* AVFoundation.framework */; };
 		294C3ED41F0093140080D556 /* btn_reset.png in Resources */ = {isa = PBXBuildFile; fileRef = 294C3ED31F0093140080D556 /* btn_reset.png */; };
 		294C3ED61F00B93E0080D556 /* bg_search_set_on.png in Resources */ = {isa = PBXBuildFile; fileRef = 294C3ED51F00B93E0080D556 /* bg_search_set_on.png */; };
 		298819D81EFC964E00E7E54A /* bg_top.png in Resources */ = {isa = PBXBuildFile; fileRef = 298819CC1EFC964E00E7E54A /* bg_top.png */; };
@@ -126,6 +127,7 @@
 		292F69811F1327020090FFF4 /* MNMBottomPullToRefreshManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshManager.m; sourceTree = "<group>"; };
 		292F69821F1327020090FFF4 /* MNMBottomPullToRefreshView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MNMBottomPullToRefreshView.h; sourceTree = "<group>"; };
 		292F69831F1327020090FFF4 /* MNMBottomPullToRefreshView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MNMBottomPullToRefreshView.m; sourceTree = "<group>"; };
+		292F6A0D1F15D9590090FFF4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		294C3ED31F0093140080D556 /* btn_reset.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_reset.png; sourceTree = "<group>"; };
 		294C3ED51F00B93E0080D556 /* bg_search_set_on.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_search_set_on.png; sourceTree = "<group>"; };
 		298819CC1EFC964E00E7E54A /* bg_top.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bg_top.png; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				292F6A0E1F15D9590090FFF4 /* AVFoundation.framework in Frameworks */,
 				FFBD4B651ED01C97005380A5 /* AdSupport.framework in Frameworks */,
 				29E0E4DF1F09DA8E0096A950 /* MessageUI.framework in Frameworks */,
 				FFBD4B631ED01C8E005380A5 /* CFNetwork.framework in Frameworks */,
@@ -479,6 +482,7 @@
 		FFBD4B5B1ED01BA2005380A5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				292F6A0D1F15D9590090FFF4 /* AVFoundation.framework */,
 				29E0E4DE1F09DA8E0096A950 /* MessageUI.framework */,
 				29E0E4DC1F09DA790096A950 /* QuartzCore.framework */,
 				29E0E4DA1F09DA6F0096A950 /* AVKit.framework */,
@@ -776,6 +780,7 @@
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Google",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Adam",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
+					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
@@ -802,6 +807,7 @@
 					"$(PROJECT_DIR)/BigWordEnglish/AD/Google",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Adam",
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/Cauly",
+					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;

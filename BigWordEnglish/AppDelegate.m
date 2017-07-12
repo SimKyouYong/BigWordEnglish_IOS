@@ -103,7 +103,7 @@
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
     
-    const char *sql = [allWordQuery cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    const char *sql = [allWordQuery UTF8String];
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         while (sqlite3_step(statement)==SQLITE_ROW) {
@@ -212,7 +212,7 @@
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
     
-    const char *sql = [categoryValue cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    const char *sql = [categoryValue UTF8String];
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         while (sqlite3_step(statement)==SQLITE_ROW) {
@@ -321,7 +321,7 @@
     NSMutableArray *Result = [NSMutableArray array];
     sqlite3_stmt *statement;
     
-    const char *sql = [bookmarkQuery cStringUsingEncoding:[NSString defaultCStringEncoding]];
+    const char *sql = [bookmarkQuery UTF8String];
     
     if (sqlite3_prepare_v2(database, sql, -1, &statement, NULL) == SQLITE_OK) {
         while (sqlite3_step(statement)==SQLITE_ROW) {

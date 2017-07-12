@@ -15,7 +15,9 @@
 @property (nonatomic) UILabel *contentLabel;
 @property (nonatomic) UILabel *contentExamLabel;
 @property (nonatomic) UILabel *levelLabel;
+@property (nonatomic) UIImageView *soundImg;
 @property (nonatomic) UIButton *soundButton;
+@property (nonatomic) UIImageView *bookmarkImg;
 @property (nonatomic) UIButton *bookmarkButton;
 @property (nonatomic) UIView *lineView;
 
