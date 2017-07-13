@@ -14,6 +14,7 @@
 
 @synthesize numberLabel;
 @synthesize wordLabel;
+@synthesize wordLabel2;
 @synthesize contentLabel;
 @synthesize contentExamLabel;
 @synthesize levelLabel;
@@ -28,20 +29,29 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 40, 70)];
+        numberLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, 29, 20)];
         [numberLabel setBackgroundColor:[UIColor clearColor]];
         numberLabel.textColor = [UIColor colorWithRed:247.0/255.0 green:147.0/255.0 blue:18.0/255.0 alpha:1.0];
-        numberLabel.textAlignment = NSTextAlignmentRight;
-        numberLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];
+        numberLabel.textAlignment = NSTextAlignmentCenter;
+        numberLabel.font = [UIFont fontWithName:@"Helvetica" size:12.0];
         [self addSubview:numberLabel];
         
+        // 단어
         wordLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, WIDTH_FRAME - 172, 20)];
         [wordLabel setBackgroundColor:[UIColor clearColor]];
         wordLabel.numberOfLines = 0;
         wordLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
         wordLabel.textAlignment = NSTextAlignmentLeft;
-        wordLabel.font = [UIFont fontWithName:@"Helvetica" size:18.0];
+        wordLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:18.0];
         [self addSubview:wordLabel];
+        
+        // 발음
+        wordLabel2 = [[UILabel alloc] initWithFrame:CGRectMake(50, 5, WIDTH_FRAME - 172, 20)];
+        [wordLabel2 setBackgroundColor:[UIColor clearColor]];
+        wordLabel2.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
+        wordLabel2.textAlignment = NSTextAlignmentLeft;
+        wordLabel2.font = [UIFont fontWithName:@"Helvetica" size:13.0];
+        [self addSubview:wordLabel2];
         
         contentLabel = [[UILabel alloc] initWithFrame:CGRectMake(50, 25, WIDTH_FRAME - 172, 45)];
         [contentLabel setBackgroundColor:[UIColor clearColor]];
@@ -56,10 +66,10 @@
         contentExamLabel.numberOfLines = 0;
         contentExamLabel.textColor = [UIColor colorWithRed:55.0/255.0 green:55.0/255.0 blue:55.0/255.0 alpha:1.0];
         contentExamLabel.textAlignment = NSTextAlignmentLeft;
-        contentExamLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:14.0];
+        contentExamLabel.font = [UIFont fontWithName:@"Helvetica" size:14.0];
         [self addSubview:contentExamLabel];
         
-        levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH_FRAME - 121, 0, 40, 70)];
+        levelLabel = [[UILabel alloc] initWithFrame:CGRectMake(WIDTH_FRAME - 121, 0, 40, 17)];
         [levelLabel setBackgroundColor:[UIColor clearColor]];
         levelLabel.textColor = [UIColor colorWithRed:0.0/255.0 green:0.0/255.0 blue:0.0/255.0 alpha:1.0];
         levelLabel.textAlignment = NSTextAlignmentCenter;

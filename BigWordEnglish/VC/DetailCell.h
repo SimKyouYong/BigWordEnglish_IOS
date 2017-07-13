@@ -12,6 +12,7 @@
 
 @property (nonatomic) UILabel *numberLabel;
 @property (nonatomic) UILabel *wordLabel;
+@property (nonatomic) UILabel *wordLabel2;
 @property (nonatomic) UILabel *contentLabel;
 @property (nonatomic) UILabel *contentExamLabel;
 @property (nonatomic) UILabel *levelLabel;

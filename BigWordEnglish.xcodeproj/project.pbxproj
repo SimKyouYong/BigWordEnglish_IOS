@@ -768,7 +768,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -783,10 +783,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
-				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglishDev;
+				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
+				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
 			};
 			name = Debug;
 		};
@@ -795,7 +795,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
@@ -810,10 +810,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglishdev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
-				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglishDev;
+				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
+				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
 			};
 			name = Release;
 		};

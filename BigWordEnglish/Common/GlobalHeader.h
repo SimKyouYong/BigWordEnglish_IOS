@@ -35,7 +35,8 @@
 #define TEST                    9999
 
 // Cauly Client ID
-#define ClientID_Cauly          @"CAULY"//@"ZwPyF5pN"
+#define ClientID_Cauly          @"JGCcEskp"
+//#define ClientID_Cauly          @"CAULY"
 
 
 

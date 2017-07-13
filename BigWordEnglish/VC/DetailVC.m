@@ -126,7 +126,7 @@
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
     
     // 타이틀 텍스트
-    NSString *titleLength = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
+    NSString *titleLength = [dic objectForKey:@"col_2"];
     NSAttributedString *titleAttributedText = [[NSAttributedString alloc] initWithString:titleLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:18.0]}];
     CGRect titleRect = [titleAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGSize titleSize = titleRect.size;
@@ -168,15 +168,10 @@
     NSDictionary *dic = [detailListArr objectAtIndex:indexPath.row];
     
     // 타이틀 텍스트
-    NSString *titleLength = [NSString stringWithFormat:@"%@ [%@]", [dic objectForKey:@"col_2"], [dic objectForKey:@"col_3"]];
+    NSString *titleLength = [dic objectForKey:@"col_2"];
     NSAttributedString *titleAttributedText = [[NSAttributedString alloc] initWithString:titleLength attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:18.0]}];
     CGRect titleRect = [titleAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGSize titleSize = titleRect.size;
-    
-    NSMutableAttributedString *searchStr = [[NSMutableAttributedString alloc] initWithString:titleLength];
-    NSRange sRange = [titleLength rangeOfString:[dic objectForKey:@"col_2"]];
-    [searchStr addAttributes:@{NSFontAttributeName: [UIFont fontWithName:@"Helvetica Bold" size:18.0f],
-                               NSForegroundColorAttributeName: [UIColor colorWithRed:0.0f/255.0f green:0.0f/255.0f blue:0.0f/255.0f alpha:1.0f]} range:sRange];
     
     // 상세 텍스트
     NSString *contentLength = [dic objectForKey:@"col_5"];
@@ -184,11 +179,13 @@
     CGRect contentRect = [contentAttributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 172, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
     CGSize contentSize = contentRect.size;
     
-    cell.wordLabel.frame = CGRectMake(50, 5, WIDTH_FRAME - 172, titleSize.height);
-    cell.contentLabel.frame = CGRectMake(50, titleSize.height + 5, WIDTH_FRAME - 172, contentSize.height);
+    cell.wordLabel.frame = CGRectMake(45, 5, titleSize.width, titleSize.height);
+    cell.wordLabel2.frame = CGRectMake(45 + titleSize.width + 5, 5, (WIDTH_FRAME - 172) - (titleSize.width), titleSize.height);
+    cell.contentLabel.frame = CGRectMake(45, titleSize.height + 5, WIDTH_FRAME - 172, contentSize.height);
     
     cell.numberLabel.text = [[dic objectForKey:@"col_4"] stringValue];
-    [cell.wordLabel setAttributedText:searchStr];
+    cell.wordLabel.text = [dic objectForKey:@"col_2"];
+    cell.wordLabel2.text = [NSString stringWithFormat:@"[%@]", [dic objectForKey:@"col_3"]];
     cell.contentLabel.text = contentLength;
     cell.levelLabel.text = [dic objectForKey:@"col_6"];
     
@@ -197,6 +194,11 @@
     
     cell.bookmarkButton.tag = indexPath.row;
     [cell.bookmarkButton addTarget:self action:@selector(bookmarkAction:) forControlEvents:UIControlEventTouchUpInside];
+    
+    // 단어가 2줄이상이면 발음기호 히든
+    if(titleSize.height > 21){
+        cell.wordLabel2.hidden = YES;
+    }
     
     // 단어가리기
     if(wordHiddenNum == 1){
@@ -218,7 +220,7 @@
         NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         CGSize size = rect.size;
-        cell.contentExamLabel.frame = CGRectMake(50, titleSize.height + 5 + contentSize.height + 5, WIDTH_FRAME - 50, size.height);
+        cell.contentExamLabel.frame = CGRectMake(45, titleSize.height + 5 + contentSize.height + 5, WIDTH_FRAME - 45, size.height);
         cell.contentExamLabel.hidden = NO;
         cell.contentExamLabel.text = [dic objectForKey:@"col_7"];
         examHeight = size.height + 5;
@@ -233,8 +235,8 @@
         cell.bookmarkImg.image = [UIImage imageNamed:@"btn_favorite_press"];
     }
     
-    cell.numberLabel.frame = CGRectMake(0, 0, 40, titleSize.height + 5 + contentSize.height + examHeight + 5);
-    cell.levelLabel.frame = CGRectMake(WIDTH_FRAME - 121, 0, 40, titleSize.height + 5 + contentSize.height + examHeight + 5);
+    cell.numberLabel.frame = CGRectMake(10, 10, 29, 20);
+    cell.levelLabel.frame = CGRectMake(WIDTH_FRAME - 121, (titleSize.height + 10 + contentSize.height)/2 - 9, 40, 17);
     cell.soundImg.frame = CGRectMake(WIDTH_FRAME - 75, (titleSize.height + 10 + contentSize.height)/2 - 9, 18, 17);
     cell.soundButton.frame = CGRectMake(WIDTH_FRAME - 81, 0, 29, titleSize.height + 5 + contentSize.height);
     cell.bookmarkImg.frame = CGRectMake(WIDTH_FRAME - 40, (titleSize.height + 10 + contentSize.height)/2 - 9, 18, 17);

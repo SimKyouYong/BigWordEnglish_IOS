@@ -37,8 +37,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    yearCheckValue = @"0";
-    
     [self listLoad];
     [self buttonSelected];
 }
@@ -49,6 +47,8 @@
 }
 
 - (void)listLoad{
+    yearCheckValue = @"0";
+    
     id AppID = [[UIApplication sharedApplication] delegate];
     
     chooseArrList = [[NSMutableArray alloc] init];
@@ -204,6 +204,7 @@
 
 - (void)selectAction:(UIButton*)sender{
     NSDictionary *dic = [chooseArrList objectAtIndex:sender.tag];
+    NSLog(@"%@", dic);
     
     WORD_LEVEL_CHECK = @"";
     COL4_CHECK = @"";
