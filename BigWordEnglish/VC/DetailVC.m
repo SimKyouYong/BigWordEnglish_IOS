@@ -138,11 +138,11 @@
     CGSize contentSize = contentRect.size;
     
     if(examHiddenNum == 1){
-        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:14.0]}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         CGSize size = rect.size;
         
-        return titleSize.height + 5 + contentSize.height + 5 + size.height + 5;
+        return titleSize.height + 5 + contentSize.height + 5 + size.height + 2;
         
     }else{
         return titleSize.height + 5 + contentSize.height + 5;
@@ -184,6 +184,10 @@
     cell.contentLabel.frame = CGRectMake(45, titleSize.height + 5, WIDTH_FRAME - 172, contentSize.height);
     
     cell.numberLabel.text = [[dic objectForKey:@"col_4"] stringValue];
+    if([[[dic objectForKey:@"col_4"] stringValue] isEqualToString:@"0"]){
+        cell.numberLabel.text = @"-";
+    }
+    
     cell.wordLabel.text = [dic objectForKey:@"col_2"];
     cell.wordLabel2.text = [NSString stringWithFormat:@"[%@]", [dic objectForKey:@"col_3"]];
     cell.contentLabel.text = contentLength;
@@ -198,6 +202,8 @@
     // 단어가 2줄이상이면 발음기호 히든
     if(titleSize.height > 21){
         cell.wordLabel2.hidden = YES;
+    }else{
+        cell.wordLabel2.hidden = NO;
     }
     
     // 단어가리기
@@ -217,13 +223,13 @@
     // 예문 가리기
     NSInteger examHeight = 0;
     if(examHiddenNum == 1){
-        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica Bold" size:14.0]}];
+        NSAttributedString *attributedText = [[NSAttributedString alloc] initWithString:[dic objectForKey:@"col_7"] attributes:@{NSFontAttributeName:[UIFont fontWithName:@"Helvetica" size:14.0]}];
         CGRect rect = [attributedText boundingRectWithSize:(CGSize){WIDTH_FRAME - 50, CGFLOAT_MAX} options:NSStringDrawingUsesLineFragmentOrigin context:nil];
         CGSize size = rect.size;
-        cell.contentExamLabel.frame = CGRectMake(45, titleSize.height + 5 + contentSize.height + 5, WIDTH_FRAME - 45, size.height);
+        cell.contentExamLabel.frame = CGRectMake(45, titleSize.height + 2 + contentSize.height + 5, WIDTH_FRAME - 45, size.height);
         cell.contentExamLabel.hidden = NO;
         cell.contentExamLabel.text = [dic objectForKey:@"col_7"];
-        examHeight = size.height + 5;
+        examHeight = size.height + 2;
     }else{
         cell.contentExamLabel.hidden = YES;
     }
@@ -301,25 +307,35 @@
 - (void)bookmarkAction:(UIButton*)sender{
     NSDictionary *dic = [detailListArr objectAtIndex:sender.tag];
     
+    DetailCell *cell = (DetailCell *)[detailTableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:sender.tag inSection:0]];
+    
     id AppID = [[UIApplication sharedApplication] delegate];
     
     if([[dic objectForKey:@"col_13"] isEqualToString:@""]){
         [AppID wordBookmarkUpdate:[[dic objectForKey:@"col_1"] integerValue] bookmarkValue:@"true"];
+        cell.bookmarkImg.image = [UIImage imageNamed:@"btn_favorite_press"];
     }else{
         [AppID wordBookmarkUpdate:[[dic objectForKey:@"col_1"] integerValue] bookmarkValue:@""];
+        cell.bookmarkImg.image = [UIImage imageNamed:@"btn_favorite"];
     }
     
-    detailListArr = [[NSMutableArray alloc] init];
     if(viewCheck == 1){
         if(bookmarkNum == 0){
+            detailListArr = [[NSMutableArray alloc] init];
             [self allWordQuerySetting];
+            [detailTableView reloadData];
         }else{
-            [self bookmarkQuerySetting];
+            //[self bookmarkQuerySetting];
         }
     }else if(viewCheck == 2 || viewCheck == 3){
-        [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+        if(bookmarkNum == 0){
+            detailListArr = [[NSMutableArray alloc] init];
+            [self categoryQuerySetting:[[detailDic objectForKey:@"KeyIndex"] stringValue]];
+            [detailTableView reloadData];
+        }else{
+            //[self bookmarkQuerySetting];
+        }
     }
-    [detailTableView reloadData];
 }
 
 - (IBAction)homeButton:(id)sender {

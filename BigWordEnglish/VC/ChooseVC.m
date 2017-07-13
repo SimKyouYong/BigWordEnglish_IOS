@@ -204,7 +204,6 @@
 
 - (void)selectAction:(UIButton*)sender{
     NSDictionary *dic = [chooseArrList objectAtIndex:sender.tag];
-    NSLog(@"%@", dic);
     
     WORD_LEVEL_CHECK = @"";
     COL4_CHECK = @"";
