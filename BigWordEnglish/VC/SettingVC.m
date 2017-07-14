@@ -47,24 +47,24 @@
     wordNumCheck4.selected = 0;
     
     if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        wordNumImage1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage1.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck1.selected = 1;
-        wordNumCheck1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        wordNumImage2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage2.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck2.selected = 1;
-        wordNumCheck2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        wordNumImage3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage3.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck3.selected = 1;
-        wordNumCheck3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        wordNumImage4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage4.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck4.selected = 1;
-        wordNumCheck4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
     }
 }
 
@@ -108,9 +108,9 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:1];
     }else{
+        wordNumImage1.backgroundColor = [UIColor clearColor];
         wordNumImage1.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck1.selected = 0;
-        wordNumCheck1.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -122,9 +122,9 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:2];
     }else{
+        wordNumImage2.backgroundColor = [UIColor clearColor];
         wordNumImage2.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck2.selected = 0;
-        wordNumCheck2.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -136,9 +136,9 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:3];
     }else{
+        wordNumImage3.backgroundColor = [UIColor clearColor];
         wordNumImage3.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck3.selected = 0;
-        wordNumCheck3.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -150,9 +150,9 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:4];
     }else{
+        wordNumImage4.backgroundColor = [UIColor clearColor];
         wordNumImage4.image = [UIImage imageNamed:@"check_box_false"];
-       wordNumCheck4.selected = 0;
-        wordNumCheck4.backgroundColor = [UIColor clearColor];
+        wordNumCheck4.selected = 0;
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
@@ -168,35 +168,35 @@
     wordNumCheck3.selected = 0;
     wordNumCheck4.selected = 0;
     
-    wordNumCheck1.backgroundColor = [UIColor clearColor];
-    wordNumCheck2.backgroundColor = [UIColor clearColor];
-    wordNumCheck3.backgroundColor = [UIColor clearColor];
-    wordNumCheck4.backgroundColor = [UIColor clearColor];
+    wordNumImage1.backgroundColor = [UIColor clearColor];
+    wordNumImage2.backgroundColor = [UIColor clearColor];
+    wordNumImage3.backgroundColor = [UIColor clearColor];
+    wordNumImage4.backgroundColor = [UIColor clearColor];
     
     [defaults setObject:@"0" forKey:WORD_NUM];
     
     if(checkNum == 1){
+        wordNumImage1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage1.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck1.selected = 1;
-        wordNumCheck1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"1" forKey:WORD_NUM];
         
     }else if(checkNum == 2){
+        wordNumImage2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage2.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck2.selected = 1;
-        wordNumCheck2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"2" forKey:WORD_NUM];
         
     }else if(checkNum == 3){
+        wordNumImage3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage3.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck3.selected = 1;
-        wordNumCheck3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"3" forKey:WORD_NUM];
         
     }else if(checkNum == 4){
+        wordNumImage4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         wordNumImage4.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck4.selected = 1;
-        wordNumCheck4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"4" forKey:WORD_NUM];
     }
 }

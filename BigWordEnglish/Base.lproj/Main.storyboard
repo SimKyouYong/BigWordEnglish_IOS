@@ -281,7 +281,7 @@
                                             <constraint firstAttribute="width" constant="93" id="qsX-7M-hUU"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-9E-Uh2">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Dzq-9E-Uh2">
                                         <rect key="frame" x="0.0" y="45" width="560" height="34"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="34" id="3V5-ob-1Xg"/>
@@ -476,6 +476,7 @@
                                     <constraint firstItem="8f2-96-a41" firstAttribute="top" secondItem="KKs-dg-g4G" secondAttribute="bottom" constant="10" id="FXE-n1-VBL"/>
                                     <constraint firstItem="C7e-hX-0eF" firstAttribute="top" secondItem="QMN-cU-TPX" secondAttribute="bottom" constant="10" id="Fm6-Jy-xgd"/>
                                     <constraint firstItem="QMN-cU-TPX" firstAttribute="leading" secondItem="jt6-sf-ZAF" secondAttribute="leading" constant="22" id="HO9-jg-TIy"/>
+                                    <constraint firstItem="Dzq-9E-Uh2" firstAttribute="top" secondItem="jt6-sf-ZAF" secondAttribute="top" constant="45" id="Ic0-0W-xCY"/>
                                     <constraint firstItem="xgd-i2-VBi" firstAttribute="top" secondItem="6vA-sE-paT" secondAttribute="bottom" constant="10" id="Iug-hq-sZV"/>
                                     <constraint firstItem="enx-WX-0QB" firstAttribute="top" secondItem="CzD-sI-OVz" secondAttribute="bottom" constant="8" id="K7y-HV-7O5"/>
                                     <constraint firstItem="KKs-dg-g4G" firstAttribute="leading" secondItem="6vA-sE-paT" secondAttribute="trailing" constant="8" id="KW0-Nq-VRH"/>

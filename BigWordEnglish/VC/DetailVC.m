@@ -209,8 +209,10 @@
     // 단어가리기
     if(wordHiddenNum == 1){
         cell.wordLabel.hidden = YES;
+        cell.wordLabel2.hidden = YES;
     }else{
         cell.wordLabel.hidden = NO;
+        cell.wordLabel2.hidden = NO;
     }
     
     // 뜻 가리기
