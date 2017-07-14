@@ -28,18 +28,23 @@
 - (IBAction)noticeButton:(id)sender;
 - (IBAction)useButton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *wordNumImage1;
 @property (weak, nonatomic) IBOutlet UIButton *wordNumCheck1;
 - (IBAction)wordNumCheck1:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *wordNumImage2;
 @property (weak, nonatomic) IBOutlet UIButton *wordNumCheck2;
 - (IBAction)wordNumCheck2:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *wordNumImage3;
 @property (weak, nonatomic) IBOutlet UIButton *wordNumCheck3;
 - (IBAction)wordNumCheck3:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UIImageView *wordNumImage4;
 @property (weak, nonatomic) IBOutlet UIButton *wordNumCheck4;
 - (IBAction)wordNumCheck4:(id)sender;
 
 - (IBAction)bookmarkResetButton:(id)sender;
+@property (weak, nonatomic) IBOutlet UIView *bgView;
 
 @end

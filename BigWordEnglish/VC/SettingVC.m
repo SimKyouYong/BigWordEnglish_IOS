@@ -20,13 +20,23 @@
 
 @synthesize delegate;
 @synthesize wordNumCheck1;
+@synthesize wordNumImage1;
 @synthesize wordNumCheck2;
+@synthesize wordNumImage2;
 @synthesize wordNumCheck3;
+@synthesize wordNumImage3;
 @synthesize wordNumCheck4;
+@synthesize wordNumImage4;
 @synthesize bannerView;
+@synthesize bgView;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    bgView.layer.masksToBounds = YES;
+    bgView.layer.cornerRadius = 5;
+    bgView.layer.borderWidth = 3;
+    bgView.layer.borderColor = [UIColor colorWithRed:210.0/255.0 green:211.0/255.0 blue:213.0/255.0 alpha:1.0].CGColor;
     
     defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
@@ -37,23 +47,23 @@
     wordNumCheck4.selected = 0;
     
     if([[defaults stringForKey:WORD_NUM] isEqualToString:@"1"]){
+        wordNumImage1.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck1.selected = 1;
-        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"2"]){
+        wordNumImage2.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck2.selected = 1;
-        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"3"]){
+        wordNumImage3.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck3.selected = 1;
-        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         
     }else if([[defaults stringForKey:WORD_NUM] isEqualToString:@"4"]){
+        wordNumImage4.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck4.selected = 1;
-        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
     }
 }
@@ -98,8 +108,8 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:1];
     }else{
+        wordNumImage1.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck1.selected = 0;
-        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         wordNumCheck1.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
@@ -112,8 +122,8 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:2];
     }else{
+        wordNumImage2.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck2.selected = 0;
-        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         wordNumCheck2.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
@@ -126,8 +136,8 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:3];
     }else{
+        wordNumImage3.image = [UIImage imageNamed:@"check_box_false"];
         wordNumCheck3.selected = 0;
-        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         wordNumCheck3.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
@@ -140,23 +150,23 @@
     if(button.selected == 1){
         [self wordNumSelectedInit:4];
     }else{
+        wordNumImage4.image = [UIImage imageNamed:@"check_box_false"];
        wordNumCheck4.selected = 0;
-        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
         wordNumCheck4.backgroundColor = [UIColor clearColor];
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
 }
 
 - (void)wordNumSelectedInit:(NSInteger)checkNum{
+    wordNumImage1.image = [UIImage imageNamed:@"check_box_false"];
+    wordNumImage2.image = [UIImage imageNamed:@"check_box_false"];
+    wordNumImage3.image = [UIImage imageNamed:@"check_box_false"];
+    wordNumImage4.image = [UIImage imageNamed:@"check_box_false"];
+    
     wordNumCheck1.selected = 0;
     wordNumCheck2.selected = 0;
     wordNumCheck3.selected = 0;
     wordNumCheck4.selected = 0;
-    
-    [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
-    [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
-    [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
-    [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_false"] forState:UIControlStateNormal];
     
     wordNumCheck1.backgroundColor = [UIColor clearColor];
     wordNumCheck2.backgroundColor = [UIColor clearColor];
@@ -166,26 +176,26 @@
     [defaults setObject:@"0" forKey:WORD_NUM];
     
     if(checkNum == 1){
+        wordNumImage1.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck1.selected = 1;
-        [wordNumCheck1 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck1.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"1" forKey:WORD_NUM];
         
     }else if(checkNum == 2){
+        wordNumImage2.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck2.selected = 1;
-        [wordNumCheck2 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck2.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"2" forKey:WORD_NUM];
         
     }else if(checkNum == 3){
+        wordNumImage3.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck3.selected = 1;
-        [wordNumCheck3 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck3.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"3" forKey:WORD_NUM];
         
     }else if(checkNum == 4){
+        wordNumImage4.image = [UIImage imageNamed:@"check_box_true"];
         wordNumCheck4.selected = 1;
-        [wordNumCheck4 setImage:[UIImage imageNamed:@"check_box_true"] forState:UIControlStateNormal];
         wordNumCheck4.backgroundColor = [UIColor colorWithRed:0.0/255.0 green:174.0/255.0 blue:250.0/255.0 alpha:1.0];
         [defaults setObject:@"4" forKey:WORD_NUM];
     }
