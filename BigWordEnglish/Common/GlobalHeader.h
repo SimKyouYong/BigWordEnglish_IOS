@@ -9,12 +9,9 @@
 #define WIDTH_FRAME             [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT_FRAME            [[UIScreen mainScreen] bounds].size.height
 
-
 #define DEVICE_TOKEN        @"device_token"
 #define DEVICE_UUID         @"device_uuid"
 #define PUSH_SOUND          @"push_sound"
-
-
 
 #define DOCUMENT_DIRECTORY [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
@@ -25,7 +22,8 @@
 
 // URL
 #define COMMON_URL              @"http://snap40.cafe24.com/BigWordEgs/"
-#define DB_FILE_URL             @"http://iglassstory.com/egDb.db"
+//#define DB_FILE_URL             @"http://iglassstory.com/egDb.db"
+#define DB_FILE_URL             @"http://snap40.cafe24.com/BigWordEgs/admin/db/egDb.db"
 #define VERSION_URL             @"Version.php"
 
 // 메모리 보관

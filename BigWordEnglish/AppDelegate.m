@@ -10,6 +10,9 @@
 #import <sqlite3.h>
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
+#import <AudioToolbox/AudioToolbox.h>
+
+#define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
 @interface AppDelegate ()
 
@@ -27,26 +30,27 @@
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
     
-    
     if([defaults stringForKey:DEVICE_UUID].length == 0 && [defaults stringForKey:DEVICE_TOKEN].length == 0){
         CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
         NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
         [defaults setObject:uuidString forKey:DEVICE_UUID];
         
-        // APNS 등록
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+        if(SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(@"10.0")){
+            UNUserNotificationCenter *center = [UNUserNotificationCenter currentNotificationCenter];
+            center.delegate = self;
+            [center requestAuthorizationWithOptions:(UNAuthorizationOptionSound | UNAuthorizationOptionAlert | UNAuthorizationOptionBadge) completionHandler:^(BOOL granted, NSError * _Nullable error){
+                if( !error ){
+                    [[UIApplication sharedApplication] registerForRemoteNotifications];
+                }
+            }];
+        }else{
             [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
             [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }else{
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
-             (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
         }
         
         [defaults setObject:@"ON" forKey:PUSH_SOUND];
     }
 
-    
-    
     [NSThread sleepForTimeInterval:2];
     
     return YES;
@@ -86,22 +90,14 @@
     if (nil != urlConnection){
         joinData = [[NSMutableData alloc] init];
     }
-    
-    
 }
+
 // 어플리케이션이 실행줄일 때 노티피케이션을 받았을떄 호출됨
 - (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
     NSLog(@"userInfo %@", userInfo);
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [defaults synchronize];
-    
-    
-    NSLog(@"푸시 val : %@" , [defaults stringForKey:@"push_on_off"]);
-    if([[defaults stringForKey:@"push_on_off"] isEqualToString:@"OFF"]){
-        NSLog(@"푸시 OFF");
-        return;
-    }
     
     pushBadge = [[userInfo objectForKey:@"aps"] objectForKey:@"badge"];
     pushAlert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
@@ -112,9 +108,7 @@
     if([pushBadge intValue] > 99){
         pushBadge = @"99";
     }
-    
 }
-
 
 - (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
     NSDictionary *localDic = (NSDictionary*)notification.userInfo;
@@ -133,7 +127,6 @@
     }
 }
 
-
 - (NSString*)stringByStrippingHTML:(NSString*)stringHtml{
     NSRange r;
     while ((r = [stringHtml rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
@@ -149,6 +142,7 @@
         [[NSNotificationCenter defaultCenter] postNotificationName:@"pushNotification" object:nil userInfo:nil];
     }
 }
+
 #pragma mark -
 #pragma mark URL connection
 
@@ -190,22 +184,18 @@
     // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
 }
 
-
 - (void)applicationDidEnterBackground:(UIApplication *)application {
     // Use this method to release shared resources, save user data, invalidate timers, and store enough application state information to restore your application to its current state in case it is terminated later.
     // If your application supports background execution, this method is called instead of applicationWillTerminate: when the user quits.
 }
 
-
 - (void)applicationWillEnterForeground:(UIApplication *)application {
     // Called as part of the transition from the background to the active state; here you can undo many of the changes made on entering the background.
 }
 
-
 - (void)applicationDidBecomeActive:(UIApplication *)application {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
