@@ -9,6 +9,13 @@
 #define WIDTH_FRAME             [[UIScreen mainScreen] bounds].size.width
 #define HEIGHT_FRAME            [[UIScreen mainScreen] bounds].size.height
 
+
+#define DEVICE_TOKEN        @"device_token"
+#define DEVICE_UUID         @"device_uuid"
+#define PUSH_SOUND          @"push_sound"
+
+
+
 #define DOCUMENT_DIRECTORY [NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES) lastObject]
 
 // NSUserDefaults

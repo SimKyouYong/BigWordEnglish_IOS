@@ -16,6 +16,9 @@
 @end
 
 @implementation AppDelegate
+@synthesize pushAlert;
+@synthesize pushBadge;
+@synthesize pushMethArray;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -24,11 +27,163 @@
         [defaults setObject:@"0" forKey:WORD_NUM];
     }
     
+    
+    if([defaults stringForKey:DEVICE_UUID].length == 0 && [defaults stringForKey:DEVICE_TOKEN].length == 0){
+        CFUUIDRef uuid = CFUUIDCreate(kCFAllocatorDefault);
+        NSString *uuidString = (NSString *)CFBridgingRelease(CFUUIDCreateString(kCFAllocatorDefault, uuid));
+        [defaults setObject:uuidString forKey:DEVICE_UUID];
+        
+        // APNS 등록
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0){
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }else{
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes:
+             (UIUserNotificationTypeBadge | UIUserNotificationTypeSound | UIUserNotificationTypeAlert)];
+        }
+        
+        [defaults setObject:@"ON" forKey:PUSH_SOUND];
+    }
+
+    
+    
     [NSThread sleepForTimeInterval:2];
     
     return YES;
 }
 
+#pragma mark -
+#pragma mark Push Notification
+
+// 애플리케이션이 푸시서버에 성공적으로 등록되었을때 호출됨
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken{
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    NSString *devToken = [[[[deviceToken description]stringByReplacingOccurrencesOfString:@"<" withString:@""]stringByReplacingOccurrencesOfString:@">" withString:@""]stringByReplacingOccurrencesOfString:@" " withString:@""];
+    
+    NSLog(@"device token : %@", devToken);
+    [defaults setObject:devToken forKey:DEVICE_TOKEN];
+    
+    NSString * url = @"http://snap40.cafe24.com/BigWordEgs/Ios_push_register.php";
+    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1.0];
+    
+    // @param POST와 GET 방식을 나타냄.
+    [request setHTTPMethod:@"POST"];
+    
+    // 파라메터를 NSDictionary에 저장
+    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:2];
+    
+    [dic setObject:[defaults stringForKey:DEVICE_UUID]  forKey:@"udid"];
+    [dic setObject:[defaults stringForKey:DEVICE_TOKEN] forKey:@"reg_id"];
+    
+    // NSDictionary에 저장된 파라메터를 NSArray로 제작
+    NSArray * params = [self generatorParameters:dic];
+    
+    // POST로 파라메터 넘기기
+    [request setHTTPBody:[[params componentsJoinedByString:@"&"] dataUsingEncoding:0x80000000+kCFStringEncodingDOSKorean]];
+    urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
+    if (nil != urlConnection){
+        joinData = [[NSMutableData alloc] init];
+    }
+    
+    
+}
+// 어플리케이션이 실행줄일 때 노티피케이션을 받았을떄 호출됨
+- (void) application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo{
+    NSLog(@"userInfo %@", userInfo);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults synchronize];
+    
+    
+    NSLog(@"푸시 val : %@" , [defaults stringForKey:@"push_on_off"]);
+    if([[defaults stringForKey:@"push_on_off"] isEqualToString:@"OFF"]){
+        NSLog(@"푸시 OFF");
+        return;
+    }
+    
+    pushBadge = [[userInfo objectForKey:@"aps"] objectForKey:@"badge"];
+    pushAlert = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    //NSLog(@"pushBadge : %@", pushBadge);
+    
+    pushAlert = [self stringByStrippingHTML:pushAlert];
+    
+    if([pushBadge intValue] > 99){
+        pushBadge = @"99";
+    }
+    
+}
+
+
+- (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification{
+    NSDictionary *localDic = (NSDictionary*)notification.userInfo;
+    NSLog(@"localDic %@", localDic);
+    
+    UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"알림" message:[localDic valueForKey:@"message"] delegate:self cancelButtonTitle:@"확인" otherButtonTitles:nil, nil];
+    alert.tag = 1;
+    [alert show];
+    
+    [self performSelector:@selector(dismissAlert:) withObject:alert afterDelay:3];
+}
+
+- (void)dismissAlert:(UIAlertView*)alertView{
+    if (alertView.tag == 1) {
+        [alertView dismissWithClickedButtonIndex:-1 animated:YES];
+    }
+}
+
+
+- (NSString*)stringByStrippingHTML:(NSString*)stringHtml{
+    NSRange r;
+    while ((r = [stringHtml rangeOfString:@"<[^>]+>" options:NSRegularExpressionSearch]).location != NSNotFound)
+        stringHtml = [stringHtml stringByReplacingCharactersInRange:r withString:@" "];
+    return stringHtml;
+}
+
+#pragma mark -
+#pragma mark AlertView
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex{
+    if(alertView.tag == 0){
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"pushNotification" object:nil userInfo:nil];
+    }
+}
+#pragma mark -
+#pragma mark URL connection
+
+- (NSArray *)generatorParameters:(NSDictionary *)param{
+    // 임시 배열을 생성한 후
+    // 모든 key 값을 받와 해당 키값으로 값을 반환하고
+    // 해당 키와 값을 임시 배열에 저장 후 반환하는 함수
+    NSMutableArray * result = [NSMutableArray arrayWithCapacity:[param count]];
+    
+    NSArray * allKeys = [param allKeys];
+    
+    for (NSString * key in allKeys){
+        NSString * value = [param objectForKey:key];
+        [result addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
+    }
+    return result;
+}
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
+    //data를 받을 시 호출
+    [joinData appendData:data];
+}
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
+    // NSURLConnection 연결 이후 오류 발생시 호출
+    connection = nil;
+}
+
+- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
+    // NSURLConnection 클래스를 이용해서 모든 데이터를 다 받았을 때 호출
+    // 받은 NSData -> NSDictionary으로 변환하여 로그창에 출력
+    
+    NSString *encodeData = [[NSString alloc] initWithData:joinData encoding:NSUTF8StringEncoding];
+    NSLog(@"%@", encodeData);
+}
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

@@ -183,6 +183,7 @@
 		29F57BE21EEF70720060F1B3 /* ChooseVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseVC.m; sourceTree = "<group>"; };
 		29F57BE41EEF9B370060F1B3 /* ChooseCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseCell.h; sourceTree = "<group>"; };
 		29F57BE51EEF9B370060F1B3 /* ChooseCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseCell.m; sourceTree = "<group>"; };
+		33DD5ACD1F1C40F800423AB0 /* BigWordEnglish.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = BigWordEnglish.entitlements; sourceTree = "<group>"; };
 		FF370C7B1EC1E25E00E5684C /* BigWordEnglish.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BigWordEnglish.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF370C7F1EC1E25E00E5684C /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		FF370C811EC1E25E00E5684C /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -404,6 +405,7 @@
 		FF370C7D1EC1E25E00E5684C /* BigWordEnglish */ = {
 			isa = PBXGroup;
 			children = (
+				33DD5ACD1F1C40F800423AB0 /* BigWordEnglish.entitlements */,
 				FFBD4B481ED01A91005380A5 /* Lib */,
 				FFBD4B141ED01254005380A5 /* Common */,
 				FFBD4B191ED01254005380A5 /* VC */,
@@ -554,6 +556,11 @@
 						CreatedOnToolsVersion = 8.3.2;
 						DevelopmentTeam = 2V532BNDRF;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -788,7 +795,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
+				CODE_SIGN_ENTITLEMENTS = BigWordEnglish/BigWordEnglish.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
@@ -806,7 +814,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
+				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
 				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
 			};
 			name = Debug;
@@ -816,7 +824,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Yunsoon Kang (2V532BNDRF)";
+				CODE_SIGN_ENTITLEMENTS = BigWordEnglish/BigWordEnglish.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer: Yunsoon Kang (5RXY6E72A3)";
 				DEVELOPMENT_TEAM = 2V532BNDRF;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = BigWordEnglish/Info.plist;
@@ -834,7 +843,7 @@
 				OTHER_LDFLAGS = "-ObjC";
 				PRODUCT_BUNDLE_IDENTIFIER = com.bigwordenglish;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "73f0598d-ef3a-428a-82fa-efb8dd6f1b9f";
+				PROVISIONING_PROFILE = "487d395d-52f3-4bb0-b3a2-5604293e06f4";
 				PROVISIONING_PROFILE_SPECIFIER = BigWordEnglish;
 			};
 			name = Release;

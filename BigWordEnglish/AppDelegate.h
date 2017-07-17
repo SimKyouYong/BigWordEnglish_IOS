@@ -9,7 +9,12 @@
 #import <UIKit/UIKit.h>
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
-
+{
+    NSURLConnection *urlConnection;
+    NSMutableData *joinData;
+    
+    
+}
 @property (strong, nonatomic) UIWindow *window;
 
 - (NSMutableArray *)selectSubKey:(NSInteger)subKey;
@@ -19,6 +24,11 @@
 
 - (void)wordBookmarkUpdate:(NSInteger)idNum bookmarkValue:(NSString*)bookmarkValue;
 - (void)wordBookmarkReset;
+
+
+@property (nonatomic,retain) NSString* pushBadge;
+@property (nonatomic,retain) NSString* pushAlert;
+@property (nonatomic,retain) NSMutableArray* pushMethArray;;
 
 @end
 
