@@ -11,6 +11,7 @@
 #import "GlobalHeader.h"
 #import "GlobalObject.h"
 #import <AudioToolbox/AudioToolbox.h>
+#import "SBJsonParser.h"
 
 #define SYSTEM_VERSION_GRATERTHAN_OR_EQUALTO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
 
@@ -69,27 +70,23 @@
     NSLog(@"device token : %@", devToken);
     [defaults setObject:devToken forKey:DEVICE_TOKEN];
     
-    NSString * url = @"http://snap40.cafe24.com/BigWordEgs/Ios_push_register.php";
-    NSMutableURLRequest * request = [[NSMutableURLRequest alloc] initWithURL:[NSURL URLWithString:url] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:1.0];
+    NSString *urlString = @"http://snap40.cafe24.com/BigWordEgs/Ios_push_register.php";
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
     
-    // @param POST와 GET 방식을 나타냄.
-    [request setHTTPMethod:@"POST"];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    urlRequest.timeoutInterval = 30;
     
-    // 파라메터를 NSDictionary에 저장
-    NSMutableDictionary * dic = [NSMutableDictionary dictionaryWithCapacity:2];
+    NSString *params = [NSString stringWithFormat:@"udid=%@&reg_id=%@", [defaults stringForKey:DEVICE_UUID], [defaults stringForKey:DEVICE_TOKEN]];
+    [urlRequest setHTTPMethod:@"POST"];
+    [urlRequest setHTTPBody:[params dataUsingEncoding:NSUTF8StringEncoding]];
     
-    [dic setObject:[defaults stringForKey:DEVICE_UUID]  forKey:@"udid"];
-    [dic setObject:[defaults stringForKey:DEVICE_TOKEN] forKey:@"reg_id"];
-    
-    // NSDictionary에 저장된 파라메터를 NSArray로 제작
-    NSArray * params = [self generatorParameters:dic];
-    
-    // POST로 파라메터 넘기기
-    [request setHTTPBody:[[params componentsJoinedByString:@"&"] dataUsingEncoding:0x80000000+kCFStringEncodingDOSKorean]];
-    urlConnection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    if (nil != urlConnection){
-        joinData = [[NSMutableData alloc] init];
-    }
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        //NSLog(@"Response:%@ %@\n", response, error);
+        NSString *encodeData = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSLog(@"%@", encodeData);
+    }];
+    [dataTask resume];
 }
 
 // 어플리케이션이 실행줄일 때 노티피케이션을 받았을떄 호출됨
@@ -141,42 +138,6 @@
     if(alertView.tag == 0){
         [[NSNotificationCenter defaultCenter] postNotificationName:@"pushNotification" object:nil userInfo:nil];
     }
-}
-
-#pragma mark -
-#pragma mark URL connection
-
-- (NSArray *)generatorParameters:(NSDictionary *)param{
-    // 임시 배열을 생성한 후
-    // 모든 key 값을 받와 해당 키값으로 값을 반환하고
-    // 해당 키와 값을 임시 배열에 저장 후 반환하는 함수
-    NSMutableArray * result = [NSMutableArray arrayWithCapacity:[param count]];
-    
-    NSArray * allKeys = [param allKeys];
-    
-    for (NSString * key in allKeys){
-        NSString * value = [param objectForKey:key];
-        [result addObject:[NSString stringWithFormat:@"%@=%@", key, value]];
-    }
-    return result;
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data{
-    //data를 받을 시 호출
-    [joinData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error{
-    // NSURLConnection 연결 이후 오류 발생시 호출
-    connection = nil;
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection{
-    // NSURLConnection 클래스를 이용해서 모든 데이터를 다 받았을 때 호출
-    // 받은 NSData -> NSDictionary으로 변환하여 로그창에 출력
-    
-    NSString *encodeData = [[NSString alloc] initWithData:joinData encoding:NSUTF8StringEncoding];
-    NSLog(@"%@", encodeData);
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

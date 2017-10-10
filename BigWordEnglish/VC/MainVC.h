@@ -12,8 +12,6 @@
 @interface MainVC : UIViewController<NSURLConnectionDelegate>{
     NSUserDefaults *defaults;
     
-    NSMutableData *receivedData;
-    
     NSString *resultValue;
     
     // 로딩뷰

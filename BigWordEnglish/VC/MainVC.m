@@ -161,53 +161,39 @@
     //[self loadingInit];
     
     NSString *urlString = DB_FILE_URL;
-    NSURLRequest *theRequest=[NSURLRequest requestWithURL:[NSURL URLWithString:urlString] cachePolicy:NSURLRequestUseProtocolCachePolicy timeoutInterval:60.0];
-   
-    NSURLConnection *theConnection=[[NSURLConnection alloc] initWithRequest:theRequest delegate:self];
-    if (theConnection) {
-        receivedData = [NSMutableData data];
-    } else {
+    NSURLSessionConfiguration *defaultConfigObject = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *defaultSession = [NSURLSession sessionWithConfiguration:defaultConfigObject delegate: nil delegateQueue: [NSOperationQueue mainQueue]];
+    
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:urlString]];
+    urlRequest.timeoutInterval = 30;
+    [urlRequest setHTTPMethod:@"GET"];
+    
+    NSURLSessionDataTask * dataTask =[defaultSession dataTaskWithRequest:urlRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        //NSLog(@"Response:%@ %@\n", response, error);
+        NSInteger statusCode = [(NSHTTPURLResponse *)response statusCode];
         
-    }
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response
-{
-    [receivedData setLength:0];
-}
-
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
-{
-    [receivedData appendData:data];
-}
-
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
-{
-    //NSLog(@"Connection failed! Error - %@ %@", [error localizedDescription], [[error userInfo] objectForKey:NSURLErrorFailingURLStringErrorKey]);
-    
-    UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n앱 종료후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
-    
-    UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
-                         {}];
-    [alert addAction:ok];
-    [self presentViewController:alert animated:YES completion:nil];
-    
-    //[self loadingClose];
-}
-
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection
-{
-    NSArray *fileArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
-    NSString *filepath = [fileArr objectAtIndex:0];
-    NSString *documentPath = [filepath stringByAppendingPathComponent:@"EgDb.db"];
-
-    [receivedData writeToFile:documentPath atomically:YES];
-    
-    [defaults setObject:resultValue forKey:DB_VERSION];
-    
-    //[self loadingClose];
-    
-    introImage.hidden = YES;
+        if(statusCode == 200){
+            NSArray *fileArr = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+            NSString *filepath = [fileArr objectAtIndex:0];
+            NSString *documentPath = [filepath stringByAppendingPathComponent:@"EgDb.db"];
+            
+            [data writeToFile:documentPath atomically:YES];
+            
+            [defaults setObject:resultValue forKey:DB_VERSION];
+            
+            //[self loadingClose];
+            
+            introImage.hidden = YES;
+        }else{
+            UIAlertController * alert = [UIAlertController alertControllerWithTitle:@"알림" message:@"파일 다운로드 실패하였습니다.\n앱 종료후 다시 시도해주세요." preferredStyle:UIAlertControllerStyleAlert];
+            
+            UIAlertAction* ok = [UIAlertAction actionWithTitle:@"확인" style:UIAlertActionStyleDefault handler:^(UIAlertAction * action)
+                                 {}];
+            [alert addAction:ok];
+            [self presentViewController:alert animated:YES completion:nil];
+        }
+    }];
+    [dataTask resume];
 }
 
 #pragma mark -
