@@ -24,6 +24,7 @@
         titleLabel.textColor = [UIColor colorWithRed:55.0/255.0 green:55.0/255.0 blue:55.0/255.0 alpha:1.0];
         titleLabel.textAlignment = NSTextAlignmentCenter;
         titleLabel.font = [UIFont fontWithName:@"Helvetica Bold" size:18.0];
+        [titleLabel setAdjustsFontSizeToFitWidth:YES];
         [self addSubview:titleLabel];
 
         selectButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 5, WIDTH_FRAME - 20, 40)];

@@ -101,7 +101,7 @@
     if (self = [super initWithFrame:frame]) {
         
         [self setAutoresizingMask:UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin];
-        self.backgroundColor = [UIColor grayColor];//[UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0];
+        self.backgroundColor = [UIColor whiteColor];//[UIColor colorWithRed:244.0f/255.0f green:244.0f/255.0f blue:244.0f/255.0f alpha:1.0];
         containerView_ = [[UIView alloc] initWithFrame:CGRectMake(0.0f, 0.0f, CGRectGetWidth(frame), CGRectGetHeight(frame))];
         
         //[containerView_ setBackgroundColor:[UIColor clearColor]];
@@ -116,7 +116,7 @@
         [iconImageView_ setImage:iconImage];
         [iconImageView_ setAutoresizingMask:UIViewAutoresizingFlexibleRightMargin];
         
-        [containerView_ addSubview:iconImageView_];
+        //[containerView_ addSubview:iconImageView_];
         
         loadingActivityIndicator_ = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
          loadingActivityIndicator_.center = CGPointMake(30, ((containerView_.bounds.origin.y + containerView_.bounds.size.height)/2));

@@ -185,7 +185,7 @@
     
     cell.numberLabel.text = [[dic objectForKey:@"col_4"] stringValue];
     if([[[dic objectForKey:@"col_4"] stringValue] isEqualToString:@"0"]){
-        cell.numberLabel.text = @"-";
+        cell.numberLabel.text = @"";
     }
     
     cell.wordLabel.text = [dic objectForKey:@"col_2"];
@@ -254,17 +254,25 @@
     return cell;
 }
 
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {    
-    [pullToRefreshManager_ tableViewReleased];
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+    if(LIMIT_NUM > [detailListArr count]){
+    }else{
+        [pullToRefreshManager_ tableViewReleased];
+    }
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
-    [pullToRefreshManager_ tableViewScrolled];
+    if(LIMIT_NUM > [detailListArr count]){
+    }else{
+        [pullToRefreshManager_ tableViewScrolled];
+    }
 }
 
 - (void)bottomPullToRefreshTriggered:(MNMBottomPullToRefreshManager *)manager {
-    
-    [self performSelector:@selector(loadTable) withObject:nil afterDelay:1.0f];
+    if(LIMIT_NUM > [detailListArr count]){
+    }else{
+        [self performSelector:@selector(loadTable) withObject:nil afterDelay:1.0f];
+    }
 }
 
 - (void)loadTable {
