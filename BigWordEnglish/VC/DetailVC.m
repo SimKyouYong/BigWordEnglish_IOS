@@ -47,7 +47,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    wordLevelSelectedNum = 0;
+    wordLevelHighSelectedNum = 0;
+    wordLevelMiddleSelectedNum = 0;
+    wordLevelLowSelectedNum = 0;
     wordNumberSelectedNum = 0;
     listCountNum = 0;
     LIMIT_NUM = 0;
@@ -451,18 +453,18 @@
     }
 }
 
+// 난이도 설정 버튼
 - (IBAction)wordLevelHighButton:(id)sender {
     UIButton *button = (UIButton *) sender;
     button.selected = !button.selected;
     
     if(button.selected == 1){
-        wordLevelSelectedNum = 1;
-        [self wordLevelSelected];
+        [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+        wordLevelHighSelectedNum = 1;
         
     }else{
         [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-        button.selected = 0;
-        wordLevelSelectedNum = 0;
+        wordLevelHighSelectedNum = 0;
     }
 }
 
@@ -471,13 +473,12 @@
     button.selected = !button.selected;
     
     if(button.selected == 1){
-        wordLevelSelectedNum = 2;
-        [self wordLevelSelected];
+        [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+        wordLevelMiddleSelectedNum = 1;
         
     }else{
         [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-        button.selected = 0;
-        wordLevelSelectedNum = 0;
+        wordLevelMiddleSelectedNum = 0;
     }
 }
 
@@ -486,28 +487,12 @@
     button.selected = !button.selected;
     
     if(button.selected == 1){
-        wordLevelSelectedNum = 3;
-        [self wordLevelSelected];
+        [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+        wordLevelLowSelectedNum = 1;
         
     }else{
         [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-        button.selected = 0;
-        wordLevelSelectedNum = 0;
-    }
-}
-
-// 난이도 설정 버튼
-- (void)wordLevelSelected{
-    [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-    [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-    [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_off"] forState:UIControlStateNormal];
-    
-    if(wordLevelSelectedNum == 1){
-        [wordLevelHighButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
-    }else if(wordLevelSelectedNum == 2){
-        [wordLevelMidButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
-    }else if(wordLevelSelectedNum == 3){
-        [wordLevelLowButton setBackgroundImage:[UIImage imageNamed:@"bg_search_set_on"] forState:UIControlStateNormal];
+        wordLevelLowSelectedNum = 0;
     }
 }
 
@@ -645,14 +630,10 @@
 
 - (void)totalSelected{
     // 단어 난이도 상중하
-    if(wordLevelSelectedNum == 1){
-        WORD_LEVEL_CHECK = @"상";
-    }else if(wordLevelSelectedNum == 2){
-        WORD_LEVEL_CHECK = @"중";
-    }else if(wordLevelSelectedNum == 3){
-        WORD_LEVEL_CHECK = @"하";
-    }else{
+    if(wordLevelHighSelectedNum == 0 && wordLevelMiddleSelectedNum == 0 && wordLevelLowSelectedNum == 0){
         WORD_LEVEL_CHECK = @"";
+    }else{
+        WORD_LEVEL_CHECK = @"상중하";
     }
     
     // 출제 횟수
@@ -767,7 +748,19 @@
     // 난이도 체크
     if([WORD_LEVEL_CHECK isEqualToString:@""]){
     }else{
-        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+        NSString *wordLevelSqlValue1 = @"";
+        NSString *wordLevelSqlValue2 = @"";
+        NSString *wordLevelSqlValue3 = @"";
+        if(wordLevelHighSelectedNum == 1){
+            wordLevelSqlValue1 = @"상";
+        }
+        if(wordLevelMiddleSelectedNum == 1){
+            wordLevelSqlValue2 = @"중";
+        }
+        if(wordLevelLowSelectedNum == 1){
+            wordLevelSqlValue3 = @"하";
+        }
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6 IN('%@','%@','%@')", sqlValue, wordLevelSqlValue1, wordLevelSqlValue2, wordLevelSqlValue3];
     }
     
     // 출제횟수
@@ -801,7 +794,19 @@
     // 난이도 체크
     if([WORD_LEVEL_CHECK isEqualToString:@""]){
     }else{
-        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+        NSString *wordLevelSqlValue1 = @"";
+        NSString *wordLevelSqlValue2 = @"";
+        NSString *wordLevelSqlValue3 = @"";
+        if(wordLevelHighSelectedNum == 1){
+            wordLevelSqlValue1 = @"상";
+        }
+        if(wordLevelMiddleSelectedNum == 1){
+            wordLevelSqlValue2 = @"중";
+        }
+        if(wordLevelLowSelectedNum == 1){
+            wordLevelSqlValue3 = @"하";
+        }
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6 IN('%@','%@','%@')", sqlValue, wordLevelSqlValue1, wordLevelSqlValue2, wordLevelSqlValue3];
     }
     
     // 출제횟수
@@ -841,7 +846,19 @@
     // 난이도 체크
     if([WORD_LEVEL_CHECK isEqualToString:@""]){
     }else{
-        sqlValue = [NSString stringWithFormat:@"%@ AND col_6='%@'", sqlValue, WORD_LEVEL_CHECK];
+        NSString *wordLevelSqlValue1 = @"";
+        NSString *wordLevelSqlValue2 = @"";
+        NSString *wordLevelSqlValue3 = @"";
+        if(wordLevelHighSelectedNum == 1){
+            wordLevelSqlValue1 = @"상";
+        }
+        if(wordLevelMiddleSelectedNum == 1){
+            wordLevelSqlValue2 = @"중";
+        }
+        if(wordLevelLowSelectedNum == 1){
+            wordLevelSqlValue3 = @"하";
+        }
+        sqlValue = [NSString stringWithFormat:@"%@ AND col_6 IN('%@','%@','%@')", sqlValue, wordLevelSqlValue1, wordLevelSqlValue2, wordLevelSqlValue3];
     }
     
     // 출제횟수

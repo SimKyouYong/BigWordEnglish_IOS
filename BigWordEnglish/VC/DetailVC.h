@@ -19,7 +19,9 @@
     NSInteger examHiddenNum;
     NSInteger bookmarkNum;
     
-    NSInteger wordLevelSelectedNum;
+    NSInteger wordLevelHighSelectedNum;
+    NSInteger wordLevelMiddleSelectedNum;
+    NSInteger wordLevelLowSelectedNum;
     NSInteger wordNumberSelectedNum;
     
     NSInteger listCountNum;
