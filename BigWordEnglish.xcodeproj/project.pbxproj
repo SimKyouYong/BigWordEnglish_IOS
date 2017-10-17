@@ -811,10 +811,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.jcone.testbible;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.jcone.testbibleaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "caf7f626-40fe-4813-8893-89103681fcca";
-				PROVISIONING_PROFILE_SPECIFIER = "Test iPhone";
+				PROVISIONING_PROFILE = "7a48c305-d0f2-4680-b23f-3c0de3587e34";
+				PROVISIONING_PROFILE_SPECIFIER = "Test iPhone2";
 			};
 			name = Debug;
 		};
@@ -839,10 +839,10 @@
 					"$(PROJECT_DIR)/BigWordEnglish/Lib/TTS",
 				);
 				OTHER_LDFLAGS = "-ObjC";
-				PRODUCT_BUNDLE_IDENTIFIER = kr.co.jcone.testbible;
+				PRODUCT_BUNDLE_IDENTIFIER = kr.co.jcone.testbibleaws;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "caf7f626-40fe-4813-8893-89103681fcca";
-				PROVISIONING_PROFILE_SPECIFIER = "Test iPhone";
+				PROVISIONING_PROFILE = "7a48c305-d0f2-4680-b23f-3c0de3587e34";
+				PROVISIONING_PROFILE_SPECIFIER = "Test iPhone2";
 			};
 			name = Release;
 		};
