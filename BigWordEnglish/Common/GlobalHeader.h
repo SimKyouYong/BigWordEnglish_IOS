@@ -23,8 +23,8 @@
 // URL
 //#define COMMON_URL              @"http://snap40.cafe24.com/BigWordEgs/"
 //#define DB_FILE_URL             @"http://snap40.cafe24.com/BigWordEgs/admin/db/egDb.db"
-#define COMMON_URL              @"http://ec2-13-113-158-34.ap-northeast-1.compute.amazonaws.com/BigWordEgs/"
-#define DB_FILE_URL             @"http://ec2-13-113-158-34.ap-northeast-1.compute.amazonaws.com/BigWordEgs/admin/db/egDb.db"
+#define COMMON_URL              @"http://ec2-13-115-119-239.ap-northeast-1.compute.amazonaws.com/BigWordEgs/"
+#define DB_FILE_URL             @"http://ec2-13-115-119-239.ap-northeast-1.compute.amazonaws.com/BigWordEgs/admin/db/egDb.db"
 #define VERSION_URL             @"Version.php"
 
 // 메모리 보관
